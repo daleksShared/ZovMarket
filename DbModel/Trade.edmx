@@ -1,0 +1,1282 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="tradeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Certifications">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dateAdd" Type="datetime" StoreGeneratedPattern="Computed" />
+          <Property Name="datePrint" Type="datetime" />
+          <Property Name="dateShip" Type="datetime" />
+          <Property Name="dateGet" Type="datetime" />
+          <Property Name="Pos_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="DealerLegalNames">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Dealer_ID" Type="int" />
+          <Property Name="LegalName" Type="nvarchar" MaxLength="150" />
+          <Property Name="LegalAddress" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="Dealers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dealerName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="dealerZovName" Type="nvarchar" MaxLength="150" />
+          <Property Name="dealerDescription" Type="nvarchar(max)" />
+          <Property Name="dateadd" Type="datetime" StoreGeneratedPattern="Computed" />
+          <Property Name="Dealer_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Pos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="posStatus" Type="bit" Nullable="false" />
+          <Property Name="dateadd" Type="datetime" StoreGeneratedPattern="Computed" />
+          <Property Name="legalName" Type="nvarchar" MaxLength="150" />
+          <Property Name="fabricSynonim" Type="nvarchar" MaxLength="150" />
+          <Property Name="yandexAdress" Type="nvarchar" MaxLength="150" />
+          <Property Name="city" Type="nvarchar" MaxLength="50" />
+          <Property Name="street" Type="nvarchar" MaxLength="150" />
+          <Property Name="houseNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="locationDescription" Type="nvarchar" MaxLength="150" />
+          <Property Name="posArea" Type="int" />
+          <Property Name="brand" Type="nvarchar" MaxLength="50" />
+          <Property Name="posSortOrder" Type="int" />
+          <Property Name="dealer_ID" Type="int" />
+          <Property Name="posType_ID" Type="int" />
+          <Property Name="Ruby_Id" Type="int" />
+          <Property Name="longitude" Type="float" />
+          <Property Name="attitude" Type="float" />
+          <Property Name="coordstextdata" Type="nvarchar" MaxLength="50" />
+          <Property Name="Country" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="PosBrand">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PosEmails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" MaxLength="150" />
+          <Property Name="Pos_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="PosImages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="imageData" Type="varbinary(max)" />
+          <Property Name="Pos_ID" Type="int" />
+          <Property Name="dateAdd" Type="datetime" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="PosLegalName">
+          <Key>
+            <PropertyRef Name="Pos_ID" />
+            <PropertyRef Name="LegalName_ID" />
+          </Key>
+          <Property Name="Pos_ID" Type="int" Nullable="false" />
+          <Property Name="LegalName_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PosPhones">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Pos_ID" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="PosRanks">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rank" Type="int" Nullable="false" />
+          <Property Name="DateAdd" Type="datetime" StoreGeneratedPattern="Computed" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="Pos_ID" Type="int" />
+          <Property Name="ActiveRank" Type="bit" />
+        </EntityType>
+        <EntityType Name="PosTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="posTypeName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SampleDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dateAdd" Type="datetime" Nullable="false" />
+          <Property Name="Status_ID" Type="int" />
+          <Property Name="Sample_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="SampleDetailStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sampleDetailStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="sdsSortOrder" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Samples">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sampleStatus" Type="int" Nullable="false" />
+          <Property Name="dateAdd" Type="datetime" />
+          <Property Name="dateRequestForApproval" Type="datetime" />
+          <Property Name="dateApproval" Type="datetime" />
+          <Property Name="dateOrder" Type="datetime" />
+          <Property Name="dateShip" Type="datetime" />
+          <Property Name="dateInstallation" Type="datetime" />
+          <Property Name="Pos_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Sites">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="URL" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Pos_ID" Type="int" />
+          <Property Name="Dealer_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="UserRoles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="roleName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DealerOwner" Type="bit" Nullable="false" />
+          <Property Name="dealer_ID" Type="int" />
+          <Property Name="userRole_ID" Type="int" />
+        </EntityType>
+        <Association Name="FK_dbo_Certifications_dbo_Pos_Pos_ID">
+          <End Role="Pos" Type="Self.Pos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Certifications" Type="Self.Certifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pos">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Certifications">
+              <PropertyRef Name="Pos_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Pos_dbo_Dealers_dealer_ID">
+          <End Role="Dealers" Type="Self.Dealers" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Pos" Type="Self.Pos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dealers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pos">
+              <PropertyRef Name="dealer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Pos_dbo_PosTypes_posType_ID">
+          <End Role="PosTypes" Type="Self.PosTypes" Multiplicity="0..1" />
+          <End Role="Pos" Type="Self.Pos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PosTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pos">
+              <PropertyRef Name="posType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PosImages_dbo_Pos_Pos_ID">
+          <End Role="Pos" Type="Self.Pos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PosImages" Type="Self.PosImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pos">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PosImages">
+              <PropertyRef Name="Pos_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_SampleDetails_dbo_SampleDetailStatus_Status_ID">
+          <End Role="SampleDetailStatus" Type="Self.SampleDetailStatus" Multiplicity="0..1" />
+          <End Role="SampleDetails" Type="Self.SampleDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SampleDetailStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SampleDetails">
+              <PropertyRef Name="Status_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Samples_dbo_Pos_Pos_ID">
+          <End Role="Pos" Type="Self.Pos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Samples" Type="Self.Samples" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pos">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Samples">
+              <PropertyRef Name="Pos_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Users_dbo_Dealers_dealer_ID">
+          <End Role="Dealers" Type="Self.Dealers" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dealers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="dealer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Users_dbo_UserRoles_userRole_ID">
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRoles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="userRole_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dealer_Dealers">
+          <End Role="Dealers" Type="Self.Dealers" Multiplicity="0..1" />
+          <End Role="Dealers1" Type="Self.Dealers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dealers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Dealers1">
+              <PropertyRef Name="Dealer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DealerLegalNames_Dealers">
+          <End Role="Dealers" Type="Self.Dealers" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DealerLegalNames" Type="Self.DealerLegalNames" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dealers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DealerLegalNames">
+              <PropertyRef Name="Dealer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PosEmails_Pos">
+          <End Role="Pos" Type="Self.Pos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PosEmails" Type="Self.PosEmails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pos">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PosEmails">
+              <PropertyRef Name="Pos_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PosLegalName_DealerLegalNames">
+          <End Role="DealerLegalNames" Type="Self.DealerLegalNames" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PosLegalName" Type="Self.PosLegalName" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DealerLegalNames">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PosLegalName">
+              <PropertyRef Name="LegalName_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PosLegalName_Pos">
+          <End Role="Pos" Type="Self.Pos" Multiplicity="1" />
+          <End Role="PosLegalName" Type="Self.PosLegalName" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pos">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PosLegalName">
+              <PropertyRef Name="Pos_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PosPhones_Pos">
+          <End Role="Pos" Type="Self.Pos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PosPhones" Type="Self.PosPhones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pos">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PosPhones">
+              <PropertyRef Name="Pos_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PosRanks_Pos">
+          <End Role="Pos" Type="Self.Pos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PosRanks" Type="Self.PosRanks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pos">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PosRanks">
+              <PropertyRef Name="Pos_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SampleDetails_Samples">
+          <End Role="Samples" Type="Self.Samples" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SampleDetails" Type="Self.SampleDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Samples">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SampleDetails">
+              <PropertyRef Name="Sample_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sites_Dealers">
+          <End Role="Dealers" Type="Self.Dealers" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Sites" Type="Self.Sites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dealers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sites">
+              <PropertyRef Name="Dealer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sites_Pos">
+          <End Role="Pos" Type="Self.Pos" Multiplicity="0..1" />
+          <End Role="Sites" Type="Self.Sites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pos">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sites">
+              <PropertyRef Name="Pos_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="sp_getDealersTree" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_getPOSs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dealerId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_getSubDealers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dealerId" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="tradeModelStoreContainer">
+          <EntitySet Name="Certifications" EntityType="Self.Certifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DealerLegalNames" EntityType="Self.DealerLegalNames" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dealers" EntityType="Self.Dealers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pos" EntityType="Self.Pos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PosBrand" EntityType="Self.PosBrand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PosEmails" EntityType="Self.PosEmails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PosImages" EntityType="Self.PosImages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PosLegalName" EntityType="Self.PosLegalName" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PosPhones" EntityType="Self.PosPhones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PosRanks" EntityType="Self.PosRanks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PosTypes" EntityType="Self.PosTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SampleDetails" EntityType="Self.SampleDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SampleDetailStatus" EntityType="Self.SampleDetailStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Samples" EntityType="Self.Samples" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sites" EntityType="Self.Sites" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Certifications_dbo_Pos_Pos_ID" Association="Self.FK_dbo_Certifications_dbo_Pos_Pos_ID">
+            <End Role="Pos" EntitySet="Pos" />
+            <End Role="Certifications" EntitySet="Certifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Pos_dbo_Dealers_dealer_ID" Association="Self.FK_dbo_Pos_dbo_Dealers_dealer_ID">
+            <End Role="Dealers" EntitySet="Dealers" />
+            <End Role="Pos" EntitySet="Pos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Pos_dbo_PosTypes_posType_ID" Association="Self.FK_dbo_Pos_dbo_PosTypes_posType_ID">
+            <End Role="PosTypes" EntitySet="PosTypes" />
+            <End Role="Pos" EntitySet="Pos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PosImages_dbo_Pos_Pos_ID" Association="Self.FK_dbo_PosImages_dbo_Pos_Pos_ID">
+            <End Role="Pos" EntitySet="Pos" />
+            <End Role="PosImages" EntitySet="PosImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_SampleDetails_dbo_SampleDetailStatus_Status_ID" Association="Self.FK_dbo_SampleDetails_dbo_SampleDetailStatus_Status_ID">
+            <End Role="SampleDetailStatus" EntitySet="SampleDetailStatus" />
+            <End Role="SampleDetails" EntitySet="SampleDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Samples_dbo_Pos_Pos_ID" Association="Self.FK_dbo_Samples_dbo_Pos_Pos_ID">
+            <End Role="Pos" EntitySet="Pos" />
+            <End Role="Samples" EntitySet="Samples" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Users_dbo_Dealers_dealer_ID" Association="Self.FK_dbo_Users_dbo_Dealers_dealer_ID">
+            <End Role="Dealers" EntitySet="Dealers" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Users_dbo_UserRoles_userRole_ID" Association="Self.FK_dbo_Users_dbo_UserRoles_userRole_ID">
+            <End Role="UserRoles" EntitySet="UserRoles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dealer_Dealers" Association="Self.FK_Dealer_Dealers">
+            <End Role="Dealers" EntitySet="Dealers" />
+            <End Role="Dealers1" EntitySet="Dealers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DealerLegalNames_Dealers" Association="Self.FK_DealerLegalNames_Dealers">
+            <End Role="Dealers" EntitySet="Dealers" />
+            <End Role="DealerLegalNames" EntitySet="DealerLegalNames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PosEmails_Pos" Association="Self.FK_PosEmails_Pos">
+            <End Role="Pos" EntitySet="Pos" />
+            <End Role="PosEmails" EntitySet="PosEmails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PosLegalName_DealerLegalNames" Association="Self.FK_PosLegalName_DealerLegalNames">
+            <End Role="DealerLegalNames" EntitySet="DealerLegalNames" />
+            <End Role="PosLegalName" EntitySet="PosLegalName" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PosLegalName_Pos" Association="Self.FK_PosLegalName_Pos">
+            <End Role="Pos" EntitySet="Pos" />
+            <End Role="PosLegalName" EntitySet="PosLegalName" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PosPhones_Pos" Association="Self.FK_PosPhones_Pos">
+            <End Role="Pos" EntitySet="Pos" />
+            <End Role="PosPhones" EntitySet="PosPhones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PosRanks_Pos" Association="Self.FK_PosRanks_Pos">
+            <End Role="Pos" EntitySet="Pos" />
+            <End Role="PosRanks" EntitySet="PosRanks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SampleDetails_Samples" Association="Self.FK_SampleDetails_Samples">
+            <End Role="Samples" EntitySet="Samples" />
+            <End Role="SampleDetails" EntitySet="SampleDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sites_Dealers" Association="Self.FK_Sites_Dealers">
+            <End Role="Dealers" EntitySet="Dealers" />
+            <End Role="Sites" EntitySet="Sites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sites_Pos" Association="Self.FK_Sites_Pos">
+            <End Role="Pos" EntitySet="Pos" />
+            <End Role="Sites" EntitySet="Sites" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="tradeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        
+        <EntityType Name="Certifications">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="dateAdd" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="datePrint" Type="DateTime" Precision="3" />
+          <Property Name="dateShip" Type="DateTime" Precision="3" />
+          <Property Name="dateGet" Type="DateTime" Precision="3" />
+          <Property Name="Pos_ID" Type="Int32" />
+          <NavigationProperty Name="Pos" Relationship="Self.FK_dbo_Certifications_dbo_Pos_Pos_ID" FromRole="Certifications" ToRole="Pos" />
+        </EntityType>
+        <EntityType Name="Dealers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dealerName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dealerDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="dateadd" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Dealer_ID" Type="Int32" />
+          <NavigationProperty Name="DealerChilds" Relationship="Self.FK_dbo_Dealers_dbo_Dealers_Dealer_ID" FromRole="Dealers" ToRole="Dealers1" />
+          <NavigationProperty Name="DealerParent" Relationship="Self.FK_dbo_Dealers_dbo_Dealers_Dealer_ID" FromRole="Dealers1" ToRole="Dealers" />
+          <NavigationProperty Name="Pos" Relationship="Self.FK_dbo_Pos_dbo_Dealers_dealer_ID" FromRole="Dealers" ToRole="Pos" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_Users_dbo_Dealers_dealer_ID" FromRole="Dealers" ToRole="Users" />
+          <NavigationProperty Name="DealerLegalNames" Relationship="tradeModel.FK_DealerLegalNames_Dealers" FromRole="Dealers" ToRole="DealerLegalNames" />
+          <Property Name="dealerZovName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sites" Relationship="tradeModel.FK_Sites_Dealers" FromRole="Dealers" ToRole="Sites" />
+        </EntityType>
+        <EntityType Name="Pos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="posStatus" Type="Boolean" Nullable="false" />
+          <Property Name="dateadd" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="legalName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="fabricSynonim" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="yandexAdress" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="street" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="houseNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="locationDescription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="posArea" Type="Int32" />
+          <Property Name="brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="posSortOrder" Type="Int32" />
+          <Property Name="dealer_ID" Type="Int32" />
+          <Property Name="posType_ID" Type="Int32" />
+          <NavigationProperty Name="Certifications" Relationship="Self.FK_dbo_Certifications_dbo_Pos_Pos_ID" FromRole="Pos" ToRole="Certifications" />
+          <NavigationProperty Name="Dealers" Relationship="Self.FK_dbo_Pos_dbo_Dealers_dealer_ID" FromRole="Pos" ToRole="Dealers" />
+          <NavigationProperty Name="PosTypes" Relationship="Self.FK_dbo_Pos_dbo_PosTypes_posType_ID" FromRole="Pos" ToRole="PosTypes" />
+          <NavigationProperty Name="PosImages" Relationship="Self.FK_dbo_PosImages_dbo_Pos_Pos_ID" FromRole="Pos" ToRole="PosImages" />
+          <NavigationProperty Name="Samples" Relationship="Self.FK_dbo_Samples_dbo_Pos_Pos_ID" FromRole="Pos" ToRole="Samples" />
+          <NavigationProperty Name="PosPhones" Relationship="tradeModel.FK_PosPhones_Pos" FromRole="Pos" ToRole="PosPhones" />
+          <NavigationProperty Name="PosEmails" Relationship="tradeModel.FK_PosEmails_Pos" FromRole="Pos" ToRole="PosEmails" />
+          <Property Name="Ruby_Id" Type="Int32" />
+          <NavigationProperty Name="Sites" Relationship="tradeModel.FK_Sites_Pos" FromRole="Pos" ToRole="Sites" />
+          <NavigationProperty Name="DealerLegalNames" Relationship="tradeModel.PosLegalName" FromRole="Pos" ToRole="DealerLegalNames" />
+          <Property Name="longitude" Type="Double" />
+          <Property Name="attitude" Type="Double" />
+          <Property Name="coordstextdata" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PosRanks" Relationship="tradeModel.FK_PosRanks_Pos" FromRole="Pos" ToRole="PosRanks" />
+          <Property Name="Country" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PosImages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="imageData" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Pos_ID" Type="Int32" />
+          <Property Name="dateAdd" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Pos" Relationship="Self.FK_dbo_PosImages_dbo_Pos_Pos_ID" FromRole="PosImages" ToRole="Pos" />
+        </EntityType>
+        <EntityType Name="PosTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="posTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pos" Relationship="Self.FK_dbo_Pos_dbo_PosTypes_posType_ID" FromRole="PosTypes" ToRole="Pos" />
+        </EntityType>
+        <EntityType Name="SampleDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dateAdd" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status_ID" Type="Int32" />
+          <NavigationProperty Name="SampleDetailStatus" Relationship="Self.FK_dbo_SampleDetails_dbo_SampleDetailStatus_Status_ID" FromRole="SampleDetails" ToRole="SampleDetailStatus" />
+          <Property Name="Sample_ID" Type="Int32" />
+          <NavigationProperty Name="Samples" Relationship="tradeModel.FK_SampleDetails_Samples" FromRole="SampleDetails" ToRole="Samples" />
+        </EntityType>
+        <EntityType Name="SampleDetailStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sampleDetailStatus1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sdsSortOrder" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SampleDetails" Relationship="Self.FK_dbo_SampleDetails_dbo_SampleDetailStatus_Status_ID" FromRole="SampleDetailStatus" ToRole="SampleDetails" />
+        </EntityType>
+        <EntityType Name="Samples">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sampleStatus" Type="Int32" Nullable="false" />
+          <Property Name="dateAdd" Type="DateTime" Precision="3" />
+          <Property Name="dateRequestForApproval" Type="DateTime" Precision="3" />
+          <Property Name="dateApproval" Type="DateTime" Precision="3" />
+          <Property Name="dateOrder" Type="DateTime" Precision="3" />
+          <Property Name="dateShip" Type="DateTime" Precision="3" />
+          <Property Name="dateInstallation" Type="DateTime" Precision="3" />
+          <Property Name="Pos_ID" Type="Int32" />
+          <NavigationProperty Name="Pos" Relationship="Self.FK_dbo_Samples_dbo_Pos_Pos_ID" FromRole="Samples" ToRole="Pos" />
+          <NavigationProperty Name="SampleDetails" Relationship="tradeModel.FK_SampleDetails_Samples" FromRole="Samples" ToRole="SampleDetails" />
+        </EntityType>
+        <EntityType Name="UserRoles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="roleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_Users_dbo_UserRoles_userRole_ID" FromRole="UserRoles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DealerOwner" Type="Boolean" Nullable="false" />
+          <Property Name="dealer_ID" Type="Int32" />
+          <Property Name="userRole_ID" Type="Int32" />
+          <NavigationProperty Name="Dealers" Relationship="Self.FK_dbo_Users_dbo_Dealers_dealer_ID" FromRole="Users" ToRole="Dealers" />
+          <NavigationProperty Name="UserRoles" Relationship="Self.FK_dbo_Users_dbo_UserRoles_userRole_ID" FromRole="Users" ToRole="UserRoles" />
+        </EntityType>
+        <Association Name="FK_dbo_Certifications_dbo_Pos_Pos_ID">
+          <End Role="Pos" Type="Self.Pos" Multiplicity="0..1" />
+          <End Role="Certifications" Type="Self.Certifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pos">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Certifications">
+              <PropertyRef Name="Pos_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Dealers_dbo_Dealers_Dealer_ID">
+          <End Role="Dealers" Type="Self.Dealers" Multiplicity="0..1" />
+          <End Role="Dealers1" Type="Self.Dealers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dealers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Dealers1">
+              <PropertyRef Name="Dealer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Pos_dbo_Dealers_dealer_ID">
+          <End Role="Dealers" Type="Self.Dealers" Multiplicity="0..1" />
+          <End Role="Pos" Type="Self.Pos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dealers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pos">
+              <PropertyRef Name="dealer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Users_dbo_Dealers_dealer_ID">
+          <End Role="Dealers" Type="Self.Dealers" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dealers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="dealer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Pos_dbo_PosTypes_posType_ID">
+          <End Role="PosTypes" Type="Self.PosTypes" Multiplicity="0..1" />
+          <End Role="Pos" Type="Self.Pos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PosTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pos">
+              <PropertyRef Name="posType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PosImages_dbo_Pos_Pos_ID">
+          <End Role="Pos" Type="Self.Pos" Multiplicity="0..1" />
+          <End Role="PosImages" Type="Self.PosImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pos">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PosImages">
+              <PropertyRef Name="Pos_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Samples_dbo_Pos_Pos_ID">
+          <End Role="Pos" Type="Self.Pos" Multiplicity="0..1" />
+          <End Role="Samples" Type="Self.Samples" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pos">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Samples">
+              <PropertyRef Name="Pos_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_SampleDetails_dbo_SampleDetailStatus_Status_ID">
+          <End Role="SampleDetailStatus" Type="Self.SampleDetailStatus" Multiplicity="0..1" />
+          <End Role="SampleDetails" Type="Self.SampleDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SampleDetailStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SampleDetails">
+              <PropertyRef Name="Status_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Users_dbo_UserRoles_userRole_ID">
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRoles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="userRole_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        
+        <EntityContainer Name="tradeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Certifications" EntityType="Self.Certifications" />
+          <EntitySet Name="Dealers" EntityType="Self.Dealers" />
+          <EntitySet Name="Pos" EntityType="Self.Pos" />
+          <EntitySet Name="PosImages" EntityType="Self.PosImages" />
+          <EntitySet Name="PosTypes" EntityType="Self.PosTypes" />
+          <EntitySet Name="SampleDetails" EntityType="Self.SampleDetails" />
+          <EntitySet Name="SampleDetailStatus" EntityType="Self.SampleDetailStatus" />
+          <EntitySet Name="Samples" EntityType="Self.Samples" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRoles" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_dbo_Certifications_dbo_Pos_Pos_ID" Association="Self.FK_dbo_Certifications_dbo_Pos_Pos_ID">
+            <End Role="Pos" EntitySet="Pos" />
+            <End Role="Certifications" EntitySet="Certifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Dealers_dbo_Dealers_Dealer_ID" Association="Self.FK_dbo_Dealers_dbo_Dealers_Dealer_ID">
+            <End Role="Dealers" EntitySet="Dealers" />
+            <End Role="Dealers1" EntitySet="Dealers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Pos_dbo_Dealers_dealer_ID" Association="Self.FK_dbo_Pos_dbo_Dealers_dealer_ID">
+            <End Role="Dealers" EntitySet="Dealers" />
+            <End Role="Pos" EntitySet="Pos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Users_dbo_Dealers_dealer_ID" Association="Self.FK_dbo_Users_dbo_Dealers_dealer_ID">
+            <End Role="Dealers" EntitySet="Dealers" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Pos_dbo_PosTypes_posType_ID" Association="Self.FK_dbo_Pos_dbo_PosTypes_posType_ID">
+            <End Role="PosTypes" EntitySet="PosTypes" />
+            <End Role="Pos" EntitySet="Pos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PosImages_dbo_Pos_Pos_ID" Association="Self.FK_dbo_PosImages_dbo_Pos_Pos_ID">
+            <End Role="Pos" EntitySet="Pos" />
+            <End Role="PosImages" EntitySet="PosImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Samples_dbo_Pos_Pos_ID" Association="Self.FK_dbo_Samples_dbo_Pos_Pos_ID">
+            <End Role="Pos" EntitySet="Pos" />
+            <End Role="Samples" EntitySet="Samples" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_SampleDetails_dbo_SampleDetailStatus_Status_ID" Association="Self.FK_dbo_SampleDetails_dbo_SampleDetailStatus_Status_ID">
+            <End Role="SampleDetailStatus" EntitySet="SampleDetailStatus" />
+            <End Role="SampleDetails" EntitySet="SampleDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Users_dbo_UserRoles_userRole_ID" Association="Self.FK_dbo_Users_dbo_UserRoles_userRole_ID">
+            <End Role="UserRoles" EntitySet="UserRoles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <FunctionImport Name="sp_getDealersTree" ReturnType="Collection(tradeModel.sp_getDealersTree_Result)" />
+          <FunctionImport Name="sp_getPOSs" ReturnType="Collection(tradeModel.sp_getPOSs_Result)">
+          <Parameter Name="dealerId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_getSubDealers" ReturnType="Collection(tradeModel.sp_getSubDealers_Result)">
+          <Parameter Name="dealerId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="DealerLegalNames" EntityType="tradeModel.DealerLegalNames" />
+          <AssociationSet Name="FK_DealerLegalNames_Dealers" Association="tradeModel.FK_DealerLegalNames_Dealers">
+            <End Role="Dealers" EntitySet="Dealers" />
+            <End Role="DealerLegalNames" EntitySet="DealerLegalNames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SampleDetails_Samples" Association="tradeModel.FK_SampleDetails_Samples">
+            <End Role="Samples" EntitySet="Samples" />
+            <End Role="SampleDetails" EntitySet="SampleDetails" />
+          </AssociationSet>
+          <EntitySet Name="PosPhones" EntityType="tradeModel.PosPhones" />
+          <AssociationSet Name="FK_PosPhones_Pos" Association="tradeModel.FK_PosPhones_Pos">
+            <End Role="Pos" EntitySet="Pos" />
+            <End Role="PosPhones" EntitySet="PosPhones" />
+          </AssociationSet>
+          <EntitySet Name="PosEmails" EntityType="tradeModel.PosEmails" />
+          <AssociationSet Name="FK_PosEmails_Pos" Association="tradeModel.FK_PosEmails_Pos">
+            <End Role="Pos" EntitySet="Pos" />
+            <End Role="PosEmails" EntitySet="PosEmails" />
+          </AssociationSet>
+          <EntitySet Name="Sites" EntityType="tradeModel.Sites" />
+          <AssociationSet Name="FK_Sites_Dealers" Association="tradeModel.FK_Sites_Dealers">
+            <End Role="Dealers" EntitySet="Dealers" />
+            <End Role="Sites" EntitySet="Sites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sites_Pos" Association="tradeModel.FK_Sites_Pos">
+            <End Role="Pos" EntitySet="Pos" />
+            <End Role="Sites" EntitySet="Sites" />
+          </AssociationSet>
+          <AssociationSet Name="PosLegalName" Association="tradeModel.PosLegalName">
+            <End Role="DealerLegalNames" EntitySet="DealerLegalNames" />
+            <End Role="Pos" EntitySet="Pos" />
+          </AssociationSet>
+          <EntitySet Name="PosBrand" EntityType="tradeModel.PosBrand" />
+          <EntitySet Name="PosRanks" EntityType="tradeModel.PosRanks" />
+          <AssociationSet Name="FK_PosRanks_Pos" Association="tradeModel.FK_PosRanks_Pos">
+            <End Role="Pos" EntitySet="Pos" />
+            <End Role="PosRanks" EntitySet="PosRanks" />
+          </AssociationSet>          
+        </EntityContainer>
+        <ComplexType Name="sp_getDealersTree_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="Dealer_ID" Nullable="true" />
+          <Property Type="String" Name="dealerName" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="dealerZovName" Nullable="true" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="sp_getPOSs_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="posSiteAddress" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_getSubDealers_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="dealerName" Nullable="false" MaxLength="150" />
+        </ComplexType>
+        <EntityType Name="DealerLegalNames">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Dealer_ID" Type="Int32" />
+          <Property Name="LegalName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="LegalAddress" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Dealers" Relationship="tradeModel.FK_DealerLegalNames_Dealers" FromRole="DealerLegalNames" ToRole="Dealers" />
+          <NavigationProperty Name="Pos" Relationship="tradeModel.PosLegalName" FromRole="DealerLegalNames" ToRole="Pos" />
+        </EntityType>
+        <Association Name="FK_DealerLegalNames_Dealers">
+          <End Type="tradeModel.Dealers" Role="Dealers" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="tradeModel.DealerLegalNames" Role="DealerLegalNames" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dealers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DealerLegalNames">
+              <PropertyRef Name="Dealer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SampleDetails_Samples">
+          <End Type="tradeModel.Samples" Role="Samples" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="tradeModel.SampleDetails" Role="SampleDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Samples">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SampleDetails">
+              <PropertyRef Name="Sample_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PosPhones">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Pos_ID" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pos" Relationship="tradeModel.FK_PosPhones_Pos" FromRole="PosPhones" ToRole="Pos" />
+        </EntityType>
+        <Association Name="FK_PosPhones_Pos">
+          <End Type="tradeModel.Pos" Role="Pos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="tradeModel.PosPhones" Role="PosPhones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pos">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PosPhones">
+              <PropertyRef Name="Pos_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PosEmails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Pos_ID" Type="Int32" />
+          <NavigationProperty Name="Pos" Relationship="tradeModel.FK_PosEmails_Pos" FromRole="PosEmails" ToRole="Pos" />
+        </EntityType>
+        <Association Name="FK_PosEmails_Pos">
+          <End Type="tradeModel.Pos" Role="Pos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="tradeModel.PosEmails" Role="PosEmails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pos">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PosEmails">
+              <PropertyRef Name="Pos_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Sites">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="URL" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Pos_ID" Type="Int32" />
+          <Property Name="Dealer_ID" Type="Int32" />
+          <NavigationProperty Name="Dealers" Relationship="tradeModel.FK_Sites_Dealers" FromRole="Sites" ToRole="Dealers" />
+          <NavigationProperty Name="Pos" Relationship="tradeModel.FK_Sites_Pos" FromRole="Sites" ToRole="Pos" />
+        </EntityType>
+        <Association Name="FK_Sites_Dealers">
+          <End Type="tradeModel.Dealers" Role="Dealers" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="tradeModel.Sites" Role="Sites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dealers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sites">
+              <PropertyRef Name="Dealer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sites_Pos">
+          <End Type="tradeModel.Pos" Role="Pos" Multiplicity="0..1" />
+          <End Type="tradeModel.Sites" Role="Sites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pos">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sites">
+              <PropertyRef Name="Pos_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PosLegalName">
+          <End Type="tradeModel.DealerLegalNames" Role="DealerLegalNames" Multiplicity="*" />
+          <End Type="tradeModel.Pos" Role="Pos" Multiplicity="*" />
+        </Association>
+        <EntityType Name="PosBrand">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PosRanks">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rank" Type="Int32" Nullable="false" />
+          <Property Name="DateAdd" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Pos_ID" Type="Int32" />
+          <NavigationProperty Name="Pos" Relationship="tradeModel.FK_PosRanks_Pos" FromRole="PosRanks" ToRole="Pos" />
+          <Property Name="ActiveRank" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_PosRanks_Pos">
+          <End Type="tradeModel.Pos" Role="Pos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="tradeModel.PosRanks" Role="PosRanks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pos">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PosRanks">
+              <PropertyRef Name="Pos_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="tradeModelStoreContainer" CdmEntityContainer="tradeEntities">
+	
+          <EntitySetMapping Name="Certifications">
+            <EntityTypeMapping TypeName="tradeModel.Certifications">
+              <MappingFragment StoreEntitySet="Certifications">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="dateAdd" ColumnName="dateAdd" />
+                <ScalarProperty Name="datePrint" ColumnName="datePrint" />
+                <ScalarProperty Name="dateShip" ColumnName="dateShip" />
+                <ScalarProperty Name="dateGet" ColumnName="dateGet" />
+                <ScalarProperty Name="Pos_ID" ColumnName="Pos_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dealers">
+            <EntityTypeMapping TypeName="tradeModel.Dealers">
+              <MappingFragment StoreEntitySet="Dealers">
+                <ScalarProperty Name="dealerZovName" ColumnName="dealerZovName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="dealerName" ColumnName="dealerName" />
+                <ScalarProperty Name="dealerDescription" ColumnName="dealerDescription" />
+                <ScalarProperty Name="dateadd" ColumnName="dateadd" />
+                <ScalarProperty Name="Dealer_ID" ColumnName="Dealer_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pos">
+            <EntityTypeMapping TypeName="tradeModel.Pos">
+              <MappingFragment StoreEntitySet="Pos">
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="coordstextdata" ColumnName="coordstextdata" />
+                <ScalarProperty Name="attitude" ColumnName="attitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="Ruby_Id" ColumnName="Ruby_Id" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="posStatus" ColumnName="posStatus" />
+                <ScalarProperty Name="dateadd" ColumnName="dateadd" />
+                <ScalarProperty Name="legalName" ColumnName="legalName" />
+                <ScalarProperty Name="fabricSynonim" ColumnName="fabricSynonim" />
+                <ScalarProperty Name="yandexAdress" ColumnName="yandexAdress" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="houseNumber" ColumnName="houseNumber" />
+                <ScalarProperty Name="locationDescription" ColumnName="locationDescription" />
+                <ScalarProperty Name="posArea" ColumnName="posArea" />
+                <ScalarProperty Name="brand" ColumnName="brand" />
+                <ScalarProperty Name="posSortOrder" ColumnName="posSortOrder" />
+                <ScalarProperty Name="dealer_ID" ColumnName="dealer_ID" />
+                <ScalarProperty Name="posType_ID" ColumnName="posType_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PosImages">
+            <EntityTypeMapping TypeName="tradeModel.PosImages">
+              <MappingFragment StoreEntitySet="PosImages">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="imageData" ColumnName="imageData" />
+                <ScalarProperty Name="Pos_ID" ColumnName="Pos_ID" />
+                <ScalarProperty Name="dateAdd" ColumnName="dateAdd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PosTypes">
+            <EntityTypeMapping TypeName="tradeModel.PosTypes">
+              <MappingFragment StoreEntitySet="PosTypes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="posTypeName" ColumnName="posTypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SampleDetails">
+            <EntityTypeMapping TypeName="tradeModel.SampleDetails">
+              <MappingFragment StoreEntitySet="SampleDetails">
+                <ScalarProperty Name="Sample_ID" ColumnName="Sample_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="dateAdd" ColumnName="dateAdd" />
+                <ScalarProperty Name="Status_ID" ColumnName="Status_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SampleDetailStatus">
+            <EntityTypeMapping TypeName="tradeModel.SampleDetailStatus">
+              <MappingFragment StoreEntitySet="SampleDetailStatus">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="sampleDetailStatus1" ColumnName="sampleDetailStatus" />
+                <ScalarProperty Name="sdsSortOrder" ColumnName="sdsSortOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Samples">
+            <EntityTypeMapping TypeName="tradeModel.Samples">
+              <MappingFragment StoreEntitySet="Samples">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="sampleStatus" ColumnName="sampleStatus" />
+                <ScalarProperty Name="dateAdd" ColumnName="dateAdd" />
+                <ScalarProperty Name="dateRequestForApproval" ColumnName="dateRequestForApproval" />
+                <ScalarProperty Name="dateApproval" ColumnName="dateApproval" />
+                <ScalarProperty Name="dateOrder" ColumnName="dateOrder" />
+                <ScalarProperty Name="dateShip" ColumnName="dateShip" />
+                <ScalarProperty Name="dateInstallation" ColumnName="dateInstallation" />
+                <ScalarProperty Name="Pos_ID" ColumnName="Pos_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="tradeModel.UserRoles">
+              <MappingFragment StoreEntitySet="UserRoles">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="roleName" ColumnName="roleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="tradeModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="DealerOwner" ColumnName="DealerOwner" />
+                <ScalarProperty Name="dealer_ID" ColumnName="dealer_ID" />
+                <ScalarProperty Name="userRole_ID" ColumnName="userRole_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_getDealersTree" FunctionName="tradeModel.Store.sp_getDealersTree">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="tradeModel.sp_getDealersTree_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Dealer_ID" ColumnName="Dealer_ID" />
+                <ScalarProperty Name="dealerName" ColumnName="dealerName" />
+                <ScalarProperty Name="dealerZovName" ColumnName="dealerZovName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_getPOSs" FunctionName="tradeModel.Store.sp_getPOSs">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="tradeModel.sp_getPOSs_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="posSiteAddress" ColumnName="posSiteAddress" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_getSubDealers" FunctionName="tradeModel.Store.sp_getSubDealers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="tradeModel.sp_getSubDealers_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="dealerName" ColumnName="dealerName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="DealerLegalNames">
+            <EntityTypeMapping TypeName="tradeModel.DealerLegalNames">
+              <MappingFragment StoreEntitySet="DealerLegalNames">
+                <ScalarProperty Name="LegalAddress" ColumnName="LegalAddress" />
+                <ScalarProperty Name="LegalName" ColumnName="LegalName" />
+                <ScalarProperty Name="Dealer_ID" ColumnName="Dealer_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PosPhones">
+            <EntityTypeMapping TypeName="tradeModel.PosPhones">
+              <MappingFragment StoreEntitySet="PosPhones">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Pos_ID" ColumnName="Pos_ID" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PosEmails">
+            <EntityTypeMapping TypeName="tradeModel.PosEmails">
+              <MappingFragment StoreEntitySet="PosEmails">
+                <ScalarProperty Name="Pos_ID" ColumnName="Pos_ID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sites">
+            <EntityTypeMapping TypeName="tradeModel.Sites">
+              <MappingFragment StoreEntitySet="Sites">
+                <ScalarProperty Name="Dealer_ID" ColumnName="Dealer_ID" />
+                <ScalarProperty Name="Pos_ID" ColumnName="Pos_ID" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="PosLegalName" TypeName="tradeModel.PosLegalName" StoreEntitySet="PosLegalName">
+            <EndProperty Name="Pos">
+              <ScalarProperty Name="ID" ColumnName="Pos_ID" />
+            </EndProperty>
+            <EndProperty Name="DealerLegalNames">
+              <ScalarProperty Name="ID" ColumnName="LegalName_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="PosBrand">
+            <EntityTypeMapping TypeName="tradeModel.PosBrand">
+              <MappingFragment StoreEntitySet="PosBrand">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PosRanks">
+            <EntityTypeMapping TypeName="tradeModel.PosRanks">
+              <MappingFragment StoreEntitySet="PosRanks">
+                <ScalarProperty Name="ActiveRank" ColumnName="ActiveRank" />
+                <ScalarProperty Name="Pos_ID" ColumnName="Pos_ID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateAdd" ColumnName="DateAdd" />
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
