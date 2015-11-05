@@ -21,5 +21,6 @@ namespace DbModel
         public byte[] FileData { get; set; }
         public string FileName { get; set; }
         public Nullable<System.DateTime> AddTime { get; set; }
+        public Nullable<System.DateTime> Closed { get; set; }
     }
 }

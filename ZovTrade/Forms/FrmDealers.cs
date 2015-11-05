@@ -838,5 +838,11 @@ namespace ZovTrade
             var frmSendReport = new Forms.FrmSendAppReport();
             frmSendReport.ShowDialog();
         }
+
+        private void barButtonItem14_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var frmShowReport = new Forms.FrmAppReport();
+            frmShowReport.ShowDialog();
+        }
     }
 }

@@ -47,12 +47,17 @@
             this.barBtnFind = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem8 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem9 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem14 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem11 = new DevExpress.XtraBars.BarButtonItem();
             this.bar3 = new DevExpress.XtraBars.Bar();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem10 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem12 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem13 = new DevExpress.XtraBars.BarButtonItem();
             this.treeDealersList = new DevExpress.XtraTreeList.TreeList();
             this.layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
             this.simpleButton5 = new DevExpress.XtraEditors.SimpleButton();
@@ -125,10 +130,6 @@
             this.dealerZovNameTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.ItemFordealerZovName = new DevExpress.XtraLayout.LayoutControlItem();
             this.splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::ZovTrade.FrmWait), true, true);
-            this.barButtonItem10 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem11 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem12 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem13 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.treeDealersList)).BeginInit();
@@ -217,8 +218,9 @@
             this.barButtonItem10,
             this.barButtonItem11,
             this.barButtonItem12,
-            this.barButtonItem13});
-            this.barManager1.MaxItemId = 24;
+            this.barButtonItem13,
+            this.barButtonItem14});
+            this.barManager1.MaxItemId = 25;
             this.barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemTextEdit1});
             this.barManager1.StatusBar = this.bar3;
@@ -237,6 +239,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.barBtnFind),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem8),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem9),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem14),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem11)});
             this.bar1.OptionsBar.UseWholeRow = true;
             this.bar1.Text = "Tools";
@@ -340,6 +343,22 @@
             this.barButtonItem9.Name = "barButtonItem9";
             this.barButtonItem9.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem9_ItemClick);
             // 
+            // barButtonItem14
+            // 
+            this.barButtonItem14.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
+            this.barButtonItem14.Caption = "Нерешённые косяки";
+            this.barButtonItem14.Id = 24;
+            this.barButtonItem14.Name = "barButtonItem14";
+            this.barButtonItem14.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem14_ItemClick);
+            // 
+            // barButtonItem11
+            // 
+            this.barButtonItem11.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
+            this.barButtonItem11.Caption = "Пожаловаться";
+            this.barButtonItem11.Id = 21;
+            this.barButtonItem11.Name = "barButtonItem11";
+            this.barButtonItem11.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem11_ItemClick);
+            // 
             // bar3
             // 
             this.bar3.BarName = "Status bar";
@@ -385,6 +404,24 @@
             this.barButtonItem1.Caption = "Добавить";
             this.barButtonItem1.Id = 10;
             this.barButtonItem1.Name = "barButtonItem1";
+            // 
+            // barButtonItem10
+            // 
+            this.barButtonItem10.Caption = "Обратная связь";
+            this.barButtonItem10.Id = 20;
+            this.barButtonItem10.Name = "barButtonItem10";
+            // 
+            // barButtonItem12
+            // 
+            this.barButtonItem12.Caption = "barButtonItem12";
+            this.barButtonItem12.Id = 22;
+            this.barButtonItem12.Name = "barButtonItem12";
+            // 
+            // barButtonItem13
+            // 
+            this.barButtonItem13.Caption = "barButtonItem13";
+            this.barButtonItem13.Id = 23;
+            this.barButtonItem13.Name = "barButtonItem13";
             // 
             // treeDealersList
             // 
@@ -1128,32 +1165,6 @@
             // 
             this.splashScreenManager1.ClosingDelay = 500;
             // 
-            // barButtonItem10
-            // 
-            this.barButtonItem10.Caption = "Обратная связь";
-            this.barButtonItem10.Id = 20;
-            this.barButtonItem10.Name = "barButtonItem10";
-            // 
-            // barButtonItem11
-            // 
-            this.barButtonItem11.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
-            this.barButtonItem11.Caption = "Пожаловаться";
-            this.barButtonItem11.Id = 21;
-            this.barButtonItem11.Name = "barButtonItem11";
-            this.barButtonItem11.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem11_ItemClick);
-            // 
-            // barButtonItem12
-            // 
-            this.barButtonItem12.Caption = "barButtonItem12";
-            this.barButtonItem12.Id = 22;
-            this.barButtonItem12.Name = "barButtonItem12";
-            // 
-            // barButtonItem13
-            // 
-            this.barButtonItem13.Caption = "barButtonItem13";
-            this.barButtonItem13.Id = 23;
-            this.barButtonItem13.Name = "barButtonItem13";
-            // 
             // FrmDealers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1330,5 +1341,6 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItem10;
         private DevExpress.XtraBars.BarButtonItem barButtonItem12;
         private DevExpress.XtraBars.BarButtonItem barButtonItem13;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem14;
     }
 }

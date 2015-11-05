@@ -16,6 +16,7 @@
           <Property Name="FileData" Type="varbinary(max)" />
           <Property Name="FileName" Type="nvarchar" MaxLength="50" />
           <Property Name="AddTime" Type="datetime" StoreGeneratedPattern="Computed" />
+          <Property Name="Closed" Type="datetime" />
         </EntityType>
         <EntityType Name="Certifications">
           <Key>
@@ -1059,6 +1060,7 @@
           <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="FileName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AddTime" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Closed" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1285,6 +1287,7 @@
           <EntitySetMapping Name="AppReports">
             <EntityTypeMapping TypeName="tradeModel.AppReports">
               <MappingFragment StoreEntitySet="AppReports">
+                <ScalarProperty Name="Closed" ColumnName="Closed" />
                 <ScalarProperty Name="AddTime" ColumnName="AddTime" />
                 <ScalarProperty Name="FileName" ColumnName="FileName" />
                 <ScalarProperty Name="FileData" ColumnName="FileData" />
