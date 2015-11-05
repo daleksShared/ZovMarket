@@ -28,7 +28,7 @@
     <PublisherName>ZOV</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationRevision>7</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -72,8 +72,12 @@
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
+  <PropertyGroup />
   <PropertyGroup>
-    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.Data.v15.1, Version=15.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -154,6 +158,12 @@
     <Compile Include="Forms\FrmPosReview.Designer.cs">
       <DependentUpon>FrmPosReview.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmSendAppReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmSendAppReport.Designer.cs">
+      <DependentUpon>FrmSendAppReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmWait.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -192,6 +202,9 @@
     <EmbeddedResource Include="Forms\FrmPosReview.resx">
       <DependentUpon>FrmPosReview.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmSendAppReport.resx">
+      <DependentUpon>FrmSendAppReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmWait.resx">
       <DependentUpon>FrmWait.cs</DependentUpon>
     </EmbeddedResource>
@@ -215,6 +228,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
+    <None Include="Properties\DataSources\DbModel.AppReports.datasource" />
     <None Include="Properties\DataSources\dbModel.Certifications.datasource" />
     <None Include="Properties\DataSources\DbModel.Certifications1.datasource" />
     <None Include="Properties\DataSources\dbModel.Coordinates.datasource" />
@@ -283,6 +297,8 @@
     <None Include="Resources\delete_32x32.png" />
     <None Include="Resources\close_32x32.png" />
     <None Include="Resources\add_32x321.png" />
+    <Content Include="app.ico" />
+    <None Include="Resources\send_32x32.png" />
     <Content Include="web\data.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

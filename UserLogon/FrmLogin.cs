@@ -108,7 +108,8 @@ namespace ZOV.Tools
                 Security.ZOVReminderUsersID = dataReader.GetInt32(0);
                 Security.UserName = dataReader.GetString(1);
                 Security.IsAdmin = false;
-                Security.ReadOnly = dataReader.GetBoolean(3);
+                
+                Security.ReadOnly = dataReader[3]==DBNull.Value ? true: dataReader.GetBoolean(3);
                 dataReader.Close();
 
                 //MyConnectionString.ExecuteScalarQuery(String.Format(

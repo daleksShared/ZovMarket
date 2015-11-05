@@ -5,6 +5,18 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="tradeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AppReports">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="150" />
+          <Property Name="PcName" Type="nvarchar" MaxLength="150" StoreGeneratedPattern="Computed" />
+          <Property Name="Message" Type="nvarchar" MaxLength="500" />
+          <Property Name="FileData" Type="varbinary(max)" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="50" />
+          <Property Name="AddTime" Type="datetime" StoreGeneratedPattern="Computed" />
+        </EntityType>
         <EntityType Name="Certifications">
           <Key>
             <PropertyRef Name="ID" />
@@ -424,6 +436,7 @@
           <Parameter Name="dealerId" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="tradeModelStoreContainer">
+          <EntitySet Name="AppReports" EntityType="Self.AppReports" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Certifications" EntityType="Self.Certifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DealerLegalNames" EntityType="Self.DealerLegalNames" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dealers" EntityType="Self.Dealers" Schema="dbo" store:Type="Tables" />
@@ -857,7 +870,8 @@
           <AssociationSet Name="FK_PosRanks_Pos" Association="tradeModel.FK_PosRanks_Pos">
             <End Role="Pos" EntitySet="Pos" />
             <End Role="PosRanks" EntitySet="PosRanks" />
-          </AssociationSet>          
+          </AssociationSet>
+          <EntitySet Name="AppReports" EntityType="tradeModel.AppReports" />          
         </EntityContainer>
         <ComplexType Name="sp_getDealersTree_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -1034,6 +1048,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AppReports">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="PcName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Message" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="FileName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AddTime" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1252,6 +1278,19 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="DateAdd" ColumnName="DateAdd" />
                 <ScalarProperty Name="Rank" ColumnName="Rank" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppReports">
+            <EntityTypeMapping TypeName="tradeModel.AppReports">
+              <MappingFragment StoreEntitySet="AppReports">
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="FileData" ColumnName="FileData" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="PcName" ColumnName="PcName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

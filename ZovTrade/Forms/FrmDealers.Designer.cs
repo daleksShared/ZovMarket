@@ -125,6 +125,10 @@
             this.dealerZovNameTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.ItemFordealerZovName = new DevExpress.XtraLayout.LayoutControlItem();
             this.splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::ZovTrade.FrmWait), true, true);
+            this.barButtonItem10 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem11 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem12 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem13 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.treeDealersList)).BeginInit();
@@ -209,8 +213,12 @@
             this.barButtonItem6,
             this.barButtonItem7,
             this.barButtonItem8,
-            this.barButtonItem9});
-            this.barManager1.MaxItemId = 20;
+            this.barButtonItem9,
+            this.barButtonItem10,
+            this.barButtonItem11,
+            this.barButtonItem12,
+            this.barButtonItem13});
+            this.barManager1.MaxItemId = 24;
             this.barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemTextEdit1});
             this.barManager1.StatusBar = this.bar3;
@@ -221,13 +229,16 @@
             this.bar1.DockCol = 0;
             this.bar1.DockRow = 0;
             this.bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
+            this.bar1.FloatLocation = new System.Drawing.Point(87, 123);
             this.bar1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem1),
             new DevExpress.XtraBars.LinkPersistInfo(this.barStaticItem1, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.barEditItem1),
             new DevExpress.XtraBars.LinkPersistInfo(this.barBtnFind),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem8),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem9)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem9),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem11)});
+            this.bar1.OptionsBar.UseWholeRow = true;
             this.bar1.Text = "Tools";
             // 
             // barSubItem1
@@ -1117,6 +1128,32 @@
             // 
             this.splashScreenManager1.ClosingDelay = 500;
             // 
+            // barButtonItem10
+            // 
+            this.barButtonItem10.Caption = "Обратная связь";
+            this.barButtonItem10.Id = 20;
+            this.barButtonItem10.Name = "barButtonItem10";
+            // 
+            // barButtonItem11
+            // 
+            this.barButtonItem11.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
+            this.barButtonItem11.Caption = "Пожаловаться";
+            this.barButtonItem11.Id = 21;
+            this.barButtonItem11.Name = "barButtonItem11";
+            this.barButtonItem11.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem11_ItemClick);
+            // 
+            // barButtonItem12
+            // 
+            this.barButtonItem12.Caption = "barButtonItem12";
+            this.barButtonItem12.Id = 22;
+            this.barButtonItem12.Name = "barButtonItem12";
+            // 
+            // barButtonItem13
+            // 
+            this.barButtonItem13.Caption = "barButtonItem13";
+            this.barButtonItem13.Id = 23;
+            this.barButtonItem13.Name = "barButtonItem13";
+            // 
             // FrmDealers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1289,5 +1326,9 @@
         private DevExpress.XtraEditors.SimpleButton simpleButton5;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem17;
         private DevExpress.XtraSplashScreen.SplashScreenManager splashScreenManager1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem11;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem10;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem12;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem13;
     }
 }

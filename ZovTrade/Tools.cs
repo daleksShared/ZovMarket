@@ -50,7 +50,7 @@ namespace ZovTrade
         public static string helloUser = string.Empty;
         public static string helloUserBuy = string.Empty;
 
-
+       
         public static string cs = string.Empty;
         public static SqlConnection conn;
         public static string username;

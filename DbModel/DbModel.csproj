@@ -58,6 +58,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppReports.cs">
+      <DependentUpon>Trade.tt</DependentUpon>
+    </Compile>
     <Compile Include="Certifications.cs">
       <DependentUpon>Trade.tt</DependentUpon>
     </Compile>
