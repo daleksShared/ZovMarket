@@ -151,6 +151,18 @@
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             this.splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::ZovTrade.FrmWait), true, true);
+            this.gridControl4 = new DevExpress.XtraGrid.GridControl();
+            this.gridViewPosSites = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.sitesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.colID4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridLookUpEdit3 = new DevExpress.XtraEditors.GridLookUpEdit();
+            this.gridLookUpEdit3View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.tabbedControlGroup2 = new DevExpress.XtraLayout.TabbedControlGroup();
+            this.layoutControlGroup8 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.Добавить = new DevExpress.XtraEditors.SimpleButton();
+            this.layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
@@ -248,6 +260,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewPosSites)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sitesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit3.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit3View)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -748,6 +770,9 @@
             // 
             // dataLayoutControl1
             // 
+            this.dataLayoutControl1.Controls.Add(this.Добавить);
+            this.dataLayoutControl1.Controls.Add(this.gridLookUpEdit3);
+            this.dataLayoutControl1.Controls.Add(this.gridControl4);
             this.dataLayoutControl1.Controls.Add(this.gridLookUpEdit2);
             this.dataLayoutControl1.Controls.Add(this.gridLookUpEdit1);
             this.dataLayoutControl1.Controls.Add(this.dateaddDateEdit);
@@ -1145,7 +1170,8 @@
             this.layoutControlGroup2,
             this.layoutControlItem4,
             this.layoutControlItem3,
-            this.layoutControlItem12});
+            this.layoutControlItem12,
+            this.tabbedControlGroup2});
             this.Root.Location = new System.Drawing.Point(0, 0);
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(421, 607);
@@ -1382,7 +1408,7 @@
             this.layoutControlItem12.Control = this.gridLookUpEdit2;
             this.layoutControlItem12.Location = new System.Drawing.Point(0, 382);
             this.layoutControlItem12.Name = "layoutControlItem12";
-            this.layoutControlItem12.Size = new System.Drawing.Size(401, 205);
+            this.layoutControlItem12.Size = new System.Drawing.Size(401, 24);
             this.layoutControlItem12.Text = "Юр.наименование";
             this.layoutControlItem12.TextSize = new System.Drawing.Size(106, 13);
             // 
@@ -1459,6 +1485,117 @@
             // splashScreenManager1
             // 
             this.splashScreenManager1.ClosingDelay = 500;
+            // 
+            // gridControl4
+            // 
+            this.gridControl4.DataBindings.Add(new System.Windows.Forms.Binding("DataSource", this.posBindingSource, "Sites", true));
+            this.gridControl4.Location = new System.Drawing.Point(24, 452);
+            this.gridControl4.MainView = this.gridViewPosSites;
+            this.gridControl4.Name = "gridControl4";
+            this.gridControl4.Size = new System.Drawing.Size(373, 105);
+            this.gridControl4.TabIndex = 27;
+            this.gridControl4.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewPosSites});
+            // 
+            // gridViewPosSites
+            // 
+            this.gridViewPosSites.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colID4});
+            this.gridViewPosSites.GridControl = this.gridControl4;
+            this.gridViewPosSites.Name = "gridViewPosSites";
+            // 
+            // sitesBindingSource
+            // 
+            this.sitesBindingSource.DataSource = typeof(DbModel.Sites);
+            // 
+            // colID4
+            // 
+            this.colID4.FieldName = "ID";
+            this.colID4.Name = "colID4";
+            this.colID4.OptionsColumn.AllowEdit = false;
+            this.colID4.OptionsColumn.ReadOnly = true;
+            this.colID4.Visible = true;
+            this.colID4.VisibleIndex = 0;
+            // 
+            // gridLookUpEdit3
+            // 
+            this.gridLookUpEdit3.Location = new System.Drawing.Point(79, 561);
+            this.gridLookUpEdit3.Name = "gridLookUpEdit3";
+            this.gridLookUpEdit3.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.gridLookUpEdit3.Properties.DataSource = this.sitesBindingSource;
+            this.gridLookUpEdit3.Properties.DisplayMember = "URL";
+            this.gridLookUpEdit3.Properties.ValueMember = "ID";
+            this.gridLookUpEdit3.Properties.View = this.gridLookUpEdit3View;
+            this.gridLookUpEdit3.Size = new System.Drawing.Size(236, 20);
+            this.gridLookUpEdit3.StyleController = this.dataLayoutControl1;
+            this.gridLookUpEdit3.TabIndex = 28;
+            // 
+            // gridLookUpEdit3View
+            // 
+            this.gridLookUpEdit3View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridLookUpEdit3View.Name = "gridLookUpEdit3View";
+            this.gridLookUpEdit3View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridLookUpEdit3View.OptionsView.ShowGroupPanel = false;
+            // 
+            // tabbedControlGroup2
+            // 
+            this.tabbedControlGroup2.Location = new System.Drawing.Point(0, 406);
+            this.tabbedControlGroup2.Name = "tabbedControlGroup2";
+            this.tabbedControlGroup2.SelectedTabPage = this.layoutControlGroup8;
+            this.tabbedControlGroup2.SelectedTabPageIndex = 0;
+            this.tabbedControlGroup2.Size = new System.Drawing.Size(401, 181);
+            this.tabbedControlGroup2.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlGroup8});
+            // 
+            // layoutControlGroup8
+            // 
+            this.layoutControlGroup8.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem14,
+            this.layoutControlItem15,
+            this.layoutControlItem16});
+            this.layoutControlGroup8.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup8.Name = "layoutControlGroup8";
+            this.layoutControlGroup8.Size = new System.Drawing.Size(377, 135);
+            this.layoutControlGroup8.Text = "Сайты";
+            // 
+            // layoutControlItem14
+            // 
+            this.layoutControlItem14.Control = this.gridControl4;
+            this.layoutControlItem14.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem14.Name = "layoutControlItem14";
+            this.layoutControlItem14.Size = new System.Drawing.Size(377, 109);
+            this.layoutControlItem14.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem14.TextVisible = false;
+            // 
+            // layoutControlItem15
+            // 
+            this.layoutControlItem15.Control = this.gridLookUpEdit3;
+            this.layoutControlItem15.Location = new System.Drawing.Point(0, 109);
+            this.layoutControlItem15.Name = "layoutControlItem15";
+            this.layoutControlItem15.Size = new System.Drawing.Size(295, 26);
+            this.layoutControlItem15.Text = "Добавить";
+            this.layoutControlItem15.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
+            this.layoutControlItem15.TextSize = new System.Drawing.Size(50, 13);
+            this.layoutControlItem15.TextToControlDistance = 5;
+            // 
+            // Добавить
+            // 
+            this.Добавить.Location = new System.Drawing.Point(319, 561);
+            this.Добавить.Name = "Добавить";
+            this.Добавить.Size = new System.Drawing.Size(78, 22);
+            this.Добавить.StyleController = this.dataLayoutControl1;
+            this.Добавить.TabIndex = 29;
+            this.Добавить.Text = "Добавить";
+            // 
+            // layoutControlItem16
+            // 
+            this.layoutControlItem16.Control = this.Добавить;
+            this.layoutControlItem16.Location = new System.Drawing.Point(295, 109);
+            this.layoutControlItem16.Name = "layoutControlItem16";
+            this.layoutControlItem16.Size = new System.Drawing.Size(82, 26);
+            this.layoutControlItem16.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem16.TextVisible = false;
             // 
             // FrmEditPos
             // 
@@ -1570,6 +1707,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewPosSites)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sitesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit3.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit3View)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1697,5 +1844,17 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
         private DevExpress.XtraEditors.SimpleButton simpleButton2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem13;
+        private DevExpress.XtraEditors.SimpleButton Добавить;
+        private DevExpress.XtraEditors.GridLookUpEdit gridLookUpEdit3;
+        private System.Windows.Forms.BindingSource sitesBindingSource;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridLookUpEdit3View;
+        private DevExpress.XtraGrid.GridControl gridControl4;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewPosSites;
+        private DevExpress.XtraGrid.Columns.GridColumn colID4;
+        private DevExpress.XtraLayout.TabbedControlGroup tabbedControlGroup2;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup8;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem14;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem16;
     }
 }

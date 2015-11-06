@@ -94,7 +94,7 @@ namespace ZovTrade
         {
 
             
-            if (view.RowCount>0 && view.IsValidRowHandle(view.FocusedRowHandle))
+            if (view.RowCount>0 && view.IsValidRowHandle(view.FocusedRowHandle) && !view.IsNewItemRow(view.FocusedRowHandle))
             {
                 view.BeginSort();
                 try
