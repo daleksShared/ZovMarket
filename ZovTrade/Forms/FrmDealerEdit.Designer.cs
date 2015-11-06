@@ -52,7 +52,14 @@
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.gridControl3 = new DevExpress.XtraGrid.GridControl();
             this.dealersBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.contactsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridViewDealerContacts = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colContactName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colContactPhones = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colContactOtherData = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colContactDescription = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colDealers = new DevExpress.XtraGrid.Columns.GridColumn();
             this.IDTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.dealerNameTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.dateaddDateEdit = new DevExpress.XtraEditors.DateEdit();
@@ -95,13 +102,6 @@
             this.emptySpaceItem5 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::ZovTrade.FrmWait), true, true);
-            this.contactsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.colID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colContactName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colContactPhones = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colContactOtherData = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colContactDescription = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colDealers = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
@@ -114,6 +114,7 @@
             this.dataLayoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dealersBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.contactsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewDealerContacts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IDTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dealerNameTextEdit.Properties)).BeginInit();
@@ -155,7 +156,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.contactsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -381,6 +381,10 @@
             // 
             this.dealersBindingSource.DataSource = typeof(DbModel.Dealers);
             // 
+            // contactsBindingSource
+            // 
+            this.contactsBindingSource.DataSource = typeof(DbModel.Contacts);
+            // 
             // gridViewDealerContacts
             // 
             this.gridViewDealerContacts.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
@@ -393,6 +397,48 @@
             this.gridViewDealerContacts.GridControl = this.gridControl3;
             this.gridViewDealerContacts.Name = "gridViewDealerContacts";
             this.gridViewDealerContacts.OptionsView.ShowGroupPanel = false;
+            // 
+            // colID
+            // 
+            this.colID.FieldName = "ID";
+            this.colID.Name = "colID";
+            this.colID.Visible = true;
+            this.colID.VisibleIndex = 0;
+            // 
+            // colContactName
+            // 
+            this.colContactName.FieldName = "ContactName";
+            this.colContactName.Name = "colContactName";
+            this.colContactName.Visible = true;
+            this.colContactName.VisibleIndex = 1;
+            // 
+            // colContactPhones
+            // 
+            this.colContactPhones.FieldName = "ContactPhones";
+            this.colContactPhones.Name = "colContactPhones";
+            this.colContactPhones.Visible = true;
+            this.colContactPhones.VisibleIndex = 2;
+            // 
+            // colContactOtherData
+            // 
+            this.colContactOtherData.FieldName = "ContactOtherData";
+            this.colContactOtherData.Name = "colContactOtherData";
+            this.colContactOtherData.Visible = true;
+            this.colContactOtherData.VisibleIndex = 3;
+            // 
+            // colContactDescription
+            // 
+            this.colContactDescription.FieldName = "ContactDescription";
+            this.colContactDescription.Name = "colContactDescription";
+            this.colContactDescription.Visible = true;
+            this.colContactDescription.VisibleIndex = 4;
+            // 
+            // colDealers
+            // 
+            this.colDealers.FieldName = "Dealers";
+            this.colDealers.Name = "colDealers";
+            this.colDealers.Visible = true;
+            this.colDealers.VisibleIndex = 5;
             // 
             // IDTextEdit
             // 
@@ -826,52 +872,6 @@
             // 
             this.splashScreenManager1.ClosingDelay = 500;
             // 
-            // contactsBindingSource
-            // 
-            this.contactsBindingSource.DataSource = typeof(DbModel.Contacts);
-            // 
-            // colID
-            // 
-            this.colID.FieldName = "ID";
-            this.colID.Name = "colID";
-            this.colID.Visible = true;
-            this.colID.VisibleIndex = 0;
-            // 
-            // colContactName
-            // 
-            this.colContactName.FieldName = "ContactName";
-            this.colContactName.Name = "colContactName";
-            this.colContactName.Visible = true;
-            this.colContactName.VisibleIndex = 1;
-            // 
-            // colContactPhones
-            // 
-            this.colContactPhones.FieldName = "ContactPhones";
-            this.colContactPhones.Name = "colContactPhones";
-            this.colContactPhones.Visible = true;
-            this.colContactPhones.VisibleIndex = 2;
-            // 
-            // colContactOtherData
-            // 
-            this.colContactOtherData.FieldName = "ContactOtherData";
-            this.colContactOtherData.Name = "colContactOtherData";
-            this.colContactOtherData.Visible = true;
-            this.colContactOtherData.VisibleIndex = 3;
-            // 
-            // colContactDescription
-            // 
-            this.colContactDescription.FieldName = "ContactDescription";
-            this.colContactDescription.Name = "colContactDescription";
-            this.colContactDescription.Visible = true;
-            this.colContactDescription.VisibleIndex = 4;
-            // 
-            // colDealers
-            // 
-            this.colDealers.FieldName = "Dealers";
-            this.colDealers.Name = "colDealers";
-            this.colDealers.Visible = true;
-            this.colDealers.VisibleIndex = 5;
-            // 
             // FrmEditDealer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -894,6 +894,7 @@
             this.dataLayoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dealersBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.contactsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewDealerContacts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.IDTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dealerNameTextEdit.Properties)).EndInit();
@@ -935,7 +936,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.contactsBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }

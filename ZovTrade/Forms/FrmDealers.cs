@@ -836,5 +836,23 @@ namespace ZovTrade
             var frmShowReport = new Forms.FrmAppReport();
             frmShowReport.ShowDialog();
         }
+
+        private void simpleButton5_Click(object sender, EventArgs e)
+        {
+            var row = treeDealersList.GetDataRecordByNode(treeDealersList.FocusedNode);
+            if (row == null)
+            {
+                return;
+            }
+            else
+            {
+                dynamic treeDealer = new { ID = 0, Dealer_ID = 0, dealerZovName = "" };
+                treeDealer = row;
+                var dId = treeDealer.ID;
+                var dName = treeDealer.dealerZovName;
+                var frmEdit = new FrmEditPos(0,true, dId);
+                frmEdit.Show();
+            }
+        }
     }
 }

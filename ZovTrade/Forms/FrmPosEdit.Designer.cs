@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmEditPos));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
@@ -162,9 +163,8 @@
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::ZovTrade.FrmWait), true, true);
-            this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             this.layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::ZovTrade.FrmWait), true, true);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
@@ -290,6 +290,17 @@
             this.layoutControl1.Size = new System.Drawing.Size(1262, 673);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // simpleButton3
+            // 
+            this.simpleButton3.Image = global::ZovTrade.Properties.Resources.delete_32x32;
+            this.simpleButton3.Location = new System.Drawing.Point(12, 623);
+            this.simpleButton3.Name = "simpleButton3";
+            this.simpleButton3.Size = new System.Drawing.Size(90, 38);
+            this.simpleButton3.StyleController = this.layoutControl1;
+            this.simpleButton3.TabIndex = 8;
+            this.simpleButton3.Text = "Удалить";
+            this.simpleButton3.Click += new System.EventHandler(this.simpleButton3_Click);
             // 
             // simpleButton2
             // 
@@ -1598,21 +1609,6 @@
             this.layoutControlItem13.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem13.TextVisible = false;
             // 
-            // splashScreenManager1
-            // 
-            this.splashScreenManager1.ClosingDelay = 500;
-            // 
-            // simpleButton3
-            // 
-            this.simpleButton3.Image = global::ZovTrade.Properties.Resources.delete_32x32;
-            this.simpleButton3.Location = new System.Drawing.Point(12, 623);
-            this.simpleButton3.Name = "simpleButton3";
-            this.simpleButton3.Size = new System.Drawing.Size(90, 38);
-            this.simpleButton3.StyleController = this.layoutControl1;
-            this.simpleButton3.TabIndex = 8;
-            this.simpleButton3.Text = "Удалить";
-            this.simpleButton3.Click += new System.EventHandler(this.simpleButton3_Click);
-            // 
             // layoutControlItem17
             // 
             this.layoutControlItem17.Control = this.simpleButton3;
@@ -1621,6 +1617,10 @@
             this.layoutControlItem17.Size = new System.Drawing.Size(94, 42);
             this.layoutControlItem17.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem17.TextVisible = false;
+            // 
+            // splashScreenManager1
+            // 
+            this.splashScreenManager1.ClosingDelay = 500;
             // 
             // FrmEditPos
             // 

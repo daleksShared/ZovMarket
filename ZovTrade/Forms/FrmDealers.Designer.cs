@@ -466,12 +466,13 @@
             // simpleButton5
             // 
             this.simpleButton5.Image = global::ZovTrade.Properties.Resources.add_32x32;
-            this.simpleButton5.Location = new System.Drawing.Point(722, 599);
+            this.simpleButton5.Location = new System.Drawing.Point(713, 599);
             this.simpleButton5.Name = "simpleButton5";
-            this.simpleButton5.Size = new System.Drawing.Size(113, 38);
+            this.simpleButton5.Size = new System.Drawing.Size(122, 38);
             this.simpleButton5.StyleController = this.layoutControl2;
             this.simpleButton5.TabIndex = 9;
-            this.simpleButton5.Text = "simpleButton5";
+            this.simpleButton5.Text = "Новый магазин";
+            this.simpleButton5.Click += new System.EventHandler(this.simpleButton5_Click);
             // 
             // simpleButton2
             // 
@@ -915,7 +916,7 @@
             this.emptySpaceItem1.AllowHotTrack = false;
             this.emptySpaceItem1.Location = new System.Drawing.Point(96, 594);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(621, 42);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(612, 42);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem6
@@ -948,9 +949,9 @@
             // layoutControlItem17
             // 
             this.layoutControlItem17.Control = this.simpleButton5;
-            this.layoutControlItem17.Location = new System.Drawing.Point(717, 594);
+            this.layoutControlItem17.Location = new System.Drawing.Point(708, 594);
             this.layoutControlItem17.Name = "layoutControlItem17";
-            this.layoutControlItem17.Size = new System.Drawing.Size(117, 42);
+            this.layoutControlItem17.Size = new System.Drawing.Size(126, 42);
             this.layoutControlItem17.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem17.TextVisible = false;
             // 
