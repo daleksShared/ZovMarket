@@ -28,7 +28,7 @@
     <PublisherName>ZOV</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>11</ApplicationRevision>
+    <ApplicationRevision>12</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -240,6 +240,7 @@
     <None Include="Properties\DataSources\DbModel.AppReports.datasource" />
     <None Include="Properties\DataSources\dbModel.Certifications.datasource" />
     <None Include="Properties\DataSources\DbModel.Certifications1.datasource" />
+    <None Include="Properties\DataSources\DbModel.Contacts.datasource" />
     <None Include="Properties\DataSources\dbModel.Coordinates.datasource" />
     <None Include="Properties\DataSources\DbModel.Coordinates1.datasource" />
     <None Include="Properties\DataSources\DbModel.DealerLegalNames.datasource" />

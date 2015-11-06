@@ -22,6 +22,7 @@ namespace DbModel
             this.Users = new HashSet<Users>();
             this.DealerLegalNames = new HashSet<DealerLegalNames>();
             this.Sites = new HashSet<Sites>();
+            this.Contacts = new HashSet<Contacts>();
         }
     
         public int ID { get; set; }
@@ -42,5 +43,7 @@ namespace DbModel
         public virtual ICollection<DealerLegalNames> DealerLegalNames { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sites> Sites { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Contacts> Contacts { get; set; }
     }
 }

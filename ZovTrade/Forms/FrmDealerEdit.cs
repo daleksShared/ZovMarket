@@ -12,7 +12,7 @@ using System.Data.Entity;
 
 namespace ZovTrade
 {
-    
+
     public partial class FrmEditDealer : DevExpress.XtraEditors.XtraForm
     {
         private DbModel.tradeEntities db =
@@ -42,9 +42,10 @@ namespace ZovTrade
             }
             else
             {
-                db.Dealers.Where(x => x.ID==dealerId).Load();
+                db.Dealers.Where(x => x.ID == dealerId).Load();
                 db.Sites.Where(x => x.Dealers.ID == dealerId).Load();
                 db.DealerLegalNames.Where(x => x.Dealers.ID == dealerId).Load();
+               // db.Contacts.Where(x=>x.Dealers.Where(d=>d.ID==dealerId).Select(x)).Load();
             }
             bsParentDealers.DataSource = db.Dealers.Select(x => new { x.ID, x.dealerName, x.dealerZovName }).ToList();
             dealersBindingSource.DataSource = db.Dealers.Local.ToBindingList();
@@ -92,9 +93,7 @@ namespace ZovTrade
         }
         private void DeleteFocusedRows(DevExpress.XtraGrid.Views.Grid.GridView view)
         {
-
-            
-            if (view.RowCount>0 && view.IsValidRowHandle(view.FocusedRowHandle) && !view.IsNewItemRow(view.FocusedRowHandle))
+            if (view.RowCount > 0 && view.IsValidRowHandle(view.FocusedRowHandle) && !view.IsNewItemRow(view.FocusedRowHandle))
             {
                 view.BeginSort();
                 try
@@ -106,20 +105,32 @@ namespace ZovTrade
                 {
                 }
                 view.EndSort();
-
             }
-
         }
         private void simpleButton5_Click(object sender, EventArgs e)
         {
             DeleteFocusedRows(gridViewLegalNames);
 
         }
+        private void simpleButton9_Click(object sender, EventArgs e)
+        {
+            DeleteFocusedRows(gridViewLegalNames);
+        }
 
-       
-        private void BtnDelSite(object sender, EventArgs e)
+        private void simpleButton7_Click(object sender, EventArgs e)
         {
             DeleteFocusedRows(gridViewSites);
         }
+
+
+
+        private void simpleButton2_Click(object sender, EventArgs e)
+        {
+            var Contact = db.Contacts.Create();
+            Contact.Dealers.Add(db.Dealers.Local.First());
+            db.Contacts.Add(Contact);
+        }
+
+
     }
 }

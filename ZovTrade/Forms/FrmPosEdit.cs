@@ -20,15 +20,15 @@ namespace ZovTrade
             new tradeEntities(DbModel.Tools.TradeConnectionString(Properties.Settings.Default.barcodeCS.ToString()));
      //   private SplashScreenManager splashScreenManager = new SplashScreenManager();
         private int posId = 0;
-        public FrmEditPos(int _posId)
+        public FrmEditPos(int _posId,bool isNewPos=false)
         {
             
             posId = _posId;
             
                          
             InitializeComponent();
-            
-       
+
+            layoutControlItem17.Visibility = isNewPos ? DevExpress.XtraLayout.Utils.LayoutVisibility.Never : DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
            
             
         }
@@ -65,12 +65,19 @@ namespace ZovTrade
             var dealerId = db.Dealers.Local.First().ID;
 
 
-          //  gridLookUpEdit2.Properties.DataSource = 
-            
+            //  gridLookUpEdit2.Properties.DataSource = 
+
 
             //db.DealerLegalNames.Where(x => x.Dealers.ID == dealerId).Select(x => new { x.ID, x.LegalAddress, x.LegalName }).ToList();
             //db.DealerLegalNames.Where(x => x.Dealers.ID == dealerId).Load();
-            dealerLegalNamesBindingSource.DataSource = db.DealerLegalNames.Where(x => x.Dealers.ID == dealerId).Select(x => new { x.ID, x.LegalAddress, x.LegalName }).ToList();
+            Nullable<int> parentDealerId = db.Dealers.Where(x => x.ID == dealerId).Select(x => x.DealerParent).First().ID;
+            
+
+
+            var dealerLegalNames = db.DealerLegalNames.Where(x => x.Dealers.ID == dealerId || (parentDealerId!=null && x.Dealers.ID == parentDealerId)).Select(x => new { x.ID, x.LegalAddress, x.LegalName }).ToList();
+            //var dealerLegalNamesParent = db.DealerLegalNames.Where(x => x.Dealers.ID == parentDealerId || x.Dealers.ID == x.Dealers.DealerParent.ID).Select(x => new { x.ID, x.LegalAddress, x.LegalName }).ToList();
+
+            dealerLegalNamesBindingSource.DataSource = dealerLegalNames;
             //var pos =
             //    db.Pos.Where(x => x.ID == posId)
             //        .Include(x => x.PosTypes)
@@ -105,6 +112,20 @@ namespace ZovTrade
         private void simpleButton2_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void simpleButton3_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(this,"Точно удалить???") == DialogResult.Yes)
+                {
+                var curPos = db.Pos.Where(x => x.ID == posId).Select(x => x).ToList();
+                if (curPos.Any())
+                {
+                    db.Pos.Remove(curPos.First());
+                    db.SaveChanges();
+                    this.Close();
+                }
+            }
         }
     }
 }

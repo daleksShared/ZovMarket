@@ -64,6 +64,9 @@
     <Compile Include="Certifications.cs">
       <DependentUpon>Trade.tt</DependentUpon>
     </Compile>
+    <Compile Include="Contacts.cs">
+      <DependentUpon>Trade.tt</DependentUpon>
+    </Compile>
     <Compile Include="DealerLegalNames.cs">
       <DependentUpon>Trade.tt</DependentUpon>
     </Compile>

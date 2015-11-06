@@ -44,6 +44,7 @@ namespace DbModel
         public virtual DbSet<PosBrand> PosBrand { get; set; }
         public virtual DbSet<PosRanks> PosRanks { get; set; }
         public virtual DbSet<AppReports> AppReports { get; set; }
+        public virtual DbSet<Contacts> Contacts { get; set; }
     
         public virtual ObjectResult<sp_getDealersTree_Result> sp_getDealersTree()
         {

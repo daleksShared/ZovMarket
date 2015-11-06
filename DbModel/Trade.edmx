@@ -29,6 +29,24 @@
           <Property Name="dateGet" Type="datetime" />
           <Property Name="Pos_ID" Type="int" />
         </EntityType>
+        <EntityType Name="Contacts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="150" />
+          <Property Name="ContactPhones" Type="nvarchar" MaxLength="250" />
+          <Property Name="ContactOtherData" Type="nvarchar" MaxLength="250" />
+          <Property Name="ContactDescription" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="DealerContacts">
+          <Key>
+            <PropertyRef Name="Contact_ID" />
+            <PropertyRef Name="Dealer_ID" />
+          </Key>
+          <Property Name="Contact_ID" Type="int" Nullable="false" />
+          <Property Name="Dealer_ID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="DealerLegalNames">
           <Key>
             <PropertyRef Name="ID" />
@@ -300,6 +318,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DealerContacts_Contacts">
+          <End Role="Contacts" Type="Self.Contacts" Multiplicity="1" />
+          <End Role="DealerContacts" Type="Self.DealerContacts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contacts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DealerContacts">
+              <PropertyRef Name="Contact_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DealerContacts_Dealers">
+          <End Role="Dealers" Type="Self.Dealers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DealerContacts" Type="Self.DealerContacts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dealers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DealerContacts">
+              <PropertyRef Name="Dealer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DealerLegalNames_Dealers">
           <End Role="Dealers" Type="Self.Dealers" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -418,6 +462,8 @@
         <EntityContainer Name="tradeModelStoreContainer">
           <EntitySet Name="AppReports" EntityType="Self.AppReports" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Certifications" EntityType="Self.Certifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DealerContacts" EntityType="Self.DealerContacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DealerLegalNames" EntityType="Self.DealerLegalNames" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dealers" EntityType="Self.Dealers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pos" EntityType="Self.Pos" Schema="dbo" store:Type="Tables" />
@@ -468,6 +514,14 @@
           <AssociationSet Name="FK_Dealer_Dealers" Association="Self.FK_Dealer_Dealers">
             <End Role="Dealers" EntitySet="Dealers" />
             <End Role="Dealers1" EntitySet="Dealers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DealerContacts_Contacts" Association="Self.FK_DealerContacts_Contacts">
+            <End Role="Contacts" EntitySet="Contacts" />
+            <End Role="DealerContacts" EntitySet="DealerContacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DealerContacts_Dealers" Association="Self.FK_DealerContacts_Dealers">
+            <End Role="Dealers" EntitySet="Dealers" />
+            <End Role="DealerContacts" EntitySet="DealerContacts" />
           </AssociationSet>
           <AssociationSet Name="FK_DealerLegalNames_Dealers" Association="Self.FK_DealerLegalNames_Dealers">
             <End Role="Dealers" EntitySet="Dealers" />
@@ -535,6 +589,7 @@
           <NavigationProperty Name="DealerLegalNames" Relationship="tradeModel.FK_DealerLegalNames_Dealers" FromRole="Dealers" ToRole="DealerLegalNames" />
           <Property Name="dealerZovName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Sites" Relationship="tradeModel.FK_Sites_Dealers" FromRole="Dealers" ToRole="Sites" />
+          <NavigationProperty Name="Contacts" Relationship="tradeModel.DealerContacts" FromRole="Dealers" ToRole="Contacts" />
         </EntityType>
         <EntityType Name="Pos">
           <Key>
@@ -847,8 +902,13 @@
           <AssociationSet Name="FK_Pos_DealerLegalNames" Association="tradeModel.FK_Pos_DealerLegalNames">
             <End Role="DealerLegalNames" EntitySet="DealerLegalNames" />
             <End Role="Pos" EntitySet="Pos" />
-          </AssociationSet>          
-        </EntityContainer>
+          </AssociationSet>
+          <EntitySet Name="Contacts" EntityType="tradeModel.Contacts" />
+          <AssociationSet Name="DealerContacts" Association="tradeModel.DealerContacts">
+            <End Role="Contacts" EntitySet="Contacts" />
+            <End Role="Dealers" EntitySet="Dealers" />
+          </AssociationSet>
+          </EntityContainer>
         <ComplexType Name="sp_getDealersTree_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="Int32" Name="Dealer_ID" Nullable="true" />
@@ -1045,7 +1105,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="Contacts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContactName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContactPhones" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ContactOtherData" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ContactDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Dealers" Relationship="tradeModel.DealerContacts" FromRole="Contacts" ToRole="Dealers" />
+        </EntityType>
+        <Association Name="DealerContacts">
+          <End Type="tradeModel.Contacts" Role="Contacts" Multiplicity="*" />
+          <End Type="tradeModel.Dealers" Role="Dealers" Multiplicity="*" />
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1274,6 +1349,25 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="tradeModel.Contacts">
+              <MappingFragment StoreEntitySet="Contacts">
+                <ScalarProperty Name="ContactDescription" ColumnName="ContactDescription" />
+                <ScalarProperty Name="ContactOtherData" ColumnName="ContactOtherData" />
+                <ScalarProperty Name="ContactPhones" ColumnName="ContactPhones" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="DealerContacts" TypeName="tradeModel.DealerContacts" StoreEntitySet="DealerContacts">
+            <EndProperty Name="Dealers">
+              <ScalarProperty Name="ID" ColumnName="Dealer_ID" />
+            </EndProperty>
+            <EndProperty Name="Contacts">
+              <ScalarProperty Name="ID" ColumnName="Contact_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
