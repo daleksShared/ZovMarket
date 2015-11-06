@@ -15,7 +15,7 @@ namespace ZovTrade.Forms
 {
     public partial class FrmAppReport : DevExpress.XtraEditors.XtraForm
     {
-        private DbModel.tradeEntities db = new tradeEntities(DbModel.Tools.TradeConnectionString(Properties.Settings.Default.barcodeCS.ToString()));
+        private tradeEntities db = new tradeEntities(DbModel.Tools.TradeConnectionString(Properties.Settings.Default.barcodeCS.ToString()));
         public FrmAppReport()
         {
             InitializeComponent();

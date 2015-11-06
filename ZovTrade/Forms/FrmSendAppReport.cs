@@ -47,6 +47,8 @@ namespace ZovTrade.Forms
                         byte[] fileBytes = new byte[stream.Length];
 
                         stream.Read(fileBytes, 0, fileBytes.Length);
+                        stream.Close();
+                        stream.Dispose();
                         db.AppReports.Local.First().FileData = fileBytes;
                         db.AppReports.Local.First().FileName = openFileDialog1.FileName;
                         layoutControlItem5.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
