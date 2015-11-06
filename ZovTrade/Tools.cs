@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
@@ -12,10 +13,10 @@ using System.Text;
 
 namespace ZovTrade
 {
-     class Tools
+     public static class Tools
      {
-         private string _userHash = "";
-         public string UserHash 
+         private static string _userHash = "";
+         public static string UserHash 
         {
             get
             {
@@ -49,8 +50,24 @@ namespace ZovTrade
         }
         public static string helloUser = string.Empty;
         public static string helloUserBuy = string.Empty;
+        public static void showDbSaveExceptions(Exception _ex)
+        {
+            var ex = _ex as DbEntityValidationException;
+            if (ex == null) return;
 
-       
+            foreach (var eve in ex.EntityValidationErrors)
+            {
+                Debug.WriteLine(
+                    "Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                    eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                foreach (var ve in eve.ValidationErrors)
+                {
+                    Debug.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                        ve.PropertyName, ve.ErrorMessage);
+                }
+            }
+        }
+
         public static string cs = string.Empty;
         public static SqlConnection conn;
         public static string username;

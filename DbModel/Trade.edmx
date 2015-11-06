@@ -73,6 +73,7 @@
           <Property Name="attitude" Type="float" />
           <Property Name="coordstextdata" Type="nvarchar" MaxLength="50" />
           <Property Name="Country" Type="nvarchar" MaxLength="150" />
+          <Property Name="DealerLegalNames_ID" Type="int" />
         </EntityType>
         <EntityType Name="PosBrand">
           <Key>
@@ -98,14 +99,6 @@
           <Property Name="imageData" Type="varbinary(max)" />
           <Property Name="Pos_ID" Type="int" />
           <Property Name="dateAdd" Type="datetime" StoreGeneratedPattern="Computed" />
-        </EntityType>
-        <EntityType Name="PosLegalName">
-          <Key>
-            <PropertyRef Name="Pos_ID" />
-            <PropertyRef Name="LegalName_ID" />
-          </Key>
-          <Property Name="Pos_ID" Type="int" Nullable="false" />
-          <Property Name="LegalName_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PosPhones">
           <Key>
@@ -321,6 +314,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Pos_DealerLegalNames">
+          <End Role="DealerLegalNames" Type="Self.DealerLegalNames" Multiplicity="0..1" />
+          <End Role="Pos" Type="Self.Pos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DealerLegalNames">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pos">
+              <PropertyRef Name="DealerLegalNames_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PosEmails_Pos">
           <End Role="Pos" Type="Self.Pos" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -331,32 +336,6 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="PosEmails">
-              <PropertyRef Name="Pos_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PosLegalName_DealerLegalNames">
-          <End Role="DealerLegalNames" Type="Self.DealerLegalNames" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="PosLegalName" Type="Self.PosLegalName" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DealerLegalNames">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PosLegalName">
-              <PropertyRef Name="LegalName_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PosLegalName_Pos">
-          <End Role="Pos" Type="Self.Pos" Multiplicity="1" />
-          <End Role="PosLegalName" Type="Self.PosLegalName" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pos">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PosLegalName">
               <PropertyRef Name="Pos_ID" />
             </Dependent>
           </ReferentialConstraint>
@@ -445,7 +424,6 @@
           <EntitySet Name="PosBrand" EntityType="Self.PosBrand" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PosEmails" EntityType="Self.PosEmails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PosImages" EntityType="Self.PosImages" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PosLegalName" EntityType="Self.PosLegalName" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PosPhones" EntityType="Self.PosPhones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PosRanks" EntityType="Self.PosRanks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PosTypes" EntityType="Self.PosTypes" Schema="dbo" store:Type="Tables" />
@@ -495,17 +473,13 @@
             <End Role="Dealers" EntitySet="Dealers" />
             <End Role="DealerLegalNames" EntitySet="DealerLegalNames" />
           </AssociationSet>
+          <AssociationSet Name="FK_Pos_DealerLegalNames" Association="Self.FK_Pos_DealerLegalNames">
+            <End Role="DealerLegalNames" EntitySet="DealerLegalNames" />
+            <End Role="Pos" EntitySet="Pos" />
+          </AssociationSet>
           <AssociationSet Name="FK_PosEmails_Pos" Association="Self.FK_PosEmails_Pos">
             <End Role="Pos" EntitySet="Pos" />
             <End Role="PosEmails" EntitySet="PosEmails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PosLegalName_DealerLegalNames" Association="Self.FK_PosLegalName_DealerLegalNames">
-            <End Role="DealerLegalNames" EntitySet="DealerLegalNames" />
-            <End Role="PosLegalName" EntitySet="PosLegalName" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PosLegalName_Pos" Association="Self.FK_PosLegalName_Pos">
-            <End Role="Pos" EntitySet="Pos" />
-            <End Role="PosLegalName" EntitySet="PosLegalName" />
           </AssociationSet>
           <AssociationSet Name="FK_PosPhones_Pos" Association="Self.FK_PosPhones_Pos">
             <End Role="Pos" EntitySet="Pos" />
@@ -590,12 +564,13 @@
           <NavigationProperty Name="PosEmails" Relationship="tradeModel.FK_PosEmails_Pos" FromRole="Pos" ToRole="PosEmails" />
           <Property Name="Ruby_Id" Type="Int32" />
           <NavigationProperty Name="Sites" Relationship="tradeModel.FK_Sites_Pos" FromRole="Pos" ToRole="Sites" />
-          <NavigationProperty Name="DealerLegalNames" Relationship="tradeModel.PosLegalName" FromRole="Pos" ToRole="DealerLegalNames" />
           <Property Name="longitude" Type="Double" />
           <Property Name="attitude" Type="Double" />
           <Property Name="coordstextdata" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PosRanks" Relationship="tradeModel.FK_PosRanks_Pos" FromRole="Pos" ToRole="PosRanks" />
           <Property Name="Country" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="DealerLegalNames_ID" Type="Int32" />
+          <NavigationProperty Name="DealerLegalNames" Relationship="tradeModel.FK_Pos_DealerLegalNames" FromRole="Pos" ToRole="DealerLegalNames" />
         </EntityType>
         <EntityType Name="PosImages">
           <Key>
@@ -862,17 +837,17 @@
             <End Role="Pos" EntitySet="Pos" />
             <End Role="Sites" EntitySet="Sites" />
           </AssociationSet>
-          <AssociationSet Name="PosLegalName" Association="tradeModel.PosLegalName">
-            <End Role="DealerLegalNames" EntitySet="DealerLegalNames" />
-            <End Role="Pos" EntitySet="Pos" />
-          </AssociationSet>
           <EntitySet Name="PosBrand" EntityType="tradeModel.PosBrand" />
           <EntitySet Name="PosRanks" EntityType="tradeModel.PosRanks" />
           <AssociationSet Name="FK_PosRanks_Pos" Association="tradeModel.FK_PosRanks_Pos">
             <End Role="Pos" EntitySet="Pos" />
             <End Role="PosRanks" EntitySet="PosRanks" />
           </AssociationSet>
-          <EntitySet Name="AppReports" EntityType="tradeModel.AppReports" />          
+          <EntitySet Name="AppReports" EntityType="tradeModel.AppReports" />
+          <AssociationSet Name="FK_Pos_DealerLegalNames" Association="tradeModel.FK_Pos_DealerLegalNames">
+            <End Role="DealerLegalNames" EntitySet="DealerLegalNames" />
+            <End Role="Pos" EntitySet="Pos" />
+          </AssociationSet>          
         </EntityContainer>
         <ComplexType Name="sp_getDealersTree_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -897,7 +872,7 @@
           <Property Name="LegalName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="LegalAddress" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Dealers" Relationship="tradeModel.FK_DealerLegalNames_Dealers" FromRole="DealerLegalNames" ToRole="Dealers" />
-          <NavigationProperty Name="Pos" Relationship="tradeModel.PosLegalName" FromRole="DealerLegalNames" ToRole="Pos" />
+          <NavigationProperty Name="Pos" Relationship="tradeModel.FK_Pos_DealerLegalNames" FromRole="DealerLegalNames" ToRole="Pos" />
         </EntityType>
         <Association Name="FK_DealerLegalNames_Dealers">
           <End Type="tradeModel.Dealers" Role="Dealers" Multiplicity="0..1">
@@ -1012,10 +987,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="PosLegalName">
-          <End Type="tradeModel.DealerLegalNames" Role="DealerLegalNames" Multiplicity="*" />
-          <End Type="tradeModel.Pos" Role="Pos" Multiplicity="*" />
-        </Association>
         <EntityType Name="PosBrand">
           <Key>
             <PropertyRef Name="ID" />
@@ -1062,6 +1033,18 @@
           <Property Name="AddTime" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="Closed" Type="DateTime" Precision="3" />
         </EntityType>
+        <Association Name="FK_Pos_DealerLegalNames">
+          <End Type="tradeModel.DealerLegalNames" Role="DealerLegalNames" Multiplicity="0..1" />
+          <End Type="tradeModel.Pos" Role="Pos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DealerLegalNames">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pos">
+              <PropertyRef Name="DealerLegalNames_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1096,6 +1079,7 @@
           <EntitySetMapping Name="Pos">
             <EntityTypeMapping TypeName="tradeModel.Pos">
               <MappingFragment StoreEntitySet="Pos">
+                <ScalarProperty Name="DealerLegalNames_ID" ColumnName="DealerLegalNames_ID" />
                 <ScalarProperty Name="Country" ColumnName="Country" />
                 <ScalarProperty Name="coordstextdata" ColumnName="coordstextdata" />
                 <ScalarProperty Name="attitude" ColumnName="attitude" />
@@ -1256,14 +1240,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="PosLegalName" TypeName="tradeModel.PosLegalName" StoreEntitySet="PosLegalName">
-            <EndProperty Name="Pos">
-              <ScalarProperty Name="ID" ColumnName="Pos_ID" />
-            </EndProperty>
-            <EndProperty Name="DealerLegalNames">
-              <ScalarProperty Name="ID" ColumnName="LegalName_ID" />
-            </EndProperty>
-          </AssociationSetMapping>
           <EntitySetMapping Name="PosBrand">
             <EntityTypeMapping TypeName="tradeModel.PosBrand">
               <MappingFragment StoreEntitySet="PosBrand">

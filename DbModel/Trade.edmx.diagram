@@ -34,11 +34,11 @@
         <EntityTypeShape EntityType="tradeModel.Sites" Width="1.5" PointX="12.125" PointY="3.375" />
         <AssociationConnector Association="tradeModel.FK_Sites_Dealers" ></AssociationConnector>
         <AssociationConnector Association="tradeModel.FK_Sites_Pos" />
-        <AssociationConnector Association="tradeModel.PosLegalName" />
         <EntityTypeShape EntityType="tradeModel.PosBrand" Width="1.5" PointX="0.75" PointY="9.875" />
         <EntityTypeShape EntityType="tradeModel.PosRanks" Width="1.5" PointX="8.875" PointY="9.625" />
         <AssociationConnector Association="tradeModel.FK_PosRanks_Pos" />
         <EntityTypeShape EntityType="tradeModel.AppReports" Width="1.5" PointX="11.375" PointY="9.75" />
+        <AssociationConnector Association="tradeModel.FK_Pos_DealerLegalNames" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

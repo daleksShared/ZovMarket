@@ -30,7 +30,12 @@ namespace ZOV.Tools
             try
             {
                 conn.Open();
-                SqlCommand comm = new SqlCommand(String.Format("SELECT UserName, Permissions FROM ZOVReminderUsers "), conn);
+                SqlCommand comm = new SqlCommand();
+                comm.Connection = conn;
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.CommandText = "dbo.spGetUserListByGroupId";
+
+                comm.Parameters.AddWithValue("@groupId", 2);
                 SqlDataReader dataReader = comm.ExecuteReader();
 
                 if (dataReader.HasRows)

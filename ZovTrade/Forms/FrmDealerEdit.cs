@@ -90,5 +90,36 @@ namespace ZovTrade
         {
             this.Close();
         }
+        private void DeleteFocusedRows(DevExpress.XtraGrid.Views.Grid.GridView view)
+        {
+
+            
+            if (view.RowCount>0 && view.IsValidRowHandle(view.FocusedRowHandle))
+            {
+                view.BeginSort();
+                try
+                {
+                    view.DeleteRow(view.FocusedRowHandle);
+
+                }
+                catch (Exception)
+                {
+                }
+                view.EndSort();
+
+            }
+
+        }
+        private void simpleButton5_Click(object sender, EventArgs e)
+        {
+            DeleteFocusedRows(gridViewLegalNames);
+
+        }
+
+       
+        private void BtnDelSite(object sender, EventArgs e)
+        {
+            DeleteFocusedRows(gridViewSites);
+        }
     }
 }

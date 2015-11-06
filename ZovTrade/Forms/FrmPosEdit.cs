@@ -41,7 +41,7 @@ namespace ZovTrade
             var curpos = from p in db.Pos
                          where p.ID == posId
                          select new { p.legalName, p.Dealers.dealerZovName };
-
+            
             var firstOrDefault = curpos.FirstOrDefault();
             if (firstOrDefault != null)
                 this.Text = firstOrDefault.dealerZovName + "\\" + firstOrDefault.legalName;
@@ -60,7 +60,17 @@ namespace ZovTrade
              db.PosTypes.Load();
              db.Dealers.Where(x=>x.Pos.FirstOrDefault(p=>p.ID==posId).Dealers.ID==x.ID).Load();
             db.Pos.Where(x => x.ID == posId).Load();
+
+
+            var dealerId = db.Dealers.Local.First().ID;
+
+
+          //  gridLookUpEdit2.Properties.DataSource = 
             
+
+            //db.DealerLegalNames.Where(x => x.Dealers.ID == dealerId).Select(x => new { x.ID, x.LegalAddress, x.LegalName }).ToList();
+            //db.DealerLegalNames.Where(x => x.Dealers.ID == dealerId).Load();
+            dealerLegalNamesBindingSource.DataSource = db.DealerLegalNames.Where(x => x.Dealers.ID == dealerId).Select(x => new { x.ID, x.LegalAddress, x.LegalName }).ToList();
             //var pos =
             //    db.Pos.Where(x => x.ID == posId)
             //        .Include(x => x.PosTypes)
@@ -69,10 +79,10 @@ namespace ZovTrade
             //        .Include(x => x.Certifications)
             //        .Include(x => x.PosEmails)
             //        .Include(x => x.PosPhones).Include(x => x.Samples).Select(x=>x);
-          //  if (!pos.Any()){return;}
+            //  if (!pos.Any()){return;}
             posTypesBindingSource.DataSource = db.PosTypes.Local.Select(x => new {x.ID, x.posTypeName}).ToList();
-
-            var dealers = db.Dealers.Local.ToBindingList();
+            
+            //var dealers = db.Dealers.Local.ToBindingList();
 
             dealersBindingSource.DataSource = db.Dealers.Select(x => new { x.ID, x.dealerZovName, parentName=x.DealerParent.dealerZovName }).OrderBy(x=>x.parentName).ThenBy(x=>x.dealerZovName).ToList();
             posBindingSource.DataSource = db.Pos.Local.ToBindingList();
@@ -81,7 +91,20 @@ namespace ZovTrade
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Tools.showDbSaveExceptions(ex);
+            }
+          
+        }
+
+        private void simpleButton2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

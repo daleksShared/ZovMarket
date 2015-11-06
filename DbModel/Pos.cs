@@ -23,7 +23,6 @@ namespace DbModel
             this.PosPhones = new HashSet<PosPhones>();
             this.PosEmails = new HashSet<PosEmails>();
             this.Sites = new HashSet<Sites>();
-            this.DealerLegalNames = new HashSet<DealerLegalNames>();
             this.PosRanks = new HashSet<PosRanks>();
         }
     
@@ -47,6 +46,7 @@ namespace DbModel
         public Nullable<double> attitude { get; set; }
         public string coordstextdata { get; set; }
         public string Country { get; set; }
+        public Nullable<int> DealerLegalNames_ID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Certifications> Certifications { get; set; }
@@ -63,8 +63,7 @@ namespace DbModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sites> Sites { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DealerLegalNames> DealerLegalNames { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PosRanks> PosRanks { get; set; }
+        public virtual DealerLegalNames DealerLegalNames { get; set; }
     }
 }

@@ -196,7 +196,8 @@ namespace ZovTrade
                         x.yandexAdress,
                         x.brand,
                         x.PosTypes.posTypeName,
-                        x.Ruby_Id
+                        x.Ruby_Id,
+                        x.DealerLegalNames.LegalName
                     }).ToList();
 
             //listBoxSubDealers.DataSource =
@@ -395,6 +396,7 @@ namespace ZovTrade
                             }
 
 
+
                             //db.SaveChanges();
 
                             var legalName = db.DealerLegalNames.Any(x => x.LegalName == rLegalName)
@@ -418,11 +420,11 @@ namespace ZovTrade
                                 pos.yandexAdress = rYandexAddress;
                                 pos.legalName = rPosName;
                                 pos.city = rCity;
-                                pos.DealerLegalNames.Add(legalName);
+                                pos.DealerLegalNames=(legalName);
                                 pos.Ruby_Id = rubyId;
 
                                 pos.locationDescription = rStreetAddress;
-                                pos.DealerLegalNames.Add(legalName);
+                                //pos.DealerLegalNames.Add(legalName);
 
                                 pos.brand = rPosBrend;
                                 pos.posStatus = rPosEnable == "0" ? false : true;
@@ -521,19 +523,9 @@ namespace ZovTrade
                             {
                                 db.SaveChanges();
                             }
-                            catch (DbEntityValidationException ex)
+                            catch (Exception ex)
                             {
-                                foreach (var eve in ex.EntityValidationErrors)
-                                {
-                                    Debug.WriteLine(
-                                        "Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                                    foreach (var ve in eve.ValidationErrors)
-                                    {
-                                        Debug.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                                            ve.PropertyName, ve.ErrorMessage);
-                                    }
-                                }
+                               Tools.showDbSaveExceptions(ex);
 
                             }
                             r2.Cells.Interior.Color = ColorTranslator.ToOle(Color.LightGreen);
@@ -551,7 +543,7 @@ namespace ZovTrade
                 }
             }
         }
-
+        
         private void barButtonItem9_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
 
