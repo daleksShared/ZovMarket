@@ -17,17 +17,17 @@ namespace DbModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Pos()
         {
+            this.posStatus_ID = 1;
             this.Certifications = new HashSet<Certifications>();
             this.PosImages = new HashSet<PosImages>();
             this.Samples = new HashSet<Samples>();
             this.PosPhones = new HashSet<PosPhones>();
             this.PosEmails = new HashSet<PosEmails>();
-            this.Sites = new HashSet<Sites>();
             this.PosRanks = new HashSet<PosRanks>();
+            this.Sites = new HashSet<Sites>();
         }
     
         public int ID { get; set; }
-        public bool posStatus { get; set; }
         public Nullable<System.DateTime> dateadd { get; set; }
         public string legalName { get; set; }
         public string fabricSynonim { get; set; }
@@ -47,6 +47,9 @@ namespace DbModel
         public string coordstextdata { get; set; }
         public string Country { get; set; }
         public Nullable<int> DealerLegalNames_ID { get; set; }
+        public Nullable<bool> DeleteMark { get; set; }
+        public int posStatus_ID { get; set; }
+        public Nullable<System.DateTime> posStatusDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Certifications> Certifications { get; set; }
@@ -61,9 +64,10 @@ namespace DbModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PosEmails> PosEmails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Sites> Sites { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PosRanks> PosRanks { get; set; }
         public virtual DealerLegalNames DealerLegalNames { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Sites> Sites { get; set; }
+        public virtual StatusOfPos StatusOfPos { get; set; }
     }
 }

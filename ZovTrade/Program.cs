@@ -22,6 +22,7 @@ namespace ZovTrade
             ZOV.Tools.MyConnectionString.set_InitialCatalog("reminder");
             Application.Run(new ZOV.Tools.frmLogin());
             Properties.Settings.Default.cs_user = ZOV.Tools.Security.UserName;
+            Properties.Settings.Default.Save();
             Application.Run(new FrmDealers());
         }
     }

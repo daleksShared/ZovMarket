@@ -15,6 +15,8 @@ namespace ZovTrade
 {
      public static class Tools
      {
+
+
          private static string _userHash = "";
          public static string UserHash 
         {

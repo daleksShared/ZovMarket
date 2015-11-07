@@ -116,6 +116,9 @@
     <Compile Include="sp_getSubDealers_Result.cs">
       <DependentUpon>Trade.tt</DependentUpon>
     </Compile>
+    <Compile Include="StatusOfPos.cs">
+      <DependentUpon>Trade.tt</DependentUpon>
+    </Compile>
     <Compile Include="Tools.cs" />
     <Compile Include="Trade.Context.cs">
       <AutoGen>True</AutoGen>

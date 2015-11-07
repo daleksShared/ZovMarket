@@ -16,7 +16,9 @@
           <Property Name="FileData" Type="varbinary(max)" />
           <Property Name="FileName" Type="nvarchar" MaxLength="50" />
           <Property Name="AddTime" Type="datetime" StoreGeneratedPattern="Computed" />
-          <Property Name="Closed" Type="datetime" />
+          <Property Name="ClosedTime" Type="datetime" StoreGeneratedPattern="Computed" />
+          <Property Name="Reply" Type="nvarchar" MaxLength="150" />
+          <Property Name="CloseAction" Type="bit" />
         </EntityType>
         <EntityType Name="Certifications">
           <Key>
@@ -72,7 +74,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="posStatus" Type="bit" Nullable="false" />
+          <Property Name="posStatus_ID" Type="int" Nullable="false" />
           <Property Name="dateadd" Type="datetime" StoreGeneratedPattern="Computed" />
           <Property Name="legalName" Type="nvarchar" MaxLength="150" />
           <Property Name="fabricSynonim" Type="nvarchar" MaxLength="150" />
@@ -92,6 +94,8 @@
           <Property Name="coordstextdata" Type="nvarchar" MaxLength="50" />
           <Property Name="Country" Type="nvarchar" MaxLength="150" />
           <Property Name="DealerLegalNames_ID" Type="int" />
+          <Property Name="DeleteMark" Type="bit" />
+          <Property Name="posStatusDate" Type="datetime" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="PosBrand">
           <Key>
@@ -138,6 +142,14 @@
           <Property Name="Pos_ID" Type="int" />
           <Property Name="ActiveRank" Type="bit" />
         </EntityType>
+        <EntityType Name="PosSites">
+          <Key>
+            <PropertyRef Name="Pos_ID" />
+            <PropertyRef Name="Site_ID" />
+          </Key>
+          <Property Name="Pos_ID" Type="int" Nullable="false" />
+          <Property Name="Site_ID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="PosTypes">
           <Key>
             <PropertyRef Name="ID" />
@@ -182,15 +194,23 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="URL" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="Pos_ID" Type="int" />
           <Property Name="Dealer_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="StatusOfPos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StatusName" Type="nvarchar" MaxLength="50" />
+          <Property Name="StatusColor" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="UserRoles">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="roleName" Type="nvarchar(max)" />
+          <Property Name="roleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="roleDescription" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -370,6 +390,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Pos_StatusOfPos">
+          <End Role="StatusOfPos" Type="Self.StatusOfPos" Multiplicity="1" />
+          <End Role="Pos" Type="Self.Pos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusOfPos">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pos">
+              <PropertyRef Name="posStatus_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PosEmails_Pos">
           <End Role="Pos" Type="Self.Pos" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -412,6 +444,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PosSites_Pos">
+          <End Role="Pos" Type="Self.Pos" Multiplicity="1" />
+          <End Role="PosSites" Type="Self.PosSites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pos">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PosSites">
+              <PropertyRef Name="Pos_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PosSites_Sites">
+          <End Role="Sites" Type="Self.Sites" Multiplicity="1" />
+          <End Role="PosSites" Type="Self.PosSites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sites">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PosSites">
+              <PropertyRef Name="Site_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SampleDetails_Samples">
           <End Role="Samples" Type="Self.Samples" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -440,18 +496,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Sites_Pos">
-          <End Role="Pos" Type="Self.Pos" Multiplicity="0..1" />
-          <End Role="Sites" Type="Self.Sites" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pos">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Sites">
-              <PropertyRef Name="Pos_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Function Name="sp_getDealersTree" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_getPOSs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="dealerId" Type="int" Mode="In" />
@@ -472,11 +516,13 @@
           <EntitySet Name="PosImages" EntityType="Self.PosImages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PosPhones" EntityType="Self.PosPhones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PosRanks" EntityType="Self.PosRanks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PosSites" EntityType="Self.PosSites" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PosTypes" EntityType="Self.PosTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SampleDetails" EntityType="Self.SampleDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SampleDetailStatus" EntityType="Self.SampleDetailStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Samples" EntityType="Self.Samples" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sites" EntityType="Self.Sites" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatusOfPos" EntityType="Self.StatusOfPos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_Certifications_dbo_Pos_Pos_ID" Association="Self.FK_dbo_Certifications_dbo_Pos_Pos_ID">
@@ -531,6 +577,10 @@
             <End Role="DealerLegalNames" EntitySet="DealerLegalNames" />
             <End Role="Pos" EntitySet="Pos" />
           </AssociationSet>
+          <AssociationSet Name="FK_Pos_StatusOfPos" Association="Self.FK_Pos_StatusOfPos">
+            <End Role="StatusOfPos" EntitySet="StatusOfPos" />
+            <End Role="Pos" EntitySet="Pos" />
+          </AssociationSet>
           <AssociationSet Name="FK_PosEmails_Pos" Association="Self.FK_PosEmails_Pos">
             <End Role="Pos" EntitySet="Pos" />
             <End Role="PosEmails" EntitySet="PosEmails" />
@@ -543,16 +593,20 @@
             <End Role="Pos" EntitySet="Pos" />
             <End Role="PosRanks" EntitySet="PosRanks" />
           </AssociationSet>
+          <AssociationSet Name="FK_PosSites_Pos" Association="Self.FK_PosSites_Pos">
+            <End Role="Pos" EntitySet="Pos" />
+            <End Role="PosSites" EntitySet="PosSites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PosSites_Sites" Association="Self.FK_PosSites_Sites">
+            <End Role="Sites" EntitySet="Sites" />
+            <End Role="PosSites" EntitySet="PosSites" />
+          </AssociationSet>
           <AssociationSet Name="FK_SampleDetails_Samples" Association="Self.FK_SampleDetails_Samples">
             <End Role="Samples" EntitySet="Samples" />
             <End Role="SampleDetails" EntitySet="SampleDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_Sites_Dealers" Association="Self.FK_Sites_Dealers">
             <End Role="Dealers" EntitySet="Dealers" />
-            <End Role="Sites" EntitySet="Sites" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Sites_Pos" Association="Self.FK_Sites_Pos">
-            <End Role="Pos" EntitySet="Pos" />
             <End Role="Sites" EntitySet="Sites" />
           </AssociationSet>
         </EntityContainer>
@@ -596,7 +650,6 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="posStatus" Type="Boolean" Nullable="false" />
           <Property Name="dateadd" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="legalName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="fabricSynonim" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
@@ -618,7 +671,6 @@
           <NavigationProperty Name="PosPhones" Relationship="tradeModel.FK_PosPhones_Pos" FromRole="Pos" ToRole="PosPhones" />
           <NavigationProperty Name="PosEmails" Relationship="tradeModel.FK_PosEmails_Pos" FromRole="Pos" ToRole="PosEmails" />
           <Property Name="Ruby_Id" Type="Int32" />
-          <NavigationProperty Name="Sites" Relationship="tradeModel.FK_Sites_Pos" FromRole="Pos" ToRole="Sites" />
           <Property Name="longitude" Type="Double" />
           <Property Name="attitude" Type="Double" />
           <Property Name="coordstextdata" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -626,6 +678,11 @@
           <Property Name="Country" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="DealerLegalNames_ID" Type="Int32" />
           <NavigationProperty Name="DealerLegalNames" Relationship="tradeModel.FK_Pos_DealerLegalNames" FromRole="Pos" ToRole="DealerLegalNames" />
+          <Property Name="DeleteMark" Type="Boolean" />
+          <NavigationProperty Name="Sites" Relationship="tradeModel.PosSites" FromRole="Pos" ToRole="Sites" />
+          <Property Name="posStatus_ID" Type="Int32" Nullable="false" DefaultValue="1" />
+          <NavigationProperty Name="StatusOfPos" Relationship="tradeModel.FK_Pos_StatusOfPos" FromRole="Pos" ToRole="StatusOfPos" />
+          <Property Name="posStatusDate" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="PosImages">
           <Key>
@@ -686,8 +743,9 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="roleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="roleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Users" Relationship="Self.FK_dbo_Users_dbo_UserRoles_userRole_ID" FromRole="UserRoles" ToRole="Users" />
+          <Property Name="roleDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -888,10 +946,6 @@
             <End Role="Dealers" EntitySet="Dealers" />
             <End Role="Sites" EntitySet="Sites" />
           </AssociationSet>
-          <AssociationSet Name="FK_Sites_Pos" Association="tradeModel.FK_Sites_Pos">
-            <End Role="Pos" EntitySet="Pos" />
-            <End Role="Sites" EntitySet="Sites" />
-          </AssociationSet>
           <EntitySet Name="PosBrand" EntityType="tradeModel.PosBrand" />
           <EntitySet Name="PosRanks" EntityType="tradeModel.PosRanks" />
           <AssociationSet Name="FK_PosRanks_Pos" Association="tradeModel.FK_PosRanks_Pos">
@@ -907,6 +961,15 @@
           <AssociationSet Name="DealerContacts" Association="tradeModel.DealerContacts">
             <End Role="Contacts" EntitySet="Contacts" />
             <End Role="Dealers" EntitySet="Dealers" />
+          </AssociationSet>
+          <EntitySet Name="StatusOfPos" EntityType="tradeModel.StatusOfPos" />
+          <AssociationSet Name="PosSites" Association="tradeModel.PosSites">
+            <End Role="Pos" EntitySet="Pos" />
+            <End Role="Sites" EntitySet="Sites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pos_StatusOfPos" Association="tradeModel.FK_Pos_StatusOfPos">
+            <End Role="StatusOfPos" EntitySet="StatusOfPos" />
+            <End Role="Pos" EntitySet="Pos" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_getDealersTree_Result">
@@ -1016,10 +1079,9 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="URL" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Pos_ID" Type="Int32" />
           <Property Name="Dealer_ID" Type="Int32" />
           <NavigationProperty Name="Dealers" Relationship="tradeModel.FK_Sites_Dealers" FromRole="Sites" ToRole="Dealers" />
-          <NavigationProperty Name="Pos" Relationship="tradeModel.FK_Sites_Pos" FromRole="Sites" ToRole="Pos" />
+          <NavigationProperty Name="Pos" Relationship="tradeModel.PosSites" FromRole="Sites" ToRole="Pos" />
         </EntityType>
         <Association Name="FK_Sites_Dealers">
           <End Type="tradeModel.Dealers" Role="Dealers" Multiplicity="0..1">
@@ -1032,18 +1094,6 @@
             </Principal>
             <Dependent Role="Sites">
               <PropertyRef Name="Dealer_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Sites_Pos">
-          <End Type="tradeModel.Pos" Role="Pos" Multiplicity="0..1" />
-          <End Type="tradeModel.Sites" Role="Sites" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pos">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Sites">
-              <PropertyRef Name="Pos_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1091,7 +1141,9 @@
           <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="FileName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AddTime" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="Closed" Type="DateTime" Precision="3" />
+          <Property Name="ClosedTime" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Reply" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CloseAction" Type="Boolean" DefaultValue="false" />
         </EntityType>
         <Association Name="FK_Pos_DealerLegalNames">
           <End Type="tradeModel.DealerLegalNames" Role="DealerLegalNames" Multiplicity="0..1" />
@@ -1119,6 +1171,31 @@
         <Association Name="DealerContacts">
           <End Type="tradeModel.Contacts" Role="Contacts" Multiplicity="*" />
           <End Type="tradeModel.Dealers" Role="Dealers" Multiplicity="*" />
+        </Association>
+        <EntityType Name="StatusOfPos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StatusColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pos" Relationship="tradeModel.FK_Pos_StatusOfPos" FromRole="StatusOfPos" ToRole="Pos" />
+        </EntityType>
+        <Association Name="PosSites">
+          <End Type="tradeModel.Pos" Role="Pos" Multiplicity="*" />
+          <End Type="tradeModel.Sites" Role="Sites" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Pos_StatusOfPos">
+          <End Type="tradeModel.StatusOfPos" Role="StatusOfPos" Multiplicity="1" />
+          <End Type="tradeModel.Pos" Role="Pos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusOfPos">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pos">
+              <PropertyRef Name="posStatus_ID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -1154,6 +1231,9 @@
           <EntitySetMapping Name="Pos">
             <EntityTypeMapping TypeName="tradeModel.Pos">
               <MappingFragment StoreEntitySet="Pos">
+                <ScalarProperty Name="posStatusDate" ColumnName="posStatusDate" />
+                <ScalarProperty Name="posStatus_ID" ColumnName="posStatus_ID" />
+                <ScalarProperty Name="DeleteMark" ColumnName="DeleteMark" />
                 <ScalarProperty Name="DealerLegalNames_ID" ColumnName="DealerLegalNames_ID" />
                 <ScalarProperty Name="Country" ColumnName="Country" />
                 <ScalarProperty Name="coordstextdata" ColumnName="coordstextdata" />
@@ -1161,7 +1241,6 @@
                 <ScalarProperty Name="longitude" ColumnName="longitude" />
                 <ScalarProperty Name="Ruby_Id" ColumnName="Ruby_Id" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="posStatus" ColumnName="posStatus" />
                 <ScalarProperty Name="dateadd" ColumnName="dateadd" />
                 <ScalarProperty Name="legalName" ColumnName="legalName" />
                 <ScalarProperty Name="fabricSynonim" ColumnName="fabricSynonim" />
@@ -1233,6 +1312,7 @@
           <EntitySetMapping Name="UserRoles">
             <EntityTypeMapping TypeName="tradeModel.UserRoles">
               <MappingFragment StoreEntitySet="UserRoles">
+                <ScalarProperty Name="roleDescription" ColumnName="roleDescription" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="roleName" ColumnName="roleName" />
               </MappingFragment>
@@ -1309,7 +1389,6 @@
             <EntityTypeMapping TypeName="tradeModel.Sites">
               <MappingFragment StoreEntitySet="Sites">
                 <ScalarProperty Name="Dealer_ID" ColumnName="Dealer_ID" />
-                <ScalarProperty Name="Pos_ID" ColumnName="Pos_ID" />
                 <ScalarProperty Name="URL" ColumnName="URL" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
@@ -1338,7 +1417,9 @@
           <EntitySetMapping Name="AppReports">
             <EntityTypeMapping TypeName="tradeModel.AppReports">
               <MappingFragment StoreEntitySet="AppReports">
-                <ScalarProperty Name="Closed" ColumnName="Closed" />
+                <ScalarProperty Name="CloseAction" ColumnName="CloseAction" />
+                <ScalarProperty Name="Reply" ColumnName="Reply" />
+                <ScalarProperty Name="ClosedTime" ColumnName="ClosedTime" />
                 <ScalarProperty Name="AddTime" ColumnName="AddTime" />
                 <ScalarProperty Name="FileName" ColumnName="FileName" />
                 <ScalarProperty Name="FileData" ColumnName="FileData" />
@@ -1366,6 +1447,23 @@
             </EndProperty>
             <EndProperty Name="Contacts">
               <ScalarProperty Name="ID" ColumnName="Contact_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="StatusOfPos">
+            <EntityTypeMapping TypeName="tradeModel.StatusOfPos">
+              <MappingFragment StoreEntitySet="StatusOfPos">
+                <ScalarProperty Name="StatusColor" ColumnName="StatusColor" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="PosSites" TypeName="tradeModel.PosSites" StoreEntitySet="PosSites">
+            <EndProperty Name="Sites">
+              <ScalarProperty Name="ID" ColumnName="Site_ID" />
+            </EndProperty>
+            <EndProperty Name="Pos">
+              <ScalarProperty Name="ID" ColumnName="Pos_ID" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

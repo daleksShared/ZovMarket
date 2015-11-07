@@ -12,19 +12,18 @@ namespace DbModel
     using System;
     using System.Collections.Generic;
     
-    public partial class Sites
+    public partial class StatusOfPos
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Sites()
+        public StatusOfPos()
         {
             this.Pos = new HashSet<Pos>();
         }
     
         public int ID { get; set; }
-        public string URL { get; set; }
-        public Nullable<int> Dealer_ID { get; set; }
+        public string StatusName { get; set; }
+        public string StatusColor { get; set; }
     
-        public virtual Dealers Dealers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pos> Pos { get; set; }
     }

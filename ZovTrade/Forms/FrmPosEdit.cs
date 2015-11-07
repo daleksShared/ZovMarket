@@ -11,6 +11,9 @@ using DevExpress.XtraEditors;
 using DbModel;
 using DevExpress.Data.WcfLinq.Helpers;
 using DevExpress.XtraSplashScreen;
+using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Views.Grid;
+using System.Diagnostics;
 
 namespace ZovTrade
 {
@@ -42,7 +45,8 @@ namespace ZovTrade
 //splashScreenManager.
         //    splashScreenManager.ShowWaitForm();
             splashScreenManager1.ShowWaitForm();
-            if (isNewPos == false)
+            
+            if (!isNewPos)
             {
                 var curpos = from p in db.Pos
                              where p.ID == posId
@@ -68,40 +72,10 @@ namespace ZovTrade
                 db.Pos.Where(x => x.ID == posId).Load();
 
 
-                var dealerId = db.Dealers.Local.First().ID;
+                dealerId = db.Dealers.Local.First().ID;
 
 
-                //  gridLookUpEdit2.Properties.DataSource = 
-
-
-                //db.DealerLegalNames.Where(x => x.Dealers.ID == dealerId).Select(x => new { x.ID, x.LegalAddress, x.LegalName }).ToList();
-                //db.DealerLegalNames.Where(x => x.Dealers.ID == dealerId).Load();
-                int parentDealerId = 0;
-                if (db.Dealers.Where(x => x.ID == dealerId && x.DealerParent != null).Select(x => x.DealerParent).Any())
-                {
-                    parentDealerId = db.Dealers.Where(x => x.ID == dealerId && x.DealerParent != null).Select(x => x.DealerParent).First().ID;
-                }
-
-
-                var dealerLegalNames = db.DealerLegalNames.Where(x => x.Dealers.ID == dealerId || (parentDealerId != 0 && x.Dealers.ID == parentDealerId)).Select(x => new { x.ID, x.LegalAddress, x.LegalName }).ToList();
-                //var dealerLegalNamesParent = db.DealerLegalNames.Where(x => x.Dealers.ID == parentDealerId || x.Dealers.ID == x.Dealers.DealerParent.ID).Select(x => new { x.ID, x.LegalAddress, x.LegalName }).ToList();
-
-                dealerLegalNamesBindingSource.DataSource = dealerLegalNames;
-                //var pos =
-                //    db.Pos.Where(x => x.ID == posId)
-                //        .Include(x => x.PosTypes)
-                //        .Include(x => x.Dealers)
-                //        .Include(x => x.DealerLegalNames)
-                //        .Include(x => x.Certifications)
-                //        .Include(x => x.PosEmails)
-                //        .Include(x => x.PosPhones).Include(x => x.Samples).Select(x=>x);
-                //  if (!pos.Any()){return;}
-                posTypesBindingSource.DataSource = db.PosTypes.Local.Select(x => new { x.ID, x.posTypeName }).ToList();
-
-                //var dealers = db.Dealers.Local.ToBindingList();
-
-                dealersBindingSource.DataSource = db.Dealers.Select(x => new { x.ID, x.dealerZovName, parentName = x.DealerParent.dealerZovName }).OrderBy(x => x.parentName).ThenBy(x => x.dealerZovName).ToList();
-                posBindingSource.DataSource = db.Pos.Local.ToBindingList();
+               
             }
             else
             {
@@ -117,47 +91,47 @@ namespace ZovTrade
                 newPos.dealer_ID = dealerId;
 
                 db.Pos.Add(newPos);
-
-
-                //var dealerId = db.Dealers.Local.First().ID;
-
-
-                //  gridLookUpEdit2.Properties.DataSource = 
-
-
-                //db.DealerLegalNames.Where(x => x.Dealers.ID == dealerId).Select(x => new { x.ID, x.LegalAddress, x.LegalName }).ToList();
-                //db.DealerLegalNames.Where(x => x.Dealers.ID == dealerId).Load();
-                int parentDealerId = 0;
-                if (db.Dealers.Where(x => x.ID == dealerId && x.DealerParent != null).Select(x => x.DealerParent).Any())
-                {
-                     parentDealerId = db.Dealers.Where(x => x.ID == dealerId && x.DealerParent != null).Select(x => x.DealerParent).First().ID;
-                }
-
-
-
-                var dealerLegalNames = db.DealerLegalNames.Where(x => x.Dealers.ID == dealerId || (parentDealerId != 0 && x.Dealers.ID == parentDealerId)).Select(x => new { x.ID, x.LegalAddress, x.LegalName }).ToList();
-                //var dealerLegalNamesParent = db.DealerLegalNames.Where(x => x.Dealers.ID == parentDealerId || x.Dealers.ID == x.Dealers.DealerParent.ID).Select(x => new { x.ID, x.LegalAddress, x.LegalName }).ToList();
-
-                dealerLegalNamesBindingSource.DataSource = dealerLegalNames;
-                //var pos =
-                //    db.Pos.Where(x => x.ID == posId)
-                //        .Include(x => x.PosTypes)
-                //        .Include(x => x.Dealers)
-                //        .Include(x => x.DealerLegalNames)
-                //        .Include(x => x.Certifications)
-                //        .Include(x => x.PosEmails)
-                //        .Include(x => x.PosPhones).Include(x => x.Samples).Select(x=>x);
-                //  if (!pos.Any()){return;}
-                posTypesBindingSource.DataSource = db.PosTypes.Local.Select(x => new { x.ID, x.posTypeName }).ToList();
-
-                //var dealers = db.Dealers.Local.ToBindingList();
-
-                dealersBindingSource.DataSource = db.Dealers.Select(x => new { x.ID, x.dealerZovName, parentName = x.DealerParent.dealerZovName }).OrderBy(x => x.parentName).ThenBy(x => x.dealerZovName).ToList();
-                posBindingSource.DataSource = db.Pos.Local.ToBindingList();
+                
+               
             }
+
+            int parentDealerId = 0;
+            if (db.Dealers.Where(x => x.ID == dealerId && x.DealerParent != null).Select(x => x.DealerParent).Any())
+            {
+                parentDealerId = db.Dealers.Where(x => x.ID == dealerId && x.DealerParent != null).Select(x => x.DealerParent).First().ID;
+            }
+            
+            var dealerLegalNames = db.DealerLegalNames.Where(x => x.Dealers.ID == dealerId || (parentDealerId != 0 && x.Dealers.ID == parentDealerId)).Select(x => new { x.ID, x.LegalAddress, x.LegalName }).ToList();
+
+            dealerLegalNamesBindingSource.DataSource = dealerLegalNames;
+
+            posTypesBindingSource.DataSource = db.PosTypes.Local.Select(x => new { x.ID, x.posTypeName }).ToList();
+
+
+
+            dealersBindingSource.DataSource = db.Dealers.Select(x => new { x.ID, x.dealerZovName, parentName = x.DealerParent.dealerZovName }).OrderBy(x => x.parentName).ThenBy(x => x.dealerZovName).ToList();
+            
+            posBindingSource.DataSource = db.Pos.Local.ToBindingList();
+            db.Sites.Where(x => x.Dealer_ID == dealerId).Load();
+            statusOfPosBindingSource.DataSource = db.StatusOfPos.Select(x => new { x.ID, x.StatusName, x.StatusColor }).ToList();
+            db.StatusOfPos.Load();
+            LoadPosSites();
+
+
+
+            //bsPosSites.Filter = "Pos_ID=" + posId;
+
+
+
+
             splashScreenManager1.CloseWaitForm();
         }
-
+        private void LoadPosSites()
+        {
+            var posSites = db.Pos.Local.FirstOrDefault().Sites.ToList();
+            sitesBindingSource.DataSource = db.Pos.Local.FirstOrDefault().Dealers.Sites.Except(posSites).ToList();
+            bsPosSites.DataSource = db.Pos.Local.FirstOrDefault().Sites.ToList();
+        }
         private void simpleButton1_Click(object sender, EventArgs e)
         {
             try
@@ -196,6 +170,49 @@ namespace ZovTrade
                 {
                     Tools.showDbSaveExceptions(ex);
                 }
+            }
+        }
+
+        private void Добавить_Click(object sender, EventArgs e)
+        {
+            //var row = gridLookUpEditDealerSites.Properties.View.GetDataRow(gridLookUpEditDealerSites.Properties.View.FocusedRowHandle);
+            var curSiteId = gridLookUpEditDealerSites.EditValue;
+            if (curSiteId != null)
+            {
+                var curSite = db.Sites.Where(x => x.ID == (int)curSiteId).FirstOrDefault();
+                //var pos = db.Pos.Local.FirstOrDefault();
+                var posSites = db.Pos.Local.FirstOrDefault().Sites;
+                posSites.Add(curSite);
+                LoadPosSites();
+            }
+        }
+        private void remove_siteFromPos(int siteID)
+        {
+            try
+            {
+ var curSite = db.Sites.Where(x => x.ID == siteID).FirstOrDefault();
+            //var pos = db.Pos.Local.FirstOrDefault();
+            var posSites = db.Pos.Local.FirstOrDefault().Sites;
+            posSites.Remove(curSite);
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+            }
+           
+            LoadPosSites();
+        }
+        private void gridControl4_ProcessGridKey(object sender, KeyEventArgs e)
+        {
+            var grid = sender as GridControl;
+            var view = grid.FocusedView as GridView;
+            if (e.KeyData == Keys.Delete)
+            {
+                e.Handled = true;
+                int SiteId = (int)view.GetRowCellValue(view.FocusedRowHandle, "ID");
+
+                remove_siteFromPos(SiteId);
             }
         }
     }

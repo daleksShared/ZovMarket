@@ -28,7 +28,7 @@
     <PublisherName>ZOV</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>13</ApplicationRevision>
+    <ApplicationRevision>14</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -127,7 +127,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ComboboxItem.cs" />
+    <Compile Include="Classes\ComboboxItem.cs" />
     <Compile Include="Forms\FrmAppReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -182,17 +182,11 @@
     <Compile Include="Forms\loginform.Designer.cs">
       <DependentUpon>loginform.cs</DependentUpon>
     </Compile>
-    <Compile Include="Paramss.cs" />
+    <Compile Include="Classes\Paramss.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings.cs" />
-    <Compile Include="Tools.cs" />
-    <Compile Include="WaitForm1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WaitForm1.Designer.cs">
-      <DependentUpon>WaitForm1.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Classes\Settings.cs" />
+    <Compile Include="Classes\Tools.cs" />
     <EmbeddedResource Include="Forms\FrmAppReport.resx">
       <DependentUpon>FrmAppReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -231,9 +225,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="WaitForm1.resx">
-      <DependentUpon>WaitForm1.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
@@ -266,6 +257,7 @@
     <None Include="Properties\DataSources\DbModel.sp_getDealersTree_Result.datasource" />
     <None Include="Properties\DataSources\DbModel.sp_getPOSs_Result.datasource" />
     <None Include="Properties\DataSources\DbModel.sp_getSubDealers_Result.datasource" />
+    <None Include="Properties\DataSources\DbModel.StatusOfPos.datasource" />
     <None Include="Properties\DataSources\DbModel.Tools.datasource" />
     <None Include="Properties\DataSources\dbModel.tradeEntities.datasource" />
     <None Include="Properties\DataSources\DbModel.tradeEntities1.datasource" />

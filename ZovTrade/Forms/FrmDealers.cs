@@ -75,6 +75,7 @@ namespace ZovTrade
         {
             splashScreenManager1.ShowWaitForm();
            db = new tradeEntities(DbModel.Tools.TradeConnectionString(Properties.Settings.Default.barcodeCS.ToString()));
+            db.StatusOfPos.Load();
             GetDealersTree();
             splashScreenManager1.CloseWaitForm();
 
@@ -179,7 +180,7 @@ namespace ZovTrade
                 DealerViewPosCount.EditValue = curDealer.posCount;
                 DealerViewSubDealersCount.EditValue = curDealer.subDealersCount;
             }
-           
+
 
 
             var poss =
@@ -190,14 +191,16 @@ namespace ZovTrade
                         x.dateadd,
                         x.posArea,
                         x.legalName,
-                        posRating=x.PosRanks.Any(r=>r.ActiveRank==true)? x.PosRanks.Where(y=>y.ActiveRank==true).Average(y=>y.Rank):0,
+                        posRating = x.PosRanks.Any(r => r.ActiveRank == true) ? x.PosRanks.Where(y => y.ActiveRank == true).Average(y => y.Rank) : 0,
                         //x.posRating,
                         x.locationDescription,
                         x.yandexAdress,
                         x.brand,
                         x.PosTypes.posTypeName,
                         x.Ruby_Id,
-                        x.DealerLegalNames.LegalName
+                        x.DealerLegalNames.LegalName,
+                        posStatus = x.StatusOfPos.StatusName,
+                        colorRow = x.StatusOfPos.StatusColor
                     }).ToList();
 
             //listBoxSubDealers.DataSource =
@@ -427,7 +430,7 @@ namespace ZovTrade
                                 //pos.DealerLegalNames.Add(legalName);
 
                                 pos.brand = rPosBrend;
-                                pos.posStatus = rPosEnable == "0" ? false : true;
+                                pos.posStatus_ID = rPosEnable == "0" ? 3 : 4;
 
                                 pos.street = rPosAddress;
                                 pos.PosTypes = db.PosTypes.Any(x => x.posTypeName == rPosType)
@@ -496,7 +499,7 @@ namespace ZovTrade
 
                                         var possite = db.Sites.Create();
                                         possite.URL = site.Trim();
-                                        possite.Pos = pos;
+                                        //possite.Pos = pos;
                                         possite.Dealers = dealer;
                                         db.Sites.Add(possite);
                                     }
@@ -552,6 +555,9 @@ namespace ZovTrade
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
+            if (!db.Pos.Where(x => x.dealer_ID == dealerId).Include(p => p.PosTypes).Any()) return;
+
+
             var dir = Path.GetDirectoryName(Application.ExecutablePath.ToString());
             using (var tradeHtml = File.Open(dir + @"\web\trade.html", FileMode.Truncate))
             {

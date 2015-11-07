@@ -14,6 +14,12 @@ namespace DbModel
     
     public partial class AppReports
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public AppReports()
+        {
+            this.CloseAction = false;
+        }
+    
         public int ID { get; set; }
         public string UserName { get; set; }
         public string PcName { get; set; }
@@ -21,6 +27,8 @@ namespace DbModel
         public byte[] FileData { get; set; }
         public string FileName { get; set; }
         public Nullable<System.DateTime> AddTime { get; set; }
-        public Nullable<System.DateTime> Closed { get; set; }
+        public Nullable<System.DateTime> ClosedTime { get; set; }
+        public string Reply { get; set; }
+        public Nullable<bool> CloseAction { get; set; }
     }
 }

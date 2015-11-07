@@ -88,14 +88,16 @@
             this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
             this.Добавить = new DevExpress.XtraEditors.SimpleButton();
-            this.gridLookUpEdit3 = new DevExpress.XtraEditors.GridLookUpEdit();
+            this.gridLookUpEditDealerSites = new DevExpress.XtraEditors.GridLookUpEdit();
             this.sitesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridLookUpEdit3View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colURL1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridControl4 = new DevExpress.XtraGrid.GridControl();
-            this.posBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.bsPosSites = new System.Windows.Forms.BindingSource(this.components);
             this.gridViewPosSites = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colID4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colURL = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridLookUpEdit2 = new DevExpress.XtraEditors.GridLookUpEdit();
+            this.posBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dealerLegalNamesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridLookUpEdit2View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colLegalName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -126,7 +128,9 @@
             this.colposTypeName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.posRatingTextEdit = new DevExpress.XtraEditors.RatingControl();
             this.brandComboBoxEdit = new DevExpress.XtraEditors.TextEdit();
-            this.posStatusTextEdit = new DevExpress.XtraEditors.CheckEdit();
+            this.posStatusTextEdit = new DevExpress.XtraEditors.GridLookUpEdit();
+            this.statusOfPosBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.ItemForlegalName = new DevExpress.XtraLayout.LayoutControlItem();
@@ -205,13 +209,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit3.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEditDealerSites.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sitesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit3View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.posBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsPosSites)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewPosSites)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.posBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dealerLegalNamesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit2View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1.Properties)).BeginInit();
@@ -237,6 +242,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.posRatingTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.brandComboBoxEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.posStatusTextEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.statusOfPosBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForlegalName)).BeginInit();
@@ -786,7 +793,7 @@
             // dataLayoutControl1
             // 
             this.dataLayoutControl1.Controls.Add(this.Добавить);
-            this.dataLayoutControl1.Controls.Add(this.gridLookUpEdit3);
+            this.dataLayoutControl1.Controls.Add(this.gridLookUpEditDealerSites);
             this.dataLayoutControl1.Controls.Add(this.gridControl4);
             this.dataLayoutControl1.Controls.Add(this.gridLookUpEdit2);
             this.dataLayoutControl1.Controls.Add(this.gridLookUpEdit1);
@@ -824,20 +831,21 @@
             this.Добавить.StyleController = this.dataLayoutControl1;
             this.Добавить.TabIndex = 29;
             this.Добавить.Text = "Добавить";
+            this.Добавить.Click += new System.EventHandler(this.Добавить_Click);
             // 
-            // gridLookUpEdit3
+            // gridLookUpEditDealerSites
             // 
-            this.gridLookUpEdit3.Location = new System.Drawing.Point(79, 561);
-            this.gridLookUpEdit3.Name = "gridLookUpEdit3";
-            this.gridLookUpEdit3.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.gridLookUpEditDealerSites.Location = new System.Drawing.Point(79, 561);
+            this.gridLookUpEditDealerSites.Name = "gridLookUpEditDealerSites";
+            this.gridLookUpEditDealerSites.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.gridLookUpEdit3.Properties.DataSource = this.sitesBindingSource;
-            this.gridLookUpEdit3.Properties.DisplayMember = "URL";
-            this.gridLookUpEdit3.Properties.ValueMember = "ID";
-            this.gridLookUpEdit3.Properties.View = this.gridLookUpEdit3View;
-            this.gridLookUpEdit3.Size = new System.Drawing.Size(236, 20);
-            this.gridLookUpEdit3.StyleController = this.dataLayoutControl1;
-            this.gridLookUpEdit3.TabIndex = 28;
+            this.gridLookUpEditDealerSites.Properties.DataSource = this.sitesBindingSource;
+            this.gridLookUpEditDealerSites.Properties.DisplayMember = "URL";
+            this.gridLookUpEditDealerSites.Properties.ValueMember = "ID";
+            this.gridLookUpEditDealerSites.Properties.View = this.gridLookUpEdit3View;
+            this.gridLookUpEditDealerSites.Size = new System.Drawing.Size(236, 20);
+            this.gridLookUpEditDealerSites.StyleController = this.dataLayoutControl1;
+            this.gridLookUpEditDealerSites.TabIndex = 28;
             // 
             // sitesBindingSource
             // 
@@ -845,14 +853,24 @@
             // 
             // gridLookUpEdit3View
             // 
+            this.gridLookUpEdit3View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colURL1});
             this.gridLookUpEdit3View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.gridLookUpEdit3View.Name = "gridLookUpEdit3View";
             this.gridLookUpEdit3View.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridLookUpEdit3View.OptionsView.ShowGroupPanel = false;
             // 
+            // colURL1
+            // 
+            this.colURL1.Caption = "URL";
+            this.colURL1.FieldName = "URL";
+            this.colURL1.Name = "colURL1";
+            this.colURL1.Visible = true;
+            this.colURL1.VisibleIndex = 0;
+            // 
             // gridControl4
             // 
-            this.gridControl4.DataBindings.Add(new System.Windows.Forms.Binding("DataSource", this.posBindingSource, "Sites", true));
+            this.gridControl4.DataSource = this.bsPosSites;
             this.gridControl4.Location = new System.Drawing.Point(24, 452);
             this.gridControl4.MainView = this.gridViewPosSites;
             this.gridControl4.Name = "gridControl4";
@@ -860,30 +878,31 @@
             this.gridControl4.TabIndex = 27;
             this.gridControl4.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewPosSites});
+            this.gridControl4.ProcessGridKey += new System.Windows.Forms.KeyEventHandler(this.gridControl4_ProcessGridKey);
             // 
-            // posBindingSource
+            // bsPosSites
             // 
-            this.posBindingSource.DataSource = typeof(DbModel.Pos);
+            this.bsPosSites.DataSource = this.sitesBindingSource;
             // 
             // gridViewPosSites
             // 
             this.gridViewPosSites.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colID4});
+            this.colURL});
             this.gridViewPosSites.GridControl = this.gridControl4;
             this.gridViewPosSites.Name = "gridViewPosSites";
+            this.gridViewPosSites.OptionsBehavior.Editable = false;
+            this.gridViewPosSites.OptionsView.ShowGroupPanel = false;
             // 
-            // colID4
+            // colURL
             // 
-            this.colID4.FieldName = "ID";
-            this.colID4.Name = "colID4";
-            this.colID4.OptionsColumn.AllowEdit = false;
-            this.colID4.OptionsColumn.ReadOnly = true;
-            this.colID4.Visible = true;
-            this.colID4.VisibleIndex = 0;
+            this.colURL.FieldName = "URL";
+            this.colURL.Name = "colURL";
+            this.colURL.Visible = true;
+            this.colURL.VisibleIndex = 0;
             // 
             // gridLookUpEdit2
             // 
-            this.gridLookUpEdit2.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.posBindingSource, "DealerLegalNames_ID", true));
+            this.gridLookUpEdit2.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.posBindingSource, "DealerLegalNames_ID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.gridLookUpEdit2.Location = new System.Drawing.Point(121, 394);
             this.gridLookUpEdit2.Name = "gridLookUpEdit2";
             this.gridLookUpEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -895,6 +914,10 @@
             this.gridLookUpEdit2.Size = new System.Drawing.Size(288, 20);
             this.gridLookUpEdit2.StyleController = this.dataLayoutControl1;
             this.gridLookUpEdit2.TabIndex = 26;
+            // 
+            // posBindingSource
+            // 
+            this.posBindingSource.DataSource = typeof(DbModel.Pos);
             // 
             // dealerLegalNamesBindingSource
             // 
@@ -929,7 +952,7 @@
             // 
             // gridLookUpEdit1
             // 
-            this.gridLookUpEdit1.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.posBindingSource, "dealer_ID", true));
+            this.gridLookUpEdit1.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.posBindingSource, "dealer_ID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.gridLookUpEdit1.EditValue = "";
             this.gridLookUpEdit1.Location = new System.Drawing.Point(121, 346);
             this.gridLookUpEdit1.Name = "gridLookUpEdit1";
@@ -1078,7 +1101,7 @@
             // Ruby_IdTextEdit
             // 
             this.Ruby_IdTextEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.posBindingSource, "Ruby_Id", true));
-            this.Ruby_IdTextEdit.Location = new System.Drawing.Point(211, 12);
+            this.Ruby_IdTextEdit.Location = new System.Drawing.Point(343, 12);
             this.Ruby_IdTextEdit.Name = "Ruby_IdTextEdit";
             this.Ruby_IdTextEdit.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
             this.Ruby_IdTextEdit.Properties.Appearance.Options.UseTextOptions = true;
@@ -1086,7 +1109,7 @@
             this.Ruby_IdTextEdit.Properties.Mask.EditMask = "N0";
             this.Ruby_IdTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.Ruby_IdTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.Ruby_IdTextEdit.Size = new System.Drawing.Size(198, 20);
+            this.Ruby_IdTextEdit.Size = new System.Drawing.Size(66, 20);
             this.Ruby_IdTextEdit.StyleController = this.dataLayoutControl1;
             this.Ruby_IdTextEdit.TabIndex = 17;
             // 
@@ -1222,21 +1245,32 @@
             // 
             // posStatusTextEdit
             // 
-            this.posStatusTextEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.posBindingSource, "posStatus", true));
-            this.posStatusTextEdit.EditValue = null;
-            this.posStatusTextEdit.Location = new System.Drawing.Point(65, 12);
+            this.posStatusTextEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.posBindingSource, "posStatus_ID", true));
+            this.posStatusTextEdit.Location = new System.Drawing.Point(53, 12);
             this.posStatusTextEdit.Name = "posStatusTextEdit";
             this.posStatusTextEdit.Properties.Appearance.Options.UseTextOptions = true;
             this.posStatusTextEdit.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.posStatusTextEdit.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
-            this.posStatusTextEdit.Properties.Caption = "";
-            this.posStatusTextEdit.Properties.DisplayValueChecked = "1";
-            this.posStatusTextEdit.Properties.DisplayValueUnchecked = "0";
-            this.posStatusTextEdit.Properties.PictureChecked = ((System.Drawing.Image)(resources.GetObject("posStatusTextEdit.Properties.PictureChecked")));
-            this.posStatusTextEdit.Properties.PictureUnchecked = ((System.Drawing.Image)(resources.GetObject("posStatusTextEdit.Properties.PictureUnchecked")));
-            this.posStatusTextEdit.Size = new System.Drawing.Size(33, 19);
+            this.posStatusTextEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.posStatusTextEdit.Properties.DataSource = this.statusOfPosBindingSource;
+            this.posStatusTextEdit.Properties.DisplayMember = "StatusName";
+            this.posStatusTextEdit.Properties.NullText = "";
+            this.posStatusTextEdit.Properties.ValueMember = "ID";
+            this.posStatusTextEdit.Properties.View = this.gridView2;
+            this.posStatusTextEdit.Size = new System.Drawing.Size(177, 20);
             this.posStatusTextEdit.StyleController = this.dataLayoutControl1;
             this.posStatusTextEdit.TabIndex = 5;
+            // 
+            // statusOfPosBindingSource
+            // 
+            this.statusOfPosBindingSource.DataSource = typeof(DbModel.StatusOfPos);
+            // 
+            // gridView2
+            // 
+            this.gridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView2.Name = "gridView2";
+            this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView2.OptionsView.ShowGroupPanel = false;
             // 
             // Root
             // 
@@ -1435,9 +1469,9 @@
             // ItemForRuby_Id
             // 
             this.ItemForRuby_Id.Control = this.Ruby_IdTextEdit;
-            this.ItemForRuby_Id.Location = new System.Drawing.Point(90, 0);
+            this.ItemForRuby_Id.Location = new System.Drawing.Point(222, 0);
             this.ItemForRuby_Id.Name = "ItemForRuby_Id";
-            this.ItemForRuby_Id.Size = new System.Drawing.Size(311, 24);
+            this.ItemForRuby_Id.Size = new System.Drawing.Size(179, 24);
             this.ItemForRuby_Id.Text = "Ruby_Id";
             this.ItemForRuby_Id.TextSize = new System.Drawing.Size(106, 13);
             // 
@@ -1446,10 +1480,10 @@
             this.ItemForposStatus.Control = this.posStatusTextEdit;
             this.ItemForposStatus.Location = new System.Drawing.Point(0, 0);
             this.ItemForposStatus.Name = "ItemForposStatus";
-            this.ItemForposStatus.Size = new System.Drawing.Size(90, 24);
-            this.ItemForposStatus.Text = "Вкл/Выкл";
+            this.ItemForposStatus.Size = new System.Drawing.Size(222, 24);
+            this.ItemForposStatus.Text = "Статус";
             this.ItemForposStatus.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
-            this.ItemForposStatus.TextSize = new System.Drawing.Size(48, 13);
+            this.ItemForposStatus.TextSize = new System.Drawing.Size(36, 13);
             this.ItemForposStatus.TextToControlDistance = 5;
             // 
             // ItemForposRating
@@ -1520,7 +1554,7 @@
             // 
             // layoutControlItem15
             // 
-            this.layoutControlItem15.Control = this.gridLookUpEdit3;
+            this.layoutControlItem15.Control = this.gridLookUpEditDealerSites;
             this.layoutControlItem15.Location = new System.Drawing.Point(0, 109);
             this.layoutControlItem15.Name = "layoutControlItem15";
             this.layoutControlItem15.Size = new System.Drawing.Size(295, 26);
@@ -1675,13 +1709,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).EndInit();
             this.dataLayoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit3.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEditDealerSites.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sitesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit3View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.posBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsPosSites)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewPosSites)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.posBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dealerLegalNamesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit2View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1.Properties)).EndInit();
@@ -1707,6 +1742,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.posRatingTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.brandComboBoxEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.posStatusTextEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.statusOfPosBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemForlegalName)).EndInit();
@@ -1796,7 +1833,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraEditors.TextEdit brandComboBoxEdit;
-        private DevExpress.XtraEditors.CheckEdit posStatusTextEdit;
         private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
         private DevExpress.XtraLayout.LayoutControl layoutControl2;
@@ -1871,12 +1907,11 @@
         private DevExpress.XtraEditors.SimpleButton simpleButton2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem13;
         private DevExpress.XtraEditors.SimpleButton Добавить;
-        private DevExpress.XtraEditors.GridLookUpEdit gridLookUpEdit3;
+        private DevExpress.XtraEditors.GridLookUpEdit gridLookUpEditDealerSites;
         private System.Windows.Forms.BindingSource sitesBindingSource;
         private DevExpress.XtraGrid.Views.Grid.GridView gridLookUpEdit3View;
         private DevExpress.XtraGrid.GridControl gridControl4;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewPosSites;
-        private DevExpress.XtraGrid.Columns.GridColumn colID4;
         private DevExpress.XtraLayout.TabbedControlGroup tabbedControlGroup2;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup8;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem14;
@@ -1884,5 +1919,11 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem16;
         private DevExpress.XtraEditors.SimpleButton simpleButton3;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem17;
+        private System.Windows.Forms.BindingSource bsPosSites;
+        private DevExpress.XtraGrid.Columns.GridColumn colURL1;
+        private DevExpress.XtraGrid.Columns.GridColumn colURL;
+        private DevExpress.XtraEditors.GridLookUpEdit posStatusTextEdit;
+        private System.Windows.Forms.BindingSource statusOfPosBindingSource;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
     }
 }
