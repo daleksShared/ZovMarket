@@ -121,7 +121,9 @@ namespace ZovTrade
             certificationsBindingSource.DataSource = db.Certifications.Local.ToBindingList();
             samplesBindingSource.DataSource = db.Samples.Local.ToBindingList();
             contactsBindingSource.DataSource = db.Contacts.Local.ToBindingList();
+            sampleDetailStatusBindingSource.DataSource = db.SampleDetailStatus.Local.ToBindingList();
 
+            db.SampleDetailStatus.Load();
             db.Sites.Where(x => x.Dealer_ID == dealerId | x.Dealer_ID== parentDealerId).Load();
 
             statusOfPosBindingSource.DataSource = db.StatusOfPos.Select(x => new { x.ID, x.StatusName, x.StatusColor }).ToList();
