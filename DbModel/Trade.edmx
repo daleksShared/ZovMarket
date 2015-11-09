@@ -1001,10 +1001,6 @@
             <End Role="Pos" EntitySet="Pos" />
           </AssociationSet>
           <EntitySet Name="Contacts" EntityType="tradeModel.Contacts" />
-          <AssociationSet Name="DealerContacts" Association="tradeModel.DealerContacts">
-            <End Role="Contacts" EntitySet="Contacts" />
-            <End Role="Dealers" EntitySet="Dealers" />
-          </AssociationSet>
           <EntitySet Name="StatusOfPos" EntityType="tradeModel.StatusOfPos" />
           <AssociationSet Name="PosSites" Association="tradeModel.PosSites">
             <End Role="Pos" EntitySet="Pos" />
@@ -1013,6 +1009,10 @@
           <AssociationSet Name="FK_Pos_StatusOfPos" Association="tradeModel.FK_Pos_StatusOfPos">
             <End Role="StatusOfPos" EntitySet="StatusOfPos" />
             <End Role="Pos" EntitySet="Pos" />
+          </AssociationSet>
+          <AssociationSet Name="DealerContacts" Association="tradeModel.DealerContacts">
+            <End Role="Contacts" EntitySet="Contacts" />
+            <End Role="Dealers" EntitySet="Dealers" />
           </AssociationSet>
           <AssociationSet Name="PosContacts" Association="tradeModel.PosContacts">
             <End Role="Contacts" EntitySet="Contacts" />
@@ -1216,10 +1216,6 @@
           <NavigationProperty Name="Dealers" Relationship="tradeModel.DealerContacts" FromRole="Contacts" ToRole="Dealers" />
           <NavigationProperty Name="Pos" Relationship="tradeModel.PosContacts" FromRole="Contacts" ToRole="Pos" />
         </EntityType>
-        <Association Name="DealerContacts">
-          <End Type="tradeModel.Contacts" Role="Contacts" Multiplicity="*" />
-          <End Type="tradeModel.Dealers" Role="Dealers" Multiplicity="*" />
-        </Association>
         <EntityType Name="StatusOfPos">
           <Key>
             <PropertyRef Name="ID" />
@@ -1245,6 +1241,10 @@
               <PropertyRef Name="posStatus_ID" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <Association Name="DealerContacts">
+          <End Type="tradeModel.Contacts" Role="Contacts" Multiplicity="*" />
+          <End Type="tradeModel.Dealers" Role="Dealers" Multiplicity="*" />
         </Association>
         <Association Name="PosContacts">
           <End Type="tradeModel.Contacts" Role="Contacts" Multiplicity="*" />
@@ -1494,14 +1494,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="DealerContacts" TypeName="tradeModel.DealerContacts" StoreEntitySet="DealerContacts">
-            <EndProperty Name="Dealers">
-              <ScalarProperty Name="ID" ColumnName="Dealer_ID" />
-            </EndProperty>
-            <EndProperty Name="Contacts">
-              <ScalarProperty Name="ID" ColumnName="Contact_ID" />
-            </EndProperty>
-          </AssociationSetMapping>
           <EntitySetMapping Name="StatusOfPos">
             <EntityTypeMapping TypeName="tradeModel.StatusOfPos">
               <MappingFragment StoreEntitySet="StatusOfPos">
@@ -1518,6 +1510,14 @@
             </EndProperty>
             <EndProperty Name="Pos">
               <ScalarProperty Name="ID" ColumnName="Pos_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="DealerContacts" TypeName="tradeModel.DealerContacts" StoreEntitySet="DealerContacts">
+            <EndProperty Name="Dealers">
+              <ScalarProperty Name="ID" ColumnName="Dealer_ID" />
+            </EndProperty>
+            <EndProperty Name="Contacts">
+              <ScalarProperty Name="ID" ColumnName="Contact_ID" />
             </EndProperty>
           </AssociationSetMapping>
           <AssociationSetMapping Name="PosContacts" TypeName="tradeModel.PosContacts" StoreEntitySet="PosContacts">

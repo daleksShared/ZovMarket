@@ -39,10 +39,10 @@
         <EntityTypeShape EntityType="tradeModel.AppReports" Width="1.5" PointX="11.375" PointY="9.75" />
         <AssociationConnector Association="tradeModel.FK_Pos_DealerLegalNames" />
         <EntityTypeShape EntityType="tradeModel.Contacts" Width="1.5" PointX="7.375" PointY="12.875" />
-        <AssociationConnector Association="tradeModel.DealerContacts" />
         <EntityTypeShape EntityType="tradeModel.StatusOfPos" Width="1.5" PointX="0.625" PointY="4.625" />
         <AssociationConnector Association="tradeModel.PosSites" />
         <AssociationConnector Association="tradeModel.FK_Pos_StatusOfPos" />
+        <AssociationConnector Association="tradeModel.DealerContacts" />
         <AssociationConnector Association="tradeModel.PosContacts" />
         </Diagram>
     </edmx:Diagrams>

@@ -223,7 +223,7 @@ namespace ZovTrade
 
             //listBoxSubDealers.DataSource =
             //    db.Dealers.Where(x => x.Dealer_ID == dealerId).Select(d => new {d.ID, d.dealerZovName}).ToList();
-
+            gridControl2.DataSource = db.Contacts.Where(x => x.Dealers.Where(d => d.ID == dealerId).Any()).Select(x => new { x.ContactName, x.ContactPhones, x.ContactOtherData, x.ContactDescription }).ToList();
             gridControl1.DataSource = poss;
             gridViewPos.ExpandAllGroups();
             // точки продаж

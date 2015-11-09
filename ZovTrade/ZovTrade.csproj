@@ -134,6 +134,12 @@
     <Compile Include="Forms\FrmAppReport.Designer.cs">
       <DependentUpon>FrmAppReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmContactEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmContactEdit.Designer.cs">
+      <DependentUpon>FrmContactEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmDealers.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -189,6 +195,9 @@
     <Compile Include="Classes\Tools.cs" />
     <EmbeddedResource Include="Forms\FrmAppReport.resx">
       <DependentUpon>FrmAppReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmContactEdit.resx">
+      <DependentUpon>FrmContactEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmDealers.resx">
       <DependentUpon>FrmDealers.cs</DependentUpon>

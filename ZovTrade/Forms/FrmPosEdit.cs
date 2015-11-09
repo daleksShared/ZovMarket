@@ -74,8 +74,9 @@ namespace ZovTrade
 
                 dealerId = db.Dealers.Local.First().ID;
 
+                db.Contacts.Where(x => x.Pos.Where(p => p.ID == posId).Any()).Load();
+                
 
-               
             }
             else
             {
@@ -107,7 +108,7 @@ namespace ZovTrade
 
             posTypesBindingSource.DataSource = db.PosTypes.Local.Select(x => new { x.ID, x.posTypeName }).ToList();
 
-
+            gridControlContacts.DataSource = db.Contacts.Local.ToBindingList();
 
             dealersBindingSource.DataSource = db.Dealers.Select(x => new { x.ID, x.dealerZovName, parentName = x.DealerParent.dealerZovName }).OrderBy(x => x.parentName).ThenBy(x => x.dealerZovName).ToList();
             
@@ -221,6 +222,66 @@ namespace ZovTrade
 
                 remove_siteFromPos(SiteId);
             }
+        }
+
+        private void BtnAddSample_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void simpleButton8_Click(object sender, EventArgs e)
+        {
+            DeleteFocusedRows(gridViewContacts);
+        }
+        private void DeleteFocusedRows(DevExpress.XtraGrid.Views.Grid.GridView view)
+        {
+            if (view.RowCount > 0 && view.IsValidRowHandle(view.FocusedRowHandle) && !view.IsNewItemRow(view.FocusedRowHandle))
+            {
+                view.BeginSort();
+                try
+                {
+                    view.DeleteRow(view.FocusedRowHandle);
+
+                }
+                catch (Exception)
+                {
+                }
+                view.EndSort();
+            }
+        }
+
+        private void simpleButton7_Click(object sender, EventArgs e)
+        {
+            var Contact = db.Contacts.Create();
+            //Contact.Dealers.Add(db.Dealers.Local.First());
+            db.Contacts.Add(Contact);
+            db.Pos.Local.FirstOrDefault().Contacts.Add(Contact);
+        }
+
+        private void simpleButton4_Click(object sender, EventArgs e)
+        {
+            DeleteFocusedRows(gridViewReviews);
+        }
+
+        private void BtnAddReview_Click(object sender, EventArgs e)
+        {
+            var Review = db.PosRanks.Create();
+            //Contact.Dealers.Add(db.Dealers.Local.First());
+            Review.Pos=db.Pos.Local.FirstOrDefault();
+            Review.Rank = 0;
+            db.PosRanks.Add(Review);
+        }
+
+        private void simpleButton5_Click(object sender, EventArgs e)
+        {
+            DeleteFocusedRows(gridViewCerts);
+        }
+
+        private void BtnAddSertif_Click(object sender, EventArgs e)
+        {
+            var Cert = db.Certifications.Create();
+            Cert.Pos= db.Pos.Local.FirstOrDefault();
+            db.Certifications.Add(Cert);
         }
     }
 }

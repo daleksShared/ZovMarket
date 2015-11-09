@@ -39,13 +39,16 @@ namespace ZovTrade
             if (isNewDealer)
             {
                 db.Dealers.Add(db.Dealers.Create());
+                bsParentDealers.DataSource = db.Dealers.Select(x => new { x.ID, x.dealerName, x.dealerZovName }).ToList();
             }
             else
             {
                 db.Dealers.Where(x => x.ID == dealerId).Load();
                 db.Sites.Where(x => x.Dealers.ID == dealerId).Load();
                 db.DealerLegalNames.Where(x => x.Dealers.ID == dealerId).Load();
-               // db.Contacts.Where(x=>x.Dealers.Where(d=>d.ID==dealerId).Select(x)).Load();
+                db.Contacts.Where(x => x.Dealers.Where(d=>d.ID== dealerId).Any()).Load();
+                bsParentDealers.DataSource = db.Dealers.Where(x=>x.ID!= dealerId).Select(x => new { x.ID, x.dealerName, x.dealerZovName }).ToList();
+                // db.Contacts.Where(x=>x.Dealers.Where(d=>d.ID==dealerId).Select(x)).Load();
             }
 
             Dealer_IDTextEdit.Properties.View.OptionsBehavior.AutoPopulateColumns = false;
@@ -53,11 +56,11 @@ namespace ZovTrade
             Dealer_IDTextEdit.Properties.DisplayMember = "dealerZovName";
             Dealer_IDTextEdit.Properties.ValueMember = "ID";
 
-            bsParentDealers.DataSource = db.Dealers.Select(x => new { x.ID, x.dealerName, x.dealerZovName }).ToList();
+            
             dealersBindingSource.DataSource = db.Dealers.Local.ToBindingList();
             dealerLegalNamesBindingSource.DataSource = db.DealerLegalNames.Local.ToBindingList();
             sitesBindingSource.DataSource = db.Sites.Local.ToBindingList();
-
+            contactsBindingSource.DataSource = db.Contacts.Local.ToBindingList();
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)
@@ -118,10 +121,7 @@ namespace ZovTrade
             DeleteFocusedRows(gridViewLegalNames);
 
         }
-        private void simpleButton9_Click(object sender, EventArgs e)
-        {
-            DeleteFocusedRows(gridViewLegalNames);
-        }
+       
 
         private void simpleButton7_Click(object sender, EventArgs e)
         {
@@ -130,13 +130,24 @@ namespace ZovTrade
 
 
 
-        private void simpleButton2_Click(object sender, EventArgs e)
+      
+
+        private void simpleButton3_Click(object sender, EventArgs e)
         {
-            var Contact = db.Contacts.Create();
-            Contact.Dealers.Add(db.Dealers.Local.First());
+  var Contact = db.Contacts.Create();
+            //Contact.Dealers.Add(db.Dealers.Local.First());
             db.Contacts.Add(Contact);
+            db.Dealers.Local.FirstOrDefault().Contacts.Add(Contact);
         }
 
+        private void simpleButton2_Click(object sender, EventArgs e)
+        {
+            DeleteFocusedRows(gridViewContacts);
+        }
 
+        private void simpleButton9_Click(object sender, EventArgs e)
+        {
+            db.Dealers.Local.FirstOrDefault().Dealer_ID = null;
+        }
     }
 }
