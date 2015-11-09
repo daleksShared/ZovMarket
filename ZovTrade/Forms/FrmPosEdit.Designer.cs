@@ -54,6 +54,8 @@
             this.gridViewSamples = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsampleStatus = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemLookUpEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.sampleDetailStatusBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.coldateAdd = new DevExpress.XtraGrid.Columns.GridColumn();
             this.coldateRequestForApproval = new DevExpress.XtraGrid.Columns.GridColumn();
             this.coldateApproval = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -211,6 +213,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControlSamples)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.samplesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewSamples)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sampleDetailStatusBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
@@ -523,6 +527,7 @@
             this.simpleButton6.StyleController = this.layoutControl2;
             this.simpleButton6.TabIndex = 6;
             this.simpleButton6.Text = "Удалить образец";
+            this.simpleButton6.Click += new System.EventHandler(this.simpleButton6_Click);
             // 
             // BtnAddSample
             // 
@@ -542,7 +547,8 @@
             this.gridControlSamples.MainView = this.gridViewSamples;
             this.gridControlSamples.Name = "gridControlSamples";
             this.gridControlSamples.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemDateEdit1});
+            this.repositoryItemDateEdit1,
+            this.repositoryItemLookUpEdit1});
             this.gridControlSamples.Size = new System.Drawing.Size(777, 489);
             this.gridControlSamples.TabIndex = 4;
             this.gridControlSamples.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -576,13 +582,30 @@
             // 
             // colsampleStatus
             // 
+            this.colsampleStatus.Caption = "Статус";
+            this.colsampleStatus.ColumnEdit = this.repositoryItemLookUpEdit1;
             this.colsampleStatus.FieldName = "sampleStatus";
             this.colsampleStatus.Name = "colsampleStatus";
             this.colsampleStatus.Visible = true;
             this.colsampleStatus.VisibleIndex = 1;
             // 
+            // repositoryItemLookUpEdit1
+            // 
+            this.repositoryItemLookUpEdit1.AutoHeight = false;
+            this.repositoryItemLookUpEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemLookUpEdit1.DataSource = this.sampleDetailStatusBindingSource;
+            this.repositoryItemLookUpEdit1.DisplayMember = "sampleDetailStatus1";
+            this.repositoryItemLookUpEdit1.Name = "repositoryItemLookUpEdit1";
+            this.repositoryItemLookUpEdit1.ValueMember = "ID";
+            // 
+            // sampleDetailStatusBindingSource
+            // 
+            this.sampleDetailStatusBindingSource.DataSource = typeof(DbModel.SampleDetailStatus);
+            // 
             // coldateAdd
             // 
+            this.coldateAdd.Caption = "Добавлен";
             this.coldateAdd.FieldName = "dateAdd";
             this.coldateAdd.Name = "coldateAdd";
             this.coldateAdd.Visible = true;
@@ -590,6 +613,7 @@
             // 
             // coldateRequestForApproval
             // 
+            this.coldateRequestForApproval.Caption = "Запрошен";
             this.coldateRequestForApproval.FieldName = "dateRequestForApproval";
             this.coldateRequestForApproval.Name = "coldateRequestForApproval";
             this.coldateRequestForApproval.Visible = true;
@@ -597,6 +621,7 @@
             // 
             // coldateApproval
             // 
+            this.coldateApproval.Caption = "Подтверждён";
             this.coldateApproval.FieldName = "dateApproval";
             this.coldateApproval.Name = "coldateApproval";
             this.coldateApproval.Visible = true;
@@ -604,6 +629,7 @@
             // 
             // coldateOrder
             // 
+            this.coldateOrder.Caption = "ЗаказДата";
             this.coldateOrder.FieldName = "dateOrder";
             this.coldateOrder.Name = "coldateOrder";
             this.coldateOrder.Visible = true;
@@ -611,6 +637,7 @@
             // 
             // coldateShip1
             // 
+            this.coldateShip1.Caption = "Отгрузка";
             this.coldateShip1.FieldName = "dateShip";
             this.coldateShip1.Name = "coldateShip1";
             this.coldateShip1.Visible = true;
@@ -618,6 +645,7 @@
             // 
             // coldateInstallation
             // 
+            this.coldateInstallation.Caption = "Установлен";
             this.coldateInstallation.FieldName = "dateInstallation";
             this.coldateInstallation.Name = "coldateInstallation";
             this.coldateInstallation.Visible = true;
@@ -1959,6 +1987,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControlSamples)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.samplesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewSamples)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sampleDetailStatusBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
@@ -2238,5 +2268,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem23;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem5;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit1;
+        private System.Windows.Forms.BindingSource sampleDetailStatusBindingSource;
     }
 }

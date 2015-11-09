@@ -201,7 +201,8 @@ namespace ZovTrade
                         x.DealerLegalNames.LegalName,
                         posStatus = x.StatusOfPos.StatusName,
                         colorRow = x.StatusOfPos.StatusColor,
-                        listPosSites=x.Sites.Select(s=>s.URL).ToList()
+                        listPosSites = x.Sites.Select(s => s.URL).ToList(),
+                        listContacts = x.Contacts.Select(c => c.ContactName + "\n" + c.ContactPhones + "\n").ToList()
         }).ToList().Select(p=> new
         {
             p.ID,
@@ -217,7 +218,8 @@ namespace ZovTrade
             p.LegalName,
             p.posStatus ,
             p.colorRow ,
-            PosSites = p.listPosSites.Any() ? p.listPosSites.Aggregate((cur,next)=> cur+"\n"+next) : ""
+            PosSites = p.listPosSites.Any() ? p.listPosSites.Aggregate((cur,next)=> cur+"\n"+next) : "",
+            PosContacts=p.listContacts.Any() ? p.listContacts.Aggregate((cur, next) => cur + "\n" + next) : ""
         }        
                     );
 
@@ -261,6 +263,8 @@ namespace ZovTrade
             //    column.OptionsColumn.AllowEdit = false;
             //}
             //treeListSubDealers.ResetBindings();
+
+            gridViewPos.BestFitColumns();
         }
 
         private void treeList1_AfterCheckNode(object sender, NodeEventArgs e)

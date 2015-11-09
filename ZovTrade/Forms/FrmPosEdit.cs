@@ -54,7 +54,7 @@ namespace ZovTrade
 
                 var firstOrDefault = curpos.FirstOrDefault();
                 if (firstOrDefault != null)
-                    this.Text = firstOrDefault.dealerZovName + "\\" + firstOrDefault.legalName;
+                    this.Text = firstOrDefault.dealerZovName + " \\ " + firstOrDefault.legalName;
 
                 var posRating =
                     db.Pos.Where(x => x.ID == posId)
@@ -72,6 +72,9 @@ namespace ZovTrade
                 db.Pos.Where(x => x.ID == posId).Load();
 
 
+                db.PosRanks.Where(x => x.Pos.ID == posId).Load();
+                db.Certifications.Where(x => x.Pos.ID == posId).Load();
+                db.Samples.Where(x => x.Pos.ID == posId).Load();
                 dealerId = db.Dealers.Local.First().ID;
 
                 db.Contacts.Where(x => x.Pos.Where(p => p.ID == posId).Any()).Load();
@@ -108,15 +111,17 @@ namespace ZovTrade
 
             posTypesBindingSource.DataSource = db.PosTypes.Local.Select(x => new { x.ID, x.posTypeName }).ToList();
 
-            gridControlContacts.DataSource = db.Contacts.Local.ToBindingList();
+            
 
             dealersBindingSource.DataSource = db.Dealers.Select(x => new { x.ID, x.dealerZovName, parentName = x.DealerParent.dealerZovName }).OrderBy(x => x.parentName).ThenBy(x => x.dealerZovName).ToList();
             
             posBindingSource.DataSource = db.Pos.Local.ToBindingList();
 
+            posRanksBindingSource.DataSource = db.PosRanks.Local.ToBindingList();
+            certificationsBindingSource.DataSource = db.Certifications.Local.ToBindingList();
+            samplesBindingSource.DataSource = db.Samples.Local.ToBindingList();
+            contactsBindingSource.DataSource = db.Contacts.Local.ToBindingList();
 
-
-            
             db.Sites.Where(x => x.Dealer_ID == dealerId | x.Dealer_ID== parentDealerId).Load();
 
             statusOfPosBindingSource.DataSource = db.StatusOfPos.Select(x => new { x.ID, x.StatusName, x.StatusColor }).ToList();
@@ -226,6 +231,10 @@ namespace ZovTrade
 
         private void BtnAddSample_Click(object sender, EventArgs e)
         {
+            var Sample = db.Samples.Create();
+            Sample.Pos = db.Pos.Local.FirstOrDefault();
+            Sample.sampleStatus = 1;
+            db.Samples.Add(Sample);
 
         }
 
@@ -282,6 +291,11 @@ namespace ZovTrade
             var Cert = db.Certifications.Create();
             Cert.Pos= db.Pos.Local.FirstOrDefault();
             db.Certifications.Add(Cert);
+        }
+
+        private void simpleButton6_Click(object sender, EventArgs e)
+        {
+            DeleteFocusedRows(gridViewSamples);
         }
     }
 }
