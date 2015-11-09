@@ -23,6 +23,7 @@ namespace DbModel
         public int ID { get; set; }
         public string StatusName { get; set; }
         public string StatusColor { get; set; }
+        public Nullable<int> DaysToExpire { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pos> Pos { get; set; }

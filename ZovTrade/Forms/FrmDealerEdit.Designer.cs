@@ -66,10 +66,10 @@
             this.dealerZovNameTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.dealerDescriptionTextEdit = new DevExpress.XtraEditors.MemoEdit();
             this.Dealer_IDTextEdit = new DevExpress.XtraEditors.GridLookUpEdit();
-            this.bsParentDealers = new System.Windows.Forms.BindingSource(this.components);
             this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.coldealerName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.coldealerZovName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colID1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.ItemForID = new DevExpress.XtraLayout.LayoutControlItem();
@@ -101,6 +101,7 @@
             this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem5 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.bsParentDealers = new System.Windows.Forms.BindingSource(this.components);
             this.splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::ZovTrade.FrmWait), true, true);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -123,7 +124,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dealerZovNameTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dealerDescriptionTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Dealer_IDTextEdit.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsParentDealers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
@@ -156,6 +156,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsParentDealers)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -508,24 +509,18 @@
             this.Dealer_IDTextEdit.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.Dealer_IDTextEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.Dealer_IDTextEdit.Properties.DataSource = this.bsParentDealers;
-            this.Dealer_IDTextEdit.Properties.DisplayMember = "DealerZovName";
             this.Dealer_IDTextEdit.Properties.NullText = "";
-            this.Dealer_IDTextEdit.Properties.ValueMember = "Dealer_ID";
             this.Dealer_IDTextEdit.Properties.View = this.gridLookUpEdit1View;
             this.Dealer_IDTextEdit.Size = new System.Drawing.Size(216, 20);
             this.Dealer_IDTextEdit.StyleController = this.dataLayoutControl1;
             this.Dealer_IDTextEdit.TabIndex = 5;
             // 
-            // bsParentDealers
-            // 
-            this.bsParentDealers.DataSource = typeof(DbModel.Dealers);
-            // 
             // gridLookUpEdit1View
             // 
             this.gridLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.coldealerName,
-            this.coldealerZovName});
+            this.coldealerZovName,
+            this.colID1});
             this.gridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.gridLookUpEdit1View.Name = "gridLookUpEdit1View";
             this.gridLookUpEdit1View.OptionsBehavior.Editable = false;
@@ -545,6 +540,11 @@
             this.coldealerZovName.Name = "coldealerZovName";
             this.coldealerZovName.Visible = true;
             this.coldealerZovName.VisibleIndex = 1;
+            // 
+            // colID1
+            // 
+            this.colID1.FieldName = "ID";
+            this.colID1.Name = "colID1";
             // 
             // Root
             // 
@@ -868,6 +868,10 @@
             this.layoutControlItem1.TextLocation = DevExpress.Utils.Locations.Top;
             this.layoutControlItem1.TextSize = new System.Drawing.Size(57, 13);
             // 
+            // bsParentDealers
+            // 
+            this.bsParentDealers.DataSource = typeof(DbModel.Dealers);
+            // 
             // splashScreenManager1
             // 
             this.splashScreenManager1.ClosingDelay = 500;
@@ -903,7 +907,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dealerZovNameTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dealerDescriptionTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Dealer_IDTextEdit.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsParentDealers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
@@ -936,6 +939,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsParentDealers)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1014,5 +1018,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colContactOtherData;
         private DevExpress.XtraGrid.Columns.GridColumn colContactDescription;
         private DevExpress.XtraGrid.Columns.GridColumn colDealers;
+        private DevExpress.XtraGrid.Columns.GridColumn colID1;
     }
 }

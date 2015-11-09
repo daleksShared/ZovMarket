@@ -112,7 +112,12 @@ namespace ZovTrade
             dealersBindingSource.DataSource = db.Dealers.Select(x => new { x.ID, x.dealerZovName, parentName = x.DealerParent.dealerZovName }).OrderBy(x => x.parentName).ThenBy(x => x.dealerZovName).ToList();
             
             posBindingSource.DataSource = db.Pos.Local.ToBindingList();
-            db.Sites.Where(x => x.Dealer_ID == dealerId).Load();
+
+
+
+            
+            db.Sites.Where(x => x.Dealer_ID == dealerId | x.Dealer_ID== parentDealerId).Load();
+
             statusOfPosBindingSource.DataSource = db.StatusOfPos.Select(x => new { x.ID, x.StatusName, x.StatusColor }).ToList();
             db.StatusOfPos.Load();
             LoadPosSites();
@@ -129,7 +134,9 @@ namespace ZovTrade
         private void LoadPosSites()
         {
             var posSites = db.Pos.Local.FirstOrDefault().Sites.ToList();
-            sitesBindingSource.DataSource = db.Pos.Local.FirstOrDefault().Dealers.Sites.Except(posSites).ToList();
+           
+            
+            sitesBindingSource.DataSource = db.Sites.Local.Except(posSites).Select(x=> new { x.ID, x.URL, x.Dealers.dealerZovName }).ToList();
             bsPosSites.DataSource = db.Pos.Local.FirstOrDefault().Sites.ToList();
         }
         private void simpleButton1_Click(object sender, EventArgs e)

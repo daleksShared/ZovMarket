@@ -200,8 +200,26 @@ namespace ZovTrade
                         x.Ruby_Id,
                         x.DealerLegalNames.LegalName,
                         posStatus = x.StatusOfPos.StatusName,
-                        colorRow = x.StatusOfPos.StatusColor
-                    }).ToList();
+                        colorRow = x.StatusOfPos.StatusColor,
+                        listPosSites=x.Sites.Select(s=>s.URL).ToList()
+        }).ToList().Select(p=> new
+        {
+            p.ID,
+            p.dateadd,
+            p.posArea,
+            p.legalName,
+            p.posRating,
+            p.locationDescription,
+            p.yandexAdress,
+            p.brand,
+            p.posTypeName,
+            p.Ruby_Id,
+            p.LegalName,
+            p.posStatus ,
+            p.colorRow ,
+            PosSites = p.listPosSites.Any() ? p.listPosSites.Aggregate((cur,next)=> cur+"\n"+next) : ""
+        }        
+                    );
 
             //listBoxSubDealers.DataSource =
             //    db.Dealers.Where(x => x.Dealer_ID == dealerId).Select(d => new {d.ID, d.dealerZovName}).ToList();

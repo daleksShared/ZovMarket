@@ -25,6 +25,7 @@ namespace DbModel
             this.PosEmails = new HashSet<PosEmails>();
             this.PosRanks = new HashSet<PosRanks>();
             this.Sites = new HashSet<Sites>();
+            this.Contacts = new HashSet<Contacts>();
         }
     
         public int ID { get; set; }
@@ -69,5 +70,7 @@ namespace DbModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sites> Sites { get; set; }
         public virtual StatusOfPos StatusOfPos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Contacts> Contacts { get; set; }
     }
 }

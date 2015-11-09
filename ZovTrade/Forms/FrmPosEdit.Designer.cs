@@ -86,12 +86,14 @@
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem4 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.xtraTabPage4 = new DevExpress.XtraTab.XtraTabPage();
             this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
             this.Добавить = new DevExpress.XtraEditors.SimpleButton();
             this.gridLookUpEditDealerSites = new DevExpress.XtraEditors.GridLookUpEdit();
             this.sitesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridLookUpEdit3View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colURL1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridControl4 = new DevExpress.XtraGrid.GridControl();
             this.bsPosSites = new System.Windows.Forms.BindingSource(this.components);
             this.gridViewPosSites = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -330,7 +332,8 @@
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage1,
             this.xtraTabPage2,
-            this.xtraTabPage3});
+            this.xtraTabPage3,
+            this.xtraTabPage4});
             // 
             // xtraTabPage1
             // 
@@ -790,6 +793,12 @@
             this.layoutControlItem11.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem11.TextVisible = false;
             // 
+            // xtraTabPage4
+            // 
+            this.xtraTabPage4.Name = "xtraTabPage4";
+            this.xtraTabPage4.Size = new System.Drawing.Size(807, 579);
+            this.xtraTabPage4.Text = "xtraTabPage4";
+            // 
             // dataLayoutControl1
             // 
             this.dataLayoutControl1.Controls.Add(this.Добавить);
@@ -854,7 +863,8 @@
             // gridLookUpEdit3View
             // 
             this.gridLookUpEdit3View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colURL1});
+            this.colURL1,
+            this.gridColumn1});
             this.gridLookUpEdit3View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.gridLookUpEdit3View.Name = "gridLookUpEdit3View";
             this.gridLookUpEdit3View.OptionsSelection.EnableAppearanceFocusedCell = false;
@@ -867,6 +877,14 @@
             this.colURL1.Name = "colURL1";
             this.colURL1.Visible = true;
             this.colURL1.VisibleIndex = 0;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "Дилер";
+            this.gridColumn1.FieldName = "dealerZovName";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 1;
             // 
             // gridControl4
             // 
@@ -1472,7 +1490,7 @@
             this.ItemForRuby_Id.Location = new System.Drawing.Point(222, 0);
             this.ItemForRuby_Id.Name = "ItemForRuby_Id";
             this.ItemForRuby_Id.Size = new System.Drawing.Size(179, 24);
-            this.ItemForRuby_Id.Text = "Ruby_Id";
+            this.ItemForRuby_Id.Text = "ZOV_Id";
             this.ItemForRuby_Id.TextSize = new System.Drawing.Size(106, 13);
             // 
             // ItemForposStatus
@@ -1925,5 +1943,7 @@
         private DevExpress.XtraEditors.GridLookUpEdit posStatusTextEdit;
         private System.Windows.Forms.BindingSource statusOfPosBindingSource;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage4;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
     }
 }

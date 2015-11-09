@@ -47,6 +47,12 @@ namespace ZovTrade
                 db.DealerLegalNames.Where(x => x.Dealers.ID == dealerId).Load();
                // db.Contacts.Where(x=>x.Dealers.Where(d=>d.ID==dealerId).Select(x)).Load();
             }
+
+            Dealer_IDTextEdit.Properties.View.OptionsBehavior.AutoPopulateColumns = false;
+            Dealer_IDTextEdit.Properties.DataSource= db.Dealers.Select(x => new { x.ID, x.dealerName, x.dealerZovName }).ToList();
+            Dealer_IDTextEdit.Properties.DisplayMember = "dealerZovName";
+            Dealer_IDTextEdit.Properties.ValueMember = "ID";
+
             bsParentDealers.DataSource = db.Dealers.Select(x => new { x.ID, x.dealerName, x.dealerZovName }).ToList();
             dealersBindingSource.DataSource = db.Dealers.Local.ToBindingList();
             dealerLegalNamesBindingSource.DataSource = db.DealerLegalNames.Local.ToBindingList();

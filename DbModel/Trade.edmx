@@ -104,6 +104,14 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="PosContacts">
+          <Key>
+            <PropertyRef Name="Contact_ID" />
+            <PropertyRef Name="Pos_ID" />
+          </Key>
+          <Property Name="Contact_ID" Type="int" Nullable="false" />
+          <Property Name="Pos_ID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="PosEmails">
           <Key>
             <PropertyRef Name="ID" />
@@ -203,6 +211,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StatusName" Type="nvarchar" MaxLength="50" />
           <Property Name="StatusColor" Type="nvarchar" MaxLength="50" />
+          <Property Name="DaysToExpire" Type="int" />
         </EntityType>
         <EntityType Name="UserRoles">
           <Key>
@@ -402,6 +411,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PosContacts_Contacts">
+          <End Role="Contacts" Type="Self.Contacts" Multiplicity="1" />
+          <End Role="PosContacts" Type="Self.PosContacts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contacts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PosContacts">
+              <PropertyRef Name="Contact_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PosContacts_Pos">
+          <End Role="Pos" Type="Self.Pos" Multiplicity="1" />
+          <End Role="PosContacts" Type="Self.PosContacts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pos">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PosContacts">
+              <PropertyRef Name="Pos_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PosEmails_Pos">
           <End Role="Pos" Type="Self.Pos" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -512,6 +545,7 @@
           <EntitySet Name="Dealers" EntityType="Self.Dealers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pos" EntityType="Self.Pos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PosBrand" EntityType="Self.PosBrand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PosContacts" EntityType="Self.PosContacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PosEmails" EntityType="Self.PosEmails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PosImages" EntityType="Self.PosImages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PosPhones" EntityType="Self.PosPhones" Schema="dbo" store:Type="Tables" />
@@ -580,6 +614,14 @@
           <AssociationSet Name="FK_Pos_StatusOfPos" Association="Self.FK_Pos_StatusOfPos">
             <End Role="StatusOfPos" EntitySet="StatusOfPos" />
             <End Role="Pos" EntitySet="Pos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PosContacts_Contacts" Association="Self.FK_PosContacts_Contacts">
+            <End Role="Contacts" EntitySet="Contacts" />
+            <End Role="PosContacts" EntitySet="PosContacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PosContacts_Pos" Association="Self.FK_PosContacts_Pos">
+            <End Role="Pos" EntitySet="Pos" />
+            <End Role="PosContacts" EntitySet="PosContacts" />
           </AssociationSet>
           <AssociationSet Name="FK_PosEmails_Pos" Association="Self.FK_PosEmails_Pos">
             <End Role="Pos" EntitySet="Pos" />
@@ -683,6 +725,7 @@
           <Property Name="posStatus_ID" Type="Int32" Nullable="false" DefaultValue="1" />
           <NavigationProperty Name="StatusOfPos" Relationship="tradeModel.FK_Pos_StatusOfPos" FromRole="Pos" ToRole="StatusOfPos" />
           <Property Name="posStatusDate" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Contacts" Relationship="tradeModel.PosContacts" FromRole="Pos" ToRole="Contacts" />
         </EntityType>
         <EntityType Name="PosImages">
           <Key>
@@ -971,6 +1014,10 @@
             <End Role="StatusOfPos" EntitySet="StatusOfPos" />
             <End Role="Pos" EntitySet="Pos" />
           </AssociationSet>
+          <AssociationSet Name="PosContacts" Association="tradeModel.PosContacts">
+            <End Role="Contacts" EntitySet="Contacts" />
+            <End Role="Pos" EntitySet="Pos" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_getDealersTree_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -1167,6 +1214,7 @@
           <Property Name="ContactOtherData" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="ContactDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Dealers" Relationship="tradeModel.DealerContacts" FromRole="Contacts" ToRole="Dealers" />
+          <NavigationProperty Name="Pos" Relationship="tradeModel.PosContacts" FromRole="Contacts" ToRole="Pos" />
         </EntityType>
         <Association Name="DealerContacts">
           <End Type="tradeModel.Contacts" Role="Contacts" Multiplicity="*" />
@@ -1180,6 +1228,7 @@
           <Property Name="StatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="StatusColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Pos" Relationship="tradeModel.FK_Pos_StatusOfPos" FromRole="StatusOfPos" ToRole="Pos" />
+          <Property Name="DaysToExpire" Type="Int32" />
         </EntityType>
         <Association Name="PosSites">
           <End Type="tradeModel.Pos" Role="Pos" Multiplicity="*" />
@@ -1196,6 +1245,10 @@
               <PropertyRef Name="posStatus_ID" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <Association Name="PosContacts">
+          <End Type="tradeModel.Contacts" Role="Contacts" Multiplicity="*" />
+          <End Type="tradeModel.Pos" Role="Pos" Multiplicity="*" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -1452,6 +1505,7 @@
           <EntitySetMapping Name="StatusOfPos">
             <EntityTypeMapping TypeName="tradeModel.StatusOfPos">
               <MappingFragment StoreEntitySet="StatusOfPos">
+                <ScalarProperty Name="DaysToExpire" ColumnName="DaysToExpire" />
                 <ScalarProperty Name="StatusColor" ColumnName="StatusColor" />
                 <ScalarProperty Name="StatusName" ColumnName="StatusName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -1464,6 +1518,14 @@
             </EndProperty>
             <EndProperty Name="Pos">
               <ScalarProperty Name="ID" ColumnName="Pos_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="PosContacts" TypeName="tradeModel.PosContacts" StoreEntitySet="PosContacts">
+            <EndProperty Name="Pos">
+              <ScalarProperty Name="ID" ColumnName="Pos_ID" />
+            </EndProperty>
+            <EndProperty Name="Contacts">
+              <ScalarProperty Name="ID" ColumnName="Contact_ID" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

@@ -18,6 +18,7 @@ namespace DbModel
         public Contacts()
         {
             this.Dealers = new HashSet<Dealers>();
+            this.Pos = new HashSet<Pos>();
         }
     
         public int ID { get; set; }
@@ -28,5 +29,7 @@ namespace DbModel
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Dealers> Dealers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Pos> Pos { get; set; }
     }
 }

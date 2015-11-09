@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e23358a422b8427288641a5d7a893b7c" Name="Diagram1" ZoomLevel="76">
+      <Diagram DiagramId="e23358a422b8427288641a5d7a893b7c" Name="Diagram1" ZoomLevel="56">
         <EntityTypeShape EntityType="tradeModel.Certifications" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="tradeModel.Dealers" Width="1.5" PointX="0.625" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="tradeModel.Pos" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
@@ -43,6 +43,7 @@
         <EntityTypeShape EntityType="tradeModel.StatusOfPos" Width="1.5" PointX="0.625" PointY="4.625" />
         <AssociationConnector Association="tradeModel.PosSites" />
         <AssociationConnector Association="tradeModel.FK_Pos_StatusOfPos" />
+        <AssociationConnector Association="tradeModel.PosContacts" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

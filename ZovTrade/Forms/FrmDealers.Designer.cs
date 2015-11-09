@@ -132,6 +132,7 @@
             this.dealerZovNameTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.ItemFordealerZovName = new DevExpress.XtraLayout.LayoutControlItem();
             this.splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::ZovTrade.FrmWait), true, true);
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.treeDealersList)).BeginInit();
@@ -731,12 +732,14 @@
             this.coldealer_ID,
             this.colRuby_Id,
             this.colposTypeName,
-            this.gridColumn1});
+            this.gridColumn1,
+            this.gridColumn2});
             this.gridViewPos.GridControl = this.gridControl1;
             this.gridViewPos.GroupCount = 1;
             this.gridViewPos.Name = "gridViewPos";
             this.gridViewPos.OptionsBehavior.Editable = false;
             this.gridViewPos.OptionsBehavior.ReadOnly = true;
+            this.gridViewPos.OptionsView.RowAutoHeight = true;
             this.gridViewPos.OptionsView.ShowGroupPanel = false;
             this.gridViewPos.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colposTypeName, DevExpress.Data.ColumnSortOrder.Ascending)});
@@ -757,7 +760,7 @@
             this.colposStatus.Name = "colposStatus";
             this.colposStatus.Visible = true;
             this.colposStatus.VisibleIndex = 1;
-            this.colposStatus.Width = 50;
+            this.colposStatus.Width = 47;
             // 
             // coldateadd
             // 
@@ -767,7 +770,7 @@
             this.coldateadd.Name = "coldateadd";
             this.coldateadd.Visible = true;
             this.coldateadd.VisibleIndex = 2;
-            this.coldateadd.Width = 70;
+            this.coldateadd.Width = 66;
             // 
             // collegalName
             // 
@@ -776,7 +779,7 @@
             this.collegalName.Name = "collegalName";
             this.collegalName.Visible = true;
             this.collegalName.VisibleIndex = 3;
-            this.collegalName.Width = 299;
+            this.collegalName.Width = 285;
             // 
             // colyandexAdress
             // 
@@ -785,7 +788,7 @@
             this.colyandexAdress.Name = "colyandexAdress";
             this.colyandexAdress.Visible = true;
             this.colyandexAdress.VisibleIndex = 5;
-            this.colyandexAdress.Width = 137;
+            this.colyandexAdress.Width = 130;
             // 
             // colcity
             // 
@@ -814,7 +817,7 @@
             this.colposArea.Name = "colposArea";
             this.colposArea.Visible = true;
             this.colposArea.VisibleIndex = 6;
-            this.colposArea.Width = 44;
+            this.colposArea.Width = 42;
             // 
             // colbrand
             // 
@@ -823,7 +826,7 @@
             this.colbrand.Name = "colbrand";
             this.colbrand.Visible = true;
             this.colbrand.VisibleIndex = 7;
-            this.colbrand.Width = 213;
+            this.colbrand.Width = 203;
             // 
             // colposRating
             // 
@@ -832,8 +835,8 @@
             this.colposRating.FieldName = "posRating";
             this.colposRating.Name = "colposRating";
             this.colposRating.Visible = true;
-            this.colposRating.VisibleIndex = 8;
-            this.colposRating.Width = 359;
+            this.colposRating.VisibleIndex = 9;
+            this.colposRating.Width = 160;
             // 
             // repositoryItemRatingControl1
             // 
@@ -858,7 +861,7 @@
             this.colRuby_Id.Name = "colRuby_Id";
             this.colRuby_Id.Visible = true;
             this.colRuby_Id.VisibleIndex = 0;
-            this.colRuby_Id.Width = 102;
+            this.colRuby_Id.Width = 97;
             // 
             // colposTypeName
             // 
@@ -876,7 +879,7 @@
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 4;
-            this.gridColumn1.Width = 358;
+            this.gridColumn1.Width = 342;
             // 
             // repositoryItemCheckEdit1
             // 
@@ -1184,6 +1187,15 @@
             // 
             this.splashScreenManager1.ClosingDelay = 500;
             // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "Сайты";
+            this.gridColumn2.FieldName = "PosSites";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 8;
+            this.gridColumn2.Width = 260;
+            // 
             // FrmDealers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1364,5 +1376,6 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItem14;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
     }
 }
