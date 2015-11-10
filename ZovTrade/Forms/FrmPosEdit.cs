@@ -37,15 +37,30 @@ namespace ZovTrade
 
             layoutControlItem17.Visibility = isNewPos ? DevExpress.XtraLayout.Utils.LayoutVisibility.Never : DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
            
-            
+            if (dealerId == 0)
+            {
+                var frmSelectDealer = new Forms.FrmDealerChoose();
+                if (frmSelectDealer.ShowDialog(this) == DialogResult.OK)
+                {
+                    dealerId = frmSelectDealer.DealerId;
+                }
+
+            }
         }
 
         private void FrmEditPos_Load(object sender, EventArgs e)
         {
+            if (dealerId == 0)
+            {
+                this.Close();
+            }
 //splashScreenManager.
         //    splashScreenManager.ShowWaitForm();
             splashScreenManager1.ShowWaitForm();
+
             
+            
+
             if (!isNewPos)
             {
                 var curpos = from p in db.Pos
@@ -78,28 +93,35 @@ namespace ZovTrade
                 dealerId = db.Dealers.Local.First().ID;
 
                 db.Contacts.Where(x => x.Pos.Where(p => p.ID == posId).Any()).Load();
-                
+
 
             }
             else
             {
-                
-                this.Text = db.Dealers.Where(x=>x.ID== dealerId).Select(x=>x.dealerZovName).First() + " \\ Новый магазин";
-
+                if (dealerId > 0) { 
+                this.Text = db.Dealers.Where(x => x.ID == dealerId).Select(x => x.dealerZovName).First() + " \\ Новый магазин";
+                db.Dealers.Where(x => x.ID == dealerId).Load();
+                }
+                else{
+                    this.Text = "Новый магазин";
+            }
 
                 posRatingTextEdit.EditValue = 0;
                 db.PosTypes.Load();
-                db.Dealers.Where(x => x.ID == dealerId).Load();
+               
 
                 var newPos = db.Pos.Create();
-                newPos.dealer_ID = dealerId;
-
+                if (dealerId > 0)
+                {
+                    newPos.dealer_ID = dealerId;
+                }
                 db.Pos.Add(newPos);
                 
                
             }
 
             int parentDealerId = 0;
+
             if (db.Dealers.Where(x => x.ID == dealerId && x.DealerParent != null).Select(x => x.DealerParent).Any())
             {
                 parentDealerId = db.Dealers.Where(x => x.ID == dealerId && x.DealerParent != null).Select(x => x.DealerParent).First().ID;

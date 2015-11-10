@@ -1257,6 +1257,7 @@
             // 
             this.gridLookUpEdit1.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.posBindingSource, "dealer_ID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.gridLookUpEdit1.EditValue = "";
+            this.gridLookUpEdit1.Enabled = false;
             this.gridLookUpEdit1.Location = new System.Drawing.Point(121, 346);
             this.gridLookUpEdit1.Name = "gridLookUpEdit1";
             this.gridLookUpEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
