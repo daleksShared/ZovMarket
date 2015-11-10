@@ -32,54 +32,54 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmViewPosList));
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
-            this.repositoryItemDateEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
-            this.repositoryItemDateEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
             this.btnLoadData = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.repositoryItemTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
+            this.repositoryItemDateEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
             this.repositoryItemTextEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
+            this.repositoryItemDateEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            this.colPosId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colZovId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colDateAdd = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemDateEdit3 = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
-            this.repositoryItemMemoEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
+            this.colDealerZovName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colPosLegalName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colYandexAdress = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colposRating = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemRatingControl1 = new DevExpress.XtraEditors.Repository.RepositoryItemRatingControl();
+            this.colLegalName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemMemoEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
+            this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::ZovTrade.FrmWait), true, true);
-            this.colPosId = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colZovId = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colDateAdd = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colDealerZovName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colPosLegalName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colYandexAdress = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colposRating = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colLegalName = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit2.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit3.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemoEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRatingControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemoEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
@@ -117,24 +117,6 @@
             this.bar2.OptionsBar.MultiLine = true;
             this.bar2.OptionsBar.UseWholeRow = true;
             this.bar2.Text = "Main menu";
-            // 
-            // repositoryItemDateEdit1
-            // 
-            this.repositoryItemDateEdit1.AutoHeight = false;
-            this.repositoryItemDateEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemDateEdit1.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemDateEdit1.Name = "repositoryItemDateEdit1";
-            // 
-            // repositoryItemDateEdit2
-            // 
-            this.repositoryItemDateEdit2.AutoHeight = false;
-            this.repositoryItemDateEdit2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemDateEdit2.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemDateEdit2.Name = "repositoryItemDateEdit2";
             // 
             // btnLoadData
             // 
@@ -176,10 +158,28 @@
             this.repositoryItemTextEdit1.AutoHeight = false;
             this.repositoryItemTextEdit1.Name = "repositoryItemTextEdit1";
             // 
+            // repositoryItemDateEdit1
+            // 
+            this.repositoryItemDateEdit1.AutoHeight = false;
+            this.repositoryItemDateEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemDateEdit1.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemDateEdit1.Name = "repositoryItemDateEdit1";
+            // 
             // repositoryItemTextEdit2
             // 
             this.repositoryItemTextEdit2.AutoHeight = false;
             this.repositoryItemTextEdit2.Name = "repositoryItemTextEdit2";
+            // 
+            // repositoryItemDateEdit2
+            // 
+            this.repositoryItemDateEdit2.AutoHeight = false;
+            this.repositoryItemDateEdit2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemDateEdit2.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemDateEdit2.Name = "repositoryItemDateEdit2";
             // 
             // layoutControl1
             // 
@@ -255,10 +255,28 @@
             this.gridView1.OptionsView.ShowAutoFilterRow = true;
             this.gridView1.DoubleClick += new System.EventHandler(this.gridView1_DoubleClick);
             // 
-            // repositoryItemCheckEdit1
+            // colPosId
             // 
-            this.repositoryItemCheckEdit1.AutoHeight = false;
-            this.repositoryItemCheckEdit1.Name = "repositoryItemCheckEdit1";
+            this.colPosId.Caption = "Id";
+            this.colPosId.FieldName = "PosId";
+            this.colPosId.Name = "colPosId";
+            // 
+            // colZovId
+            // 
+            this.colZovId.Caption = "ZovId";
+            this.colZovId.FieldName = "ZovId";
+            this.colZovId.Name = "colZovId";
+            this.colZovId.Visible = true;
+            this.colZovId.VisibleIndex = 0;
+            // 
+            // colDateAdd
+            // 
+            this.colDateAdd.Caption = "Дата";
+            this.colDateAdd.ColumnEdit = this.repositoryItemDateEdit3;
+            this.colDateAdd.FieldName = "DateAdd";
+            this.colDateAdd.Name = "colDateAdd";
+            this.colDateAdd.Visible = true;
+            this.colDateAdd.VisibleIndex = 1;
             // 
             // repositoryItemDateEdit3
             // 
@@ -269,15 +287,61 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repositoryItemDateEdit3.Name = "repositoryItemDateEdit3";
             // 
-            // repositoryItemMemoEdit1
+            // colDealerZovName
             // 
-            this.repositoryItemMemoEdit1.Name = "repositoryItemMemoEdit1";
+            this.colDealerZovName.Caption = "Дилер";
+            this.colDealerZovName.FieldName = "DealerZovName";
+            this.colDealerZovName.Name = "colDealerZovName";
+            this.colDealerZovName.Visible = true;
+            this.colDealerZovName.VisibleIndex = 2;
+            // 
+            // colPosLegalName
+            // 
+            this.colPosLegalName.Caption = "Магазин";
+            this.colPosLegalName.FieldName = "PosLegalName";
+            this.colPosLegalName.Name = "colPosLegalName";
+            this.colPosLegalName.Visible = true;
+            this.colPosLegalName.VisibleIndex = 3;
+            // 
+            // colYandexAdress
+            // 
+            this.colYandexAdress.Caption = "Адрес";
+            this.colYandexAdress.FieldName = "YandexAdress";
+            this.colYandexAdress.Name = "colYandexAdress";
+            this.colYandexAdress.Visible = true;
+            this.colYandexAdress.VisibleIndex = 5;
+            // 
+            // colposRating
+            // 
+            this.colposRating.Caption = "Рейтинг";
+            this.colposRating.ColumnEdit = this.repositoryItemRatingControl1;
+            this.colposRating.FieldName = "posRating";
+            this.colposRating.Name = "colposRating";
+            this.colposRating.Visible = true;
+            this.colposRating.VisibleIndex = 4;
             // 
             // repositoryItemRatingControl1
             // 
             this.repositoryItemRatingControl1.AutoHeight = false;
             this.repositoryItemRatingControl1.Name = "repositoryItemRatingControl1";
             this.repositoryItemRatingControl1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            // 
+            // colLegalName
+            // 
+            this.colLegalName.Caption = "Юрид. наименование";
+            this.colLegalName.FieldName = "LegalName";
+            this.colLegalName.Name = "colLegalName";
+            this.colLegalName.Visible = true;
+            this.colLegalName.VisibleIndex = 6;
+            // 
+            // repositoryItemMemoEdit1
+            // 
+            this.repositoryItemMemoEdit1.Name = "repositoryItemMemoEdit1";
+            // 
+            // repositoryItemCheckEdit1
+            // 
+            this.repositoryItemCheckEdit1.AutoHeight = false;
+            this.repositoryItemCheckEdit1.Name = "repositoryItemCheckEdit1";
             // 
             // layoutControlGroup1
             // 
@@ -332,70 +396,6 @@
             // 
             this.splashScreenManager1.ClosingDelay = 500;
             // 
-            // colPosId
-            // 
-            this.colPosId.Caption = "Id";
-            this.colPosId.FieldName = "PosId";
-            this.colPosId.Name = "colPosId";
-            // 
-            // colZovId
-            // 
-            this.colZovId.Caption = "ZovId";
-            this.colZovId.FieldName = "ZovId";
-            this.colZovId.Name = "colZovId";
-            this.colZovId.Visible = true;
-            this.colZovId.VisibleIndex = 0;
-            // 
-            // colDateAdd
-            // 
-            this.colDateAdd.Caption = "Дата";
-            this.colDateAdd.ColumnEdit = this.repositoryItemDateEdit3;
-            this.colDateAdd.FieldName = "DateAdd";
-            this.colDateAdd.Name = "colDateAdd";
-            this.colDateAdd.Visible = true;
-            this.colDateAdd.VisibleIndex = 1;
-            // 
-            // colDealerZovName
-            // 
-            this.colDealerZovName.Caption = "Дилер";
-            this.colDealerZovName.FieldName = "DealerZovName";
-            this.colDealerZovName.Name = "colDealerZovName";
-            this.colDealerZovName.Visible = true;
-            this.colDealerZovName.VisibleIndex = 2;
-            // 
-            // colPosLegalName
-            // 
-            this.colPosLegalName.Caption = "Магазин";
-            this.colPosLegalName.FieldName = "PosLegalName";
-            this.colPosLegalName.Name = "colPosLegalName";
-            this.colPosLegalName.Visible = true;
-            this.colPosLegalName.VisibleIndex = 3;
-            // 
-            // colYandexAdress
-            // 
-            this.colYandexAdress.Caption = "Адрес";
-            this.colYandexAdress.FieldName = "YandexAdress";
-            this.colYandexAdress.Name = "colYandexAdress";
-            this.colYandexAdress.Visible = true;
-            this.colYandexAdress.VisibleIndex = 5;
-            // 
-            // colposRating
-            // 
-            this.colposRating.Caption = "Рейтинг";
-            this.colposRating.ColumnEdit = this.repositoryItemRatingControl1;
-            this.colposRating.FieldName = "posRating";
-            this.colposRating.Name = "colposRating";
-            this.colposRating.Visible = true;
-            this.colposRating.VisibleIndex = 4;
-            // 
-            // colLegalName
-            // 
-            this.colLegalName.Caption = "Юрид. наименование";
-            this.colLegalName.FieldName = "LegalName";
-            this.colLegalName.Name = "colLegalName";
-            this.colLegalName.Visible = true;
-            this.colLegalName.VisibleIndex = 6;
-            // 
             // FrmViewPosList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -411,21 +411,21 @@
             this.Text = "Магазины";
             this.Load += new System.EventHandler(this.FrmViewReviews_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit2.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit3.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemoEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRatingControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemoEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();

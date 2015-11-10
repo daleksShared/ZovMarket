@@ -798,7 +798,9 @@ namespace ZovTrade
                 string colCaption = info.Column == null ? "N/A" : info.Column.GetCaption();
            //     MessageBox.Show(string.Format("DoubleClick on row: {0}, column: {1}.", info.RowHandle, colCaption));
                 int posId = (int)gridViewPos.GetRowCellValue(info.RowHandle, "ID");
-                var frmEditPos = new FrmEditPos(posId);
+                var dealerID = db.Pos.Where(x => x.ID == posId).Select(x => x.Dealers.ID).FirstOrDefault();
+                var frmEditPos = new FrmEditPos(posId, false, dealerID);
+                
 
                 frmEditPos.Show(this);
                 
