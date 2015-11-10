@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmDealers));
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar1 = new DevExpress.XtraBars.Bar();
@@ -112,6 +112,9 @@
             this.repositoryItemMemoEdit4 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemMemoEdit5 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
+            this.colposColor = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemDateEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
             this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.repositoryItemTextEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -179,6 +182,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRatingControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemoEdit4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemoEdit5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
@@ -797,9 +802,9 @@
             // 
             // gridControl1
             // 
-            gridLevelNode2.RelationName = "Level1";
+            gridLevelNode1.RelationName = "Level1";
             this.gridControl1.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode2});
+            gridLevelNode1});
             this.gridControl1.Location = new System.Drawing.Point(5, 239);
             this.gridControl1.MainView = this.gridViewPos;
             this.gridControl1.MenuManager = this.barManager1;
@@ -809,7 +814,8 @@
             this.repositoryItemCheckEdit1,
             this.repositoryItemTextEdit2,
             this.repositoryItemMemoEdit4,
-            this.repositoryItemMemoEdit5});
+            this.repositoryItemMemoEdit5,
+            this.repositoryItemDateEdit1});
             this.gridControl1.Size = new System.Drawing.Size(939, 356);
             this.gridControl1.TabIndex = 4;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -837,7 +843,9 @@
             this.colposTypeName,
             this.gridColumn1,
             this.gridColumn2,
-            this.gridColumn7});
+            this.gridColumn7,
+            this.colposColor,
+            this.gridColumn8});
             this.gridViewPos.GridControl = this.gridControl1;
             this.gridViewPos.GroupCount = 1;
             this.gridViewPos.Name = "gridViewPos";
@@ -848,6 +856,7 @@
             this.gridViewPos.OptionsView.ShowGroupPanel = false;
             this.gridViewPos.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colposTypeName, DevExpress.Data.ColumnSortOrder.Ascending)});
+            this.gridViewPos.RowStyle += new DevExpress.XtraGrid.Views.Grid.RowStyleEventHandler(this.gridViewPos_RowStyle);
             this.gridViewPos.DoubleClick += new System.EventHandler(this.gridViewPos_DoubleClick);
             // 
             // colID
@@ -861,20 +870,19 @@
             // 
             this.colposStatus.Caption = "Статус";
             this.colposStatus.FieldName = "posStatus";
-            this.colposStatus.MaxWidth = 50;
             this.colposStatus.Name = "colposStatus";
             this.colposStatus.Visible = true;
-            this.colposStatus.VisibleIndex = 1;
-            this.colposStatus.Width = 46;
+            this.colposStatus.VisibleIndex = 2;
+            this.colposStatus.Width = 78;
             // 
             // coldateadd
             // 
-            this.coldateadd.Caption = "Дата добавки";
+            this.coldateadd.Caption = "Дата";
             this.coldateadd.FieldName = "dateadd";
             this.coldateadd.MaxWidth = 70;
             this.coldateadd.Name = "coldateadd";
             this.coldateadd.Visible = true;
-            this.coldateadd.VisibleIndex = 2;
+            this.coldateadd.VisibleIndex = 1;
             this.coldateadd.Width = 70;
             // 
             // collegalName
@@ -883,7 +891,7 @@
             this.collegalName.FieldName = "legalName";
             this.collegalName.Name = "collegalName";
             this.collegalName.Visible = true;
-            this.collegalName.VisibleIndex = 3;
+            this.collegalName.VisibleIndex = 4;
             this.collegalName.Width = 153;
             // 
             // colyandexAdress
@@ -892,7 +900,7 @@
             this.colyandexAdress.FieldName = "yandexAdress";
             this.colyandexAdress.Name = "colyandexAdress";
             this.colyandexAdress.Visible = true;
-            this.colyandexAdress.VisibleIndex = 5;
+            this.colyandexAdress.VisibleIndex = 6;
             this.colyandexAdress.Width = 68;
             // 
             // colcity
@@ -921,7 +929,7 @@
             this.colposArea.FieldName = "posArea";
             this.colposArea.Name = "colposArea";
             this.colposArea.Visible = true;
-            this.colposArea.VisibleIndex = 6;
+            this.colposArea.VisibleIndex = 7;
             this.colposArea.Width = 28;
             // 
             // colbrand
@@ -930,7 +938,7 @@
             this.colbrand.FieldName = "brand";
             this.colbrand.Name = "colbrand";
             this.colbrand.Visible = true;
-            this.colbrand.VisibleIndex = 7;
+            this.colbrand.VisibleIndex = 8;
             this.colbrand.Width = 63;
             // 
             // colposRating
@@ -940,7 +948,7 @@
             this.colposRating.FieldName = "posRating";
             this.colposRating.Name = "colposRating";
             this.colposRating.Visible = true;
-            this.colposRating.VisibleIndex = 10;
+            this.colposRating.VisibleIndex = 11;
             this.colposRating.Width = 144;
             // 
             // repositoryItemRatingControl1
@@ -967,7 +975,7 @@
             this.colRuby_Id.Name = "colRuby_Id";
             this.colRuby_Id.Visible = true;
             this.colRuby_Id.VisibleIndex = 0;
-            this.colRuby_Id.Width = 41;
+            this.colRuby_Id.Width = 47;
             // 
             // colposTypeName
             // 
@@ -984,7 +992,7 @@
             this.gridColumn1.FieldName = "LegalName";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 4;
+            this.gridColumn1.VisibleIndex = 5;
             this.gridColumn1.Width = 183;
             // 
             // gridColumn2
@@ -994,7 +1002,7 @@
             this.gridColumn2.FieldName = "PosSites";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 8;
+            this.gridColumn2.VisibleIndex = 9;
             this.gridColumn2.Width = 96;
             // 
             // repositoryItemMemoEdit4
@@ -1008,12 +1016,37 @@
             this.gridColumn7.FieldName = "PosContacts";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 9;
+            this.gridColumn7.VisibleIndex = 10;
             this.gridColumn7.Width = 66;
             // 
             // repositoryItemMemoEdit5
             // 
             this.repositoryItemMemoEdit5.Name = "repositoryItemMemoEdit5";
+            // 
+            // colposColor
+            // 
+            this.colposColor.Caption = "gridColumn8";
+            this.colposColor.FieldName = "posColor";
+            this.colposColor.Name = "colposColor";
+            // 
+            // gridColumn8
+            // 
+            this.gridColumn8.Caption = "Дата статуса";
+            this.gridColumn8.ColumnEdit = this.repositoryItemDateEdit1;
+            this.gridColumn8.FieldName = "posStatusDate";
+            this.gridColumn8.Name = "gridColumn8";
+            this.gridColumn8.Visible = true;
+            this.gridColumn8.VisibleIndex = 3;
+            this.gridColumn8.Width = 79;
+            // 
+            // repositoryItemDateEdit1
+            // 
+            this.repositoryItemDateEdit1.AutoHeight = false;
+            this.repositoryItemDateEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemDateEdit1.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemDateEdit1.Name = "repositoryItemDateEdit1";
             // 
             // repositoryItemCheckEdit1
             // 
@@ -1370,6 +1403,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRatingControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemoEdit4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemoEdit5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
@@ -1522,5 +1557,8 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit repositoryItemMemoEdit5;
         private DevExpress.XtraBars.BarButtonItem barButtonItem6;
         private DevExpress.XtraBars.BarButtonItem barButtonItem7;
+        private DevExpress.XtraGrid.Columns.GridColumn colposColor;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
+        private DevExpress.XtraEditors.Repository.RepositoryItemDateEdit repositoryItemDateEdit1;
     }
 }

@@ -95,6 +95,9 @@
       <DependentUpon>Trade.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RankStatus.cs">
+      <DependentUpon>Trade.tt</DependentUpon>
+    </Compile>
     <Compile Include="SampleDetails.cs">
       <DependentUpon>Trade.tt</DependentUpon>
     </Compile>

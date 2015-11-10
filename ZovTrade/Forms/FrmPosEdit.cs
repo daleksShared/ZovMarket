@@ -21,14 +21,14 @@ namespace ZovTrade
     {
         private DbModel.tradeEntities db =
             new tradeEntities(DbModel.Tools.TradeConnectionString(Properties.Settings.Default.barcodeCS.ToString()));
-     //   private SplashScreenManager splashScreenManager = new SplashScreenManager();
+        //   private SplashScreenManager splashScreenManager = new SplashScreenManager();
         private int posId = 0;
         bool isNewPos = false;
         int dealerId = 0;
 
-        public FrmEditPos(int _posId,bool _isNewPos=false,int _dealerId=0)
+        public FrmEditPos(int _posId, bool _isNewPos = false, int _dealerId = 0)
         {
-            
+
             posId = _posId;
             isNewPos = _isNewPos;
             dealerId = _dealerId;
@@ -36,7 +36,7 @@ namespace ZovTrade
             InitializeComponent();
 
             layoutControlItem17.Visibility = isNewPos ? DevExpress.XtraLayout.Utils.LayoutVisibility.Never : DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
-           
+
             if (dealerId == 0)
             {
                 var frmSelectDealer = new Forms.FrmDealerChoose();
@@ -54,12 +54,12 @@ namespace ZovTrade
             {
                 this.Close();
             }
-//splashScreenManager.
-        //    splashScreenManager.ShowWaitForm();
+            //splashScreenManager.
+            //    splashScreenManager.ShowWaitForm();
             splashScreenManager1.ShowWaitForm();
 
-            
-            
+
+
 
             if (!isNewPos)
             {
@@ -98,17 +98,19 @@ namespace ZovTrade
             }
             else
             {
-                if (dealerId > 0) { 
-                this.Text = db.Dealers.Where(x => x.ID == dealerId).Select(x => x.dealerZovName).First() + " \\ Новый магазин";
-                db.Dealers.Where(x => x.ID == dealerId).Load();
+                if (dealerId > 0)
+                {
+                    this.Text = db.Dealers.Where(x => x.ID == dealerId).Select(x => x.dealerZovName).First() + " \\ Новый магазин";
+                    db.Dealers.Where(x => x.ID == dealerId).Load();
                 }
-                else{
+                else
+                {
                     this.Text = "Новый магазин";
-            }
+                }
 
                 posRatingTextEdit.EditValue = 0;
                 db.PosTypes.Load();
-               
+
 
                 var newPos = db.Pos.Create();
                 if (dealerId > 0)
@@ -116,8 +118,8 @@ namespace ZovTrade
                     newPos.dealer_ID = dealerId;
                 }
                 db.Pos.Add(newPos);
-                
-               
+
+
             }
 
             int parentDealerId = 0;
@@ -126,17 +128,17 @@ namespace ZovTrade
             {
                 parentDealerId = db.Dealers.Where(x => x.ID == dealerId && x.DealerParent != null).Select(x => x.DealerParent).First().ID;
             }
-            
+
             var dealerLegalNames = db.DealerLegalNames.Where(x => x.Dealers.ID == dealerId || (parentDealerId != 0 && x.Dealers.ID == parentDealerId)).Select(x => new { x.ID, x.LegalAddress, x.LegalName }).ToList();
 
             dealerLegalNamesBindingSource.DataSource = dealerLegalNames;
 
             posTypesBindingSource.DataSource = db.PosTypes.Local.Select(x => new { x.ID, x.posTypeName }).ToList();
 
-            
+
 
             dealersBindingSource.DataSource = db.Dealers.Select(x => new { x.ID, x.dealerZovName, parentName = x.DealerParent.dealerZovName }).OrderBy(x => x.parentName).ThenBy(x => x.dealerZovName).ToList();
-            
+
             posBindingSource.DataSource = db.Pos.Local.ToBindingList();
 
             posRanksBindingSource.DataSource = db.PosRanks.Local.ToBindingList();
@@ -146,7 +148,7 @@ namespace ZovTrade
             sampleDetailStatusBindingSource.DataSource = db.SampleDetailStatus.Local.ToBindingList();
 
             db.SampleDetailStatus.Load();
-            db.Sites.Where(x => x.Dealer_ID == dealerId | x.Dealer_ID== parentDealerId).Load();
+            db.Sites.Where(x => x.Dealer_ID == dealerId | x.Dealer_ID == parentDealerId).Load();
 
             statusOfPosBindingSource.DataSource = db.StatusOfPos.Select(x => new { x.ID, x.StatusName, x.StatusColor }).ToList();
             db.StatusOfPos.Load();
@@ -164,9 +166,9 @@ namespace ZovTrade
         private void LoadPosSites()
         {
             var posSites = db.Pos.Local.FirstOrDefault().Sites.ToList();
-           
-            
-            sitesBindingSource.DataSource = db.Sites.Local.Except(posSites).Select(x=> new { x.ID, x.URL, x.Dealers.dealerZovName }).ToList();
+
+
+            sitesBindingSource.DataSource = db.Sites.Local.Except(posSites).Select(x => new { x.ID, x.URL, x.Dealers.dealerZovName }).ToList();
             bsPosSites.DataSource = db.Pos.Local.FirstOrDefault().Sites.ToList();
         }
         private void simpleButton1_Click(object sender, EventArgs e)
@@ -180,7 +182,7 @@ namespace ZovTrade
             {
                 Tools.showDbSaveExceptions(ex);
             }
-          
+
         }
 
         private void simpleButton2_Click(object sender, EventArgs e)
@@ -190,19 +192,19 @@ namespace ZovTrade
 
         private void simpleButton3_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(this,"Точно удалить???") == DialogResult.OK)
-                {
+            if (MessageBox.Show(this, "Точно удалить???") == DialogResult.OK)
+            {
                 try
                 {
 
-                
-                var curPos = db.Pos.Where(x => x.ID == posId).Select(x => x).ToList();
-                if (curPos.Any())
-                {
-                    db.Pos.Remove(curPos.First());
-                    db.SaveChanges();
-                    this.Close();
-                }
+
+                    var curPos = db.Pos.Where(x => x.ID == posId).Select(x => x).ToList();
+                    if (curPos.Any())
+                    {
+                        db.Pos.Remove(curPos.First());
+                        db.SaveChanges();
+                        this.Close();
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -228,17 +230,17 @@ namespace ZovTrade
         {
             try
             {
- var curSite = db.Sites.Where(x => x.ID == siteID).FirstOrDefault();
-            //var pos = db.Pos.Local.FirstOrDefault();
-            var posSites = db.Pos.Local.FirstOrDefault().Sites;
-            posSites.Remove(curSite);
+                var curSite = db.Sites.Where(x => x.ID == siteID).FirstOrDefault();
+                //var pos = db.Pos.Local.FirstOrDefault();
+                var posSites = db.Pos.Local.FirstOrDefault().Sites;
+                posSites.Remove(curSite);
 
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
             }
-           
+
             LoadPosSites();
         }
         private void gridControl4_ProcessGridKey(object sender, KeyEventArgs e)
@@ -301,7 +303,7 @@ namespace ZovTrade
         {
             var Review = db.PosRanks.Create();
             //Contact.Dealers.Add(db.Dealers.Local.First());
-            Review.Pos=db.Pos.Local.FirstOrDefault();
+            Review.Pos = db.Pos.Local.FirstOrDefault();
             Review.Rank = 0;
             db.PosRanks.Add(Review);
         }
@@ -314,13 +316,40 @@ namespace ZovTrade
         private void BtnAddSertif_Click(object sender, EventArgs e)
         {
             var Cert = db.Certifications.Create();
-            Cert.Pos= db.Pos.Local.FirstOrDefault();
+            Cert.Pos = db.Pos.Local.FirstOrDefault();
             db.Certifications.Add(Cert);
         }
 
         private void simpleButton6_Click(object sender, EventArgs e)
         {
             DeleteFocusedRows(gridViewSamples);
+        }
+
+        private void simpleButton9_Click(object sender, EventArgs e)
+        {
+
+            var newdealerId = 0;
+            var frmSelectDealer = new Forms.FrmDealerChoose();
+            if (frmSelectDealer.ShowDialog(this) == DialogResult.OK)
+            {
+                try
+                {
+
+                var dbNew = new tradeEntities(DbModel.Tools.TradeConnectionString(Properties.Settings.Default.barcodeCS.ToString()));
+                var pos2change = dbNew.Pos.Where(x => x.ID == posId).FirstOrDefault();
+                pos2change.dealer_ID = frmSelectDealer.DealerId;
+                dbNew.SaveChanges();
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                    this.Close();
+                }
+            }
+
+
         }
     }
 }

@@ -73,8 +73,37 @@ namespace ZovTrade
 
         private void FormMain_Load(object sender, EventArgs e)
         {
+            db = new tradeEntities(DbModel.Tools.TradeConnectionString(Properties.Settings.Default.barcodeCS.ToString()));
+            //              ID StatusName
+            //              1   Новый
+            //              2   На рассмотрении
+            //              3   OK
+            //              4   Закрыт
+            //try
+            //{
+
+           
+            //var sp1 = db.StatusOfPos.Where(x=>x.ID==1).FirstOrDefault();
+            //sp1.StatusColorInt = Color.LightGray.ToArgb();
+            //sp1.StatusColor = Color.LightGray.Name;
+            //var sp2 = db.StatusOfPos.Where(x => x.ID == 2).FirstOrDefault();
+            //sp2.StatusColorInt = Color.Yellow.ToArgb();
+            //sp2.StatusColor = Color.Yellow.Name;
+            //var sp3 = db.StatusOfPos.Where(x => x.ID == 3).FirstOrDefault();
+            //sp3.StatusColorInt = Color.LightGreen.ToArgb();
+            //sp3.StatusColor = Color.LightGreen.Name;
+            //var sp4 = db.StatusOfPos.Where(x => x.ID == 4).FirstOrDefault();
+            //sp4.StatusColorInt = Color.OrangeRed.ToArgb();
+            //sp4.StatusColor = Color.OrangeRed.Name;
+            //db.SaveChanges();
+            //}
+            //catch (Exception ex)
+            //{
+
+            //    throw;
+            //}
             splashScreenManager1.ShowWaitForm();
-           db = new tradeEntities(DbModel.Tools.TradeConnectionString(Properties.Settings.Default.barcodeCS.ToString()));
+           
             db.StatusOfPos.Load();
             GetDealersTree();
             splashScreenManager1.CloseWaitForm();
@@ -200,13 +229,16 @@ namespace ZovTrade
                         x.Ruby_Id,
                         x.DealerLegalNames.LegalName,
                         posStatus = x.StatusOfPos.StatusName,
+                        posColor=x.StatusOfPos.StatusColorInt,
                         colorRow = x.StatusOfPos.StatusColor,
+                        posStatusDate= x.posStatusDate==null ? x.dateadd : x.posStatusDate,
                         listPosSites = x.Sites.Select(s => s.URL).ToList(),
                         listContacts = x.Contacts.Select(c => c.ContactName + "\n" + c.ContactPhones + "\n").ToList()
         }).ToList().Select(p=> new
         {
             p.ID,
             p.dateadd,
+            p.posStatusDate,
             p.posArea,
             p.legalName,
             p.posRating,
@@ -217,6 +249,7 @@ namespace ZovTrade
             p.Ruby_Id,
             p.LegalName,
             p.posStatus ,
+            p.posColor,
             p.colorRow ,
             PosSites = p.listPosSites.Any() ? p.listPosSites.Aggregate((cur,next)=> cur+"\n"+next) : "",
             PosContacts=p.listContacts.Any() ? p.listContacts.Aggregate((cur, next) => cur + "\n" + next) : ""
@@ -900,6 +933,21 @@ namespace ZovTrade
         {
  var frmViewPosList = new Forms.FrmViewPosList();
             frmViewPosList.Show(this);
+        }
+
+        private void gridViewPos_RowStyle(object sender, RowStyleEventArgs e)
+        {
+            if (e.RowHandle >= 0)
+            {
+                GridView view = sender as GridView;
+
+                // Some condition
+                var colorInt = view.GetRowCellValue(e.RowHandle, view.Columns["posColor"])!=null ? (int)view.GetRowCellValue(e.RowHandle, view.Columns["posColor"]) : 0;
+                if (colorInt != 0)
+                {
+                    e.Appearance.BackColor = Color.FromArgb(colorInt);
+                }
+            }
         }
     }
 }

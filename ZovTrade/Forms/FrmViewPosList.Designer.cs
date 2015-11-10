@@ -56,6 +56,9 @@
             this.colposRating = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemRatingControl1 = new DevExpress.XtraEditors.Repository.RepositoryItemRatingControl();
             this.colLegalName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colposStatusDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colposStatus = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colposcolor = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemMemoEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
             this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -243,7 +246,10 @@
             this.colPosLegalName,
             this.colYandexAdress,
             this.colposRating,
-            this.colLegalName});
+            this.colLegalName,
+            this.colposStatusDate,
+            this.colposStatus,
+            this.colposcolor});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.AllowIncrementalSearch = true;
@@ -253,6 +259,7 @@
             this.gridView1.OptionsView.ColumnAutoWidth = false;
             this.gridView1.OptionsView.RowAutoHeight = true;
             this.gridView1.OptionsView.ShowAutoFilterRow = true;
+            this.gridView1.RowStyle += new DevExpress.XtraGrid.Views.Grid.RowStyleEventHandler(this.gridView1_RowStyle);
             this.gridView1.DoubleClick += new System.EventHandler(this.gridView1_DoubleClick);
             // 
             // colPosId
@@ -293,7 +300,7 @@
             this.colDealerZovName.FieldName = "DealerZovName";
             this.colDealerZovName.Name = "colDealerZovName";
             this.colDealerZovName.Visible = true;
-            this.colDealerZovName.VisibleIndex = 2;
+            this.colDealerZovName.VisibleIndex = 4;
             // 
             // colPosLegalName
             // 
@@ -301,7 +308,7 @@
             this.colPosLegalName.FieldName = "PosLegalName";
             this.colPosLegalName.Name = "colPosLegalName";
             this.colPosLegalName.Visible = true;
-            this.colPosLegalName.VisibleIndex = 3;
+            this.colPosLegalName.VisibleIndex = 5;
             // 
             // colYandexAdress
             // 
@@ -309,7 +316,7 @@
             this.colYandexAdress.FieldName = "YandexAdress";
             this.colYandexAdress.Name = "colYandexAdress";
             this.colYandexAdress.Visible = true;
-            this.colYandexAdress.VisibleIndex = 5;
+            this.colYandexAdress.VisibleIndex = 7;
             // 
             // colposRating
             // 
@@ -318,7 +325,7 @@
             this.colposRating.FieldName = "posRating";
             this.colposRating.Name = "colposRating";
             this.colposRating.Visible = true;
-            this.colposRating.VisibleIndex = 4;
+            this.colposRating.VisibleIndex = 6;
             // 
             // repositoryItemRatingControl1
             // 
@@ -332,7 +339,30 @@
             this.colLegalName.FieldName = "LegalName";
             this.colLegalName.Name = "colLegalName";
             this.colLegalName.Visible = true;
-            this.colLegalName.VisibleIndex = 6;
+            this.colLegalName.VisibleIndex = 8;
+            // 
+            // colposStatusDate
+            // 
+            this.colposStatusDate.Caption = "Дата статуса";
+            this.colposStatusDate.ColumnEdit = this.repositoryItemDateEdit3;
+            this.colposStatusDate.FieldName = "posStatusDate";
+            this.colposStatusDate.Name = "colposStatusDate";
+            this.colposStatusDate.Visible = true;
+            this.colposStatusDate.VisibleIndex = 3;
+            // 
+            // colposStatus
+            // 
+            this.colposStatus.Caption = "Статус";
+            this.colposStatus.FieldName = "posStatus";
+            this.colposStatus.Name = "colposStatus";
+            this.colposStatus.Visible = true;
+            this.colposStatus.VisibleIndex = 2;
+            // 
+            // colposcolor
+            // 
+            this.colposcolor.Caption = "gridColumn1";
+            this.colposcolor.FieldName = "poscolor";
+            this.colposcolor.Name = "colposcolor";
             // 
             // repositoryItemMemoEdit1
             // 
@@ -471,5 +501,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn colYandexAdress;
         private DevExpress.XtraGrid.Columns.GridColumn colposRating;
         private DevExpress.XtraGrid.Columns.GridColumn colLegalName;
+        private DevExpress.XtraGrid.Columns.GridColumn colposStatusDate;
+        private DevExpress.XtraGrid.Columns.GridColumn colposStatus;
+        private DevExpress.XtraGrid.Columns.GridColumn colposcolor;
     }
 }

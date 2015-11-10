@@ -165,6 +165,14 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="posTypeName" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="RankStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RankStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="StateColor" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="SampleDetails">
           <Key>
             <PropertyRef Name="ID" />
@@ -212,6 +220,7 @@
           <Property Name="StatusName" Type="nvarchar" MaxLength="50" />
           <Property Name="StatusColor" Type="nvarchar" MaxLength="50" />
           <Property Name="DaysToExpire" Type="int" />
+          <Property Name="StatusColorInt" Type="int" />
         </EntityType>
         <EntityType Name="UserRoles">
           <Key>
@@ -552,6 +561,7 @@
           <EntitySet Name="PosRanks" EntityType="Self.PosRanks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PosSites" EntityType="Self.PosSites" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PosTypes" EntityType="Self.PosTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RankStatus" EntityType="Self.RankStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SampleDetails" EntityType="Self.SampleDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SampleDetailStatus" EntityType="Self.SampleDetailStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Samples" EntityType="Self.Samples" Schema="dbo" store:Type="Tables" />
@@ -1018,6 +1028,7 @@
             <End Role="Contacts" EntitySet="Contacts" />
             <End Role="Pos" EntitySet="Pos" />
           </AssociationSet>
+          <EntitySet Name="RankStatus" EntityType="tradeModel.RankStatus" />
           </EntityContainer>
         <ComplexType Name="sp_getDealersTree_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -1225,6 +1236,7 @@
           <Property Name="StatusColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Pos" Relationship="tradeModel.FK_Pos_StatusOfPos" FromRole="StatusOfPos" ToRole="Pos" />
           <Property Name="DaysToExpire" Type="Int32" />
+          <Property Name="StatusColorInt" Type="Int32" />
         </EntityType>
         <Association Name="PosSites">
           <End Type="tradeModel.Pos" Role="Pos" Multiplicity="*" />
@@ -1250,6 +1262,14 @@
           <End Type="tradeModel.Contacts" Role="Contacts" Multiplicity="*" />
           <End Type="tradeModel.Pos" Role="Pos" Multiplicity="*" />
         </Association>
+        <EntityType Name="RankStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RankStatus1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StateColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1497,6 +1517,7 @@
           <EntitySetMapping Name="StatusOfPos">
             <EntityTypeMapping TypeName="tradeModel.StatusOfPos">
               <MappingFragment StoreEntitySet="StatusOfPos">
+                <ScalarProperty Name="StatusColorInt" ColumnName="StatusColorInt" />
                 <ScalarProperty Name="DaysToExpire" ColumnName="DaysToExpire" />
                 <ScalarProperty Name="StatusColor" ColumnName="StatusColor" />
                 <ScalarProperty Name="StatusName" ColumnName="StatusName" />
@@ -1528,6 +1549,15 @@
               <ScalarProperty Name="ID" ColumnName="Contact_ID" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="RankStatus">
+            <EntityTypeMapping TypeName="tradeModel.RankStatus">
+              <MappingFragment StoreEntitySet="RankStatus">
+                <ScalarProperty Name="StateColor" ColumnName="StateColor" />
+                <ScalarProperty Name="RankStatus1" ColumnName="RankStatus" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

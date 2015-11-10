@@ -45,7 +45,10 @@ namespace ZovTrade.Forms
                 //DealerContactsList = r.Dealers.Contacts.Select(c => c.ContactName + ":\n" + c.ContactPhones + "\n").ToList(),
                 //PosContactsList = r.Contacts.Select(c => c.ContactName + ":\n" + c.ContactPhones + "\n").ToList(),
                 PosId = r.ID,
-                ZovId = r.Ruby_Id
+                ZovId = r.Ruby_Id,
+                posStatusDate=r.posStatusDate==null ? r.dateadd : r.posStatusDate,
+                poscolor=r.StatusOfPos.StatusColorInt,
+                posStatus=r.StatusOfPos.StatusName
             }).ToList().Select(d => new
             {
                 d.DateAdd,
@@ -57,7 +60,10 @@ namespace ZovTrade.Forms
                 //PosContacts = d.PosContactsList.Any() ? d.PosContactsList.Aggregate((cur, next) => cur + "\n" + next) : "",
                 d.PosId,
                 d.ZovId,
-                d.LegalName
+                d.LegalName,
+                d.posStatusDate,
+                d.poscolor,
+                d.posStatus
             }).OrderBy(d=>d.DealerZovName).ThenBy(d=>d.PosLegalName).ToList(); 
             gridControl1.DataSource = data;
             gridView1.BestFitColumns();
@@ -99,6 +105,21 @@ namespace ZovTrade.Forms
             var newPos = new FrmEditPos(0,true);
             var dr = newPos.ShowDialog(this);
             if (dr == DialogResult.OK) LoadData();
+        }
+
+        private void gridView1_RowStyle(object sender, RowStyleEventArgs e)
+        {
+            if (e.RowHandle >= 0)
+            {
+                GridView view = sender as GridView;
+
+                // Some condition
+                var colorInt = view.GetRowCellValue(e.RowHandle, view.Columns["poscolor"]) != null ? (int)view.GetRowCellValue(e.RowHandle, view.Columns["poscolor"]) : 0;
+                if (colorInt != 0)
+                {
+                    e.Appearance.BackColor = Color.FromArgb(colorInt);
+                }
+            }
         }
     }
 }

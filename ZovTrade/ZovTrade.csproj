@@ -28,7 +28,7 @@
     <PublisherName>ZOV</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>24</ApplicationRevision>
+    <ApplicationRevision>25</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -348,6 +348,7 @@
     <None Include="Resources\send_32x32.png" />
     <None Include="Resources\apply_32x32.png" />
     <None Include="Resources\cancel_32x32.png" />
+    <None Include="Resources\driving_32x32.png" />
     <Content Include="web\data.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
