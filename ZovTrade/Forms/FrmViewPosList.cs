@@ -14,16 +14,15 @@ using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 
 namespace ZovTrade.Forms
 {
-    public partial class FrmViewReviews : DevExpress.XtraEditors.XtraForm
+    public partial class FrmViewPosList : DevExpress.XtraEditors.XtraForm
     {
         private DbModel.tradeEntities db =
             new tradeEntities(DbModel.Tools.TradeConnectionString(Properties.Settings.Default.barcodeCS.ToString()));
-        public FrmViewReviews()
+        public FrmViewPosList()
         {
             InitializeComponent();
             splashScreenManager1.SplashFormStartPosition = DevExpress.XtraSplashScreen.SplashFormStartPosition.Manual;
-            ReviewStartDate.EditValue = DateTime.Today.AddDays(-60);
-            ReviewEndDate.EditValue = DateTime.Today.AddDays(1);
+           
 
         }
 
@@ -33,37 +32,33 @@ namespace ZovTrade.Forms
         }
         private void LoadData() {
             splashScreenManager1.ShowWaitForm();
-            var dtStart = (DateTime)ReviewStartDate.EditValue;
-            var dtEnd = (DateTime)ReviewEndDate.EditValue;
+           
 
-
-            var data = db.PosRanks.Where(r => r.DateAdd >= dtStart.Date & r.DateAdd <= dtEnd.Date).Select(r => new
+            var data = db.Pos.Select(r => new
             {
-                DateAdd = r.DateAdd,
-                DealerZovName = r.Pos.Dealers.dealerZovName,
-                PosLegalName = r.Pos.legalName,
-                Description = r.Description,
-                Rank=r.Rank,
-                ActiveRank = r.ActiveRank,
-                YandexAdress = r.Pos.yandexAdress,
-                DealerContactsList = r.Pos.Dealers.Contacts.Select(c => c.ContactName + ":\n" + c.ContactPhones + "\n").ToList(),
-                PosContactsList = r.Pos.Contacts.Select(c => c.ContactName + ":\n" + c.ContactPhones + "\n").ToList(),
-                PosId = r.Pos.ID,
-                ZovId = r.Pos.Ruby_Id
+                DateAdd = r.dateadd,
+                DealerZovName = r.Dealers.dealerZovName,
+                PosLegalName = r.legalName,
+                posRating = r.PosRanks.Any(x => x.ActiveRank == true) ? r.PosRanks.Where(y => y.ActiveRank == true).Average(y => y.Rank) : 0,
+                YandexAdress = r.yandexAdress,
+                LegalName=r.legalName,
+                //DealerContactsList = r.Dealers.Contacts.Select(c => c.ContactName + ":\n" + c.ContactPhones + "\n").ToList(),
+                //PosContactsList = r.Contacts.Select(c => c.ContactName + ":\n" + c.ContactPhones + "\n").ToList(),
+                PosId = r.ID,
+                ZovId = r.Ruby_Id
             }).ToList().Select(d => new
             {
                 d.DateAdd,
                 d.DealerZovName,
                 d.PosLegalName,
-                d.Description,
-                d.Rank,
-                d.ActiveRank,
+                d.posRating,
                 d.YandexAdress,
-                DealerContacts = d.DealerContactsList.Any() ? d.DealerContactsList.Aggregate((cur, next) => cur + "\n" + next) : "",
-                PosContacts = d.PosContactsList.Any() ? d.PosContactsList.Aggregate((cur, next) => cur + "\n" + next) : "",
+                //DealerContacts = d.DealerContactsList.Any() ? d.DealerContactsList.Aggregate((cur, next) => cur + "\n" + next) : "",
+                //PosContacts = d.PosContactsList.Any() ? d.PosContactsList.Aggregate((cur, next) => cur + "\n" + next) : "",
                 d.PosId,
-                d.ZovId
-            }).OrderByDescending(d=>d.DateAdd).ToList(); 
+                d.ZovId,
+                d.LegalName
+            }).OrderBy(d=>d.DealerZovName).ThenBy(d=>d.PosLegalName).ToList(); 
             gridControl1.DataSource = data;
             gridView1.BestFitColumns();
             splashScreenManager1.CloseWaitForm();
@@ -100,8 +95,8 @@ namespace ZovTrade.Forms
 
         private void simpleButton2_Click(object sender, EventArgs e)
         {
-            var newReviewForm = new Forms.FrmPosReviewNew();
-            var dr = newReviewForm.ShowDialog(this);
+            var newPos = new FrmEditPos(0,true);
+            var dr = newPos.ShowDialog(this);
             if (dr == DialogResult.OK) LoadData();
         }
     }

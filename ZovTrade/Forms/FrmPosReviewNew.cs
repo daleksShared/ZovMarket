@@ -30,14 +30,14 @@ namespace ZovTrade.Forms
                 x.legalName,
                 x.yandexAdress
             }
-            ).OrderBy(x=>x.dealerZovName).ThenBy(x=>x.legalName).ToList();
+            ).OrderBy(x => x.dealerZovName).ThenBy(x => x.legalName).ToList();
             lookUpEdit1.Properties.DisplayMember = "legalName";
             lookUpEdit1.Properties.ValueMember = "ID";
-
+            lookUpEdit1.Properties.BestFitMode=DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
 
             var Rank = db.PosRanks.Create();
             Rank.ActiveRank = true;
-            
+
             db.PosRanks.Add(Rank);
 
             posRanksBindingSource.DataSource = db.PosRanks.Local.ToBindingList();
@@ -47,9 +47,15 @@ namespace ZovTrade.Forms
         private void simpleButton1_Click(object sender, EventArgs e)
         {
 
-            if (db.PosRanks.Local.First().Pos_ID == null) {
+            if (db.PosRanks.Local.First().Pos_ID == null)
+            {
                 MessageBox.Show("Не все поля определены!!!!");
-                return; }
+                return;
+            }
+
+            db.SaveChanges();
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
     }
 }

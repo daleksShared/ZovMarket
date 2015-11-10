@@ -800,7 +800,7 @@ namespace ZovTrade
                 int posId = (int)gridViewPos.GetRowCellValue(info.RowHandle, "ID");
                 var frmEditPos = new FrmEditPos(posId);
 
-                frmEditPos.Show();
+                frmEditPos.Show(this);
                 
 
             }
@@ -843,7 +843,7 @@ namespace ZovTrade
                 var dName = treeDealer.dealerZovName;
                 var frmEdit = new FrmEditDealer(dId, false, dName);
 
-                frmEdit.Show();
+                frmEdit.Show(this);
             }
 
         }
@@ -852,21 +852,21 @@ namespace ZovTrade
         {
             var frmEdit = new FrmEditDealer(0, true);
             
-            frmEdit.Show();
+            frmEdit.Show(this);
         }
 
         private void barButtonItem11_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             var frmSendReport = new Forms.FrmSendAppReport();
             
-            frmSendReport.ShowDialog();
+            frmSendReport.ShowDialog(this);
         }
 
         private void barButtonItem14_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             var frmShowReport = new Forms.FrmAppReport();
             
-            frmShowReport.ShowDialog();
+            frmShowReport.ShowDialog(this);
         }
 
         private void simpleButton5_Click(object sender, EventArgs e)
@@ -883,15 +883,21 @@ namespace ZovTrade
                 var dId = treeDealer.ID;
                 var dName = treeDealer.dealerZovName;
                 var frmEdit = new FrmEditPos(0,true, dId);
-                frmEdit.Show();
+                frmEdit.Show(this);
             }
         }
 
         private void barButtonItem6_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             var reviews = new Forms.FrmViewReviews();
-            reviews.Show();
+            reviews.Show(this);
 
+        }
+
+        private void barButtonItem7_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+ var frmViewPosList = new Forms.FrmViewPosList();
+            frmViewPosList.Show(this);
         }
     }
 }

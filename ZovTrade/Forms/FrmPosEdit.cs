@@ -152,6 +152,7 @@ namespace ZovTrade
             try
             {
                 db.SaveChanges();
+                this.DialogResult = DialogResult.OK;
             }
             catch (Exception ex)
             {
