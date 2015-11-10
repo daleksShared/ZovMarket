@@ -577,8 +577,6 @@
             // 
             this.colID.FieldName = "ID";
             this.colID.Name = "colID";
-            this.colID.Visible = true;
-            this.colID.VisibleIndex = 0;
             // 
             // colsampleStatus
             // 
@@ -587,7 +585,7 @@
             this.colsampleStatus.FieldName = "sampleStatus";
             this.colsampleStatus.Name = "colsampleStatus";
             this.colsampleStatus.Visible = true;
-            this.colsampleStatus.VisibleIndex = 1;
+            this.colsampleStatus.VisibleIndex = 0;
             // 
             // repositoryItemLookUpEdit1
             // 
@@ -609,7 +607,7 @@
             this.coldateAdd.FieldName = "dateAdd";
             this.coldateAdd.Name = "coldateAdd";
             this.coldateAdd.Visible = true;
-            this.coldateAdd.VisibleIndex = 2;
+            this.coldateAdd.VisibleIndex = 1;
             // 
             // coldateRequestForApproval
             // 
@@ -617,7 +615,7 @@
             this.coldateRequestForApproval.FieldName = "dateRequestForApproval";
             this.coldateRequestForApproval.Name = "coldateRequestForApproval";
             this.coldateRequestForApproval.Visible = true;
-            this.coldateRequestForApproval.VisibleIndex = 3;
+            this.coldateRequestForApproval.VisibleIndex = 2;
             // 
             // coldateApproval
             // 
@@ -625,7 +623,7 @@
             this.coldateApproval.FieldName = "dateApproval";
             this.coldateApproval.Name = "coldateApproval";
             this.coldateApproval.Visible = true;
-            this.coldateApproval.VisibleIndex = 4;
+            this.coldateApproval.VisibleIndex = 3;
             // 
             // coldateOrder
             // 
@@ -633,7 +631,7 @@
             this.coldateOrder.FieldName = "dateOrder";
             this.coldateOrder.Name = "coldateOrder";
             this.coldateOrder.Visible = true;
-            this.coldateOrder.VisibleIndex = 5;
+            this.coldateOrder.VisibleIndex = 4;
             // 
             // coldateShip1
             // 
@@ -641,7 +639,7 @@
             this.coldateShip1.FieldName = "dateShip";
             this.coldateShip1.Name = "coldateShip1";
             this.coldateShip1.Visible = true;
-            this.coldateShip1.VisibleIndex = 6;
+            this.coldateShip1.VisibleIndex = 5;
             // 
             // coldateInstallation
             // 
@@ -649,7 +647,7 @@
             this.coldateInstallation.FieldName = "dateInstallation";
             this.coldateInstallation.Name = "coldateInstallation";
             this.coldateInstallation.Visible = true;
-            this.coldateInstallation.VisibleIndex = 7;
+            this.coldateInstallation.VisibleIndex = 6;
             // 
             // repositoryItemDateEdit1
             // 
@@ -780,6 +778,7 @@
             // 
             // coldateAdd1
             // 
+            this.coldateAdd1.Caption = "Добавлен";
             this.coldateAdd1.FieldName = "dateAdd";
             this.coldateAdd1.Name = "coldateAdd1";
             this.coldateAdd1.Visible = true;
@@ -787,6 +786,7 @@
             // 
             // coldatePrint
             // 
+            this.coldatePrint.Caption = "Распечатан";
             this.coldatePrint.FieldName = "datePrint";
             this.coldatePrint.Name = "coldatePrint";
             this.coldatePrint.Visible = true;
@@ -794,6 +794,7 @@
             // 
             // coldateShip
             // 
+            this.coldateShip.Caption = "Отправлен";
             this.coldateShip.FieldName = "dateShip";
             this.coldateShip.Name = "coldateShip";
             this.coldateShip.Visible = true;
@@ -801,6 +802,7 @@
             // 
             // coldateGet
             // 
+            this.coldateGet.Caption = "Получен";
             this.coldateGet.FieldName = "dateGet";
             this.coldateGet.Name = "coldateGet";
             this.coldateGet.Visible = true;
@@ -925,6 +927,7 @@
             this.colActiveRank});
             this.gridViewReviews.GridControl = this.gridControlReviews;
             this.gridViewReviews.Name = "gridViewReviews";
+            this.gridViewReviews.OptionsView.RowAutoHeight = true;
             this.gridViewReviews.OptionsView.ShowGroupPanel = false;
             // 
             // colRank

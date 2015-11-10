@@ -799,8 +799,8 @@ namespace ZovTrade
            //     MessageBox.Show(string.Format("DoubleClick on row: {0}, column: {1}.", info.RowHandle, colCaption));
                 int posId = (int)gridViewPos.GetRowCellValue(info.RowHandle, "ID");
                 var frmEditPos = new FrmEditPos(posId);
-               
-                    frmEditPos.Show();
+
+                frmEditPos.Show();
                 
 
             }
@@ -842,6 +842,7 @@ namespace ZovTrade
                 var dId = treeDealer.ID;
                 var dName = treeDealer.dealerZovName;
                 var frmEdit = new FrmEditDealer(dId, false, dName);
+
                 frmEdit.Show();
             }
 
@@ -850,18 +851,21 @@ namespace ZovTrade
         private void barButtonItem5_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             var frmEdit = new FrmEditDealer(0, true);
+            
             frmEdit.Show();
         }
 
         private void barButtonItem11_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             var frmSendReport = new Forms.FrmSendAppReport();
+            
             frmSendReport.ShowDialog();
         }
 
         private void barButtonItem14_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             var frmShowReport = new Forms.FrmAppReport();
+            
             frmShowReport.ShowDialog();
         }
 
@@ -881,6 +885,13 @@ namespace ZovTrade
                 var frmEdit = new FrmEditPos(0,true, dId);
                 frmEdit.Show();
             }
+        }
+
+        private void barButtonItem6_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var reviews = new Forms.FrmViewReviews();
+            reviews.Show();
+
         }
     }
 }

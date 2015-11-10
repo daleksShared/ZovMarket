@@ -28,7 +28,7 @@
     <PublisherName>ZOV</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>20</ApplicationRevision>
+    <ApplicationRevision>23</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -170,11 +170,23 @@
     <Compile Include="Forms\FrmPosReview.Designer.cs">
       <DependentUpon>FrmPosReview.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmPosReviewNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmPosReviewNew.Designer.cs">
+      <DependentUpon>FrmPosReviewNew.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmSendAppReport.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FrmSendAppReport.Designer.cs">
       <DependentUpon>FrmSendAppReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmViewReviews.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmViewReviews.Designer.cs">
+      <DependentUpon>FrmViewReviews.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FrmWait.cs">
       <SubType>Form</SubType>
@@ -214,8 +226,14 @@
     <EmbeddedResource Include="Forms\FrmPosReview.resx">
       <DependentUpon>FrmPosReview.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmPosReviewNew.resx">
+      <DependentUpon>FrmPosReviewNew.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmSendAppReport.resx">
       <DependentUpon>FrmSendAppReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmViewReviews.resx">
+      <DependentUpon>FrmViewReviews.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmWait.resx">
       <DependentUpon>FrmWait.cs</DependentUpon>
