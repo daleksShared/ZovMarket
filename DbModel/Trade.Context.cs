@@ -27,7 +27,6 @@ namespace DbModel
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Certifications> Certifications { get; set; }
         public virtual DbSet<Dealers> Dealers { get; set; }
         public virtual DbSet<Pos> Pos { get; set; }
         public virtual DbSet<PosImages> PosImages { get; set; }
@@ -47,6 +46,9 @@ namespace DbModel
         public virtual DbSet<Contacts> Contacts { get; set; }
         public virtual DbSet<StatusOfPos> StatusOfPos { get; set; }
         public virtual DbSet<RankStatus> RankStatus { get; set; }
+        public virtual DbSet<Attachments> Attachments { get; set; }
+        public virtual DbSet<CertTypes> CertTypes { get; set; }
+        public virtual DbSet<Certifications> Certifications { get; set; }
     
         public virtual ObjectResult<sp_getDealersTree_Result> sp_getDealersTree()
         {

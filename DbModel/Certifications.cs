@@ -19,8 +19,13 @@ namespace DbModel
         public Nullable<System.DateTime> datePrint { get; set; }
         public Nullable<System.DateTime> dateShip { get; set; }
         public Nullable<System.DateTime> dateGet { get; set; }
-        public Nullable<int> Pos_ID { get; set; }
+        public int Pos_ID { get; set; }
+        public Nullable<int> CertType_ID { get; set; }
+        public Nullable<int> Attachment_ID { get; set; }
+        public string DocDescription { get; set; }
     
+        public virtual Attachments Attachments { get; set; }
+        public virtual CertTypes CertTypes { get; set; }
         public virtual Pos Pos { get; set; }
     }
 }

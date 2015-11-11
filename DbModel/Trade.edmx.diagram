@@ -4,8 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e23358a422b8427288641a5d7a893b7c" Name="Diagram1" ZoomLevel="56">
-        <EntityTypeShape EntityType="tradeModel.Certifications" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+      <Diagram DiagramId="e23358a422b8427288641a5d7a893b7c" Name="Diagram1" ZoomLevel="73">
         <EntityTypeShape EntityType="tradeModel.Dealers" Width="1.5" PointX="25.25" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="tradeModel.Pos" Width="1.5" PointX="19.875" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="tradeModel.PosImages" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
@@ -15,7 +14,6 @@
         <EntityTypeShape EntityType="tradeModel.Samples" Width="1.5" PointX="5.375" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="tradeModel.UserRoles" Width="1.5" PointX="22.25" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="tradeModel.Users" Width="1.5" PointX="19.375" PointY="1" IsExpanded="true" />
-        <AssociationConnector Association="tradeModel.FK_dbo_Certifications_dbo_Pos_Pos_ID" ManuallyRouted="false" />
         <AssociationConnector Association="tradeModel.FK_dbo_Dealers_dbo_Dealers_Dealer_ID" ManuallyRouted="false" />
         <AssociationConnector Association="tradeModel.FK_dbo_Pos_dbo_Dealers_dealer_ID" ManuallyRouted="false" />
         <AssociationConnector Association="tradeModel.FK_dbo_Users_dbo_Dealers_dealer_ID" ManuallyRouted="false" ></AssociationConnector>
@@ -45,6 +43,12 @@
         <AssociationConnector Association="tradeModel.DealerContacts" />
         <AssociationConnector Association="tradeModel.PosContacts" />
         <EntityTypeShape EntityType="tradeModel.RankStatus" Width="1.5" PointX="0.75" PointY="12.75" />
+        <EntityTypeShape EntityType="tradeModel.Attachments" Width="1.5" PointX="2.375" PointY="2.5" />
+        <EntityTypeShape EntityType="tradeModel.CertTypes" Width="1.5" PointX="0.75" PointY="0.875" />
+        <EntityTypeShape EntityType="tradeModel.Certifications" Width="1.5" PointX="22.125" PointY="5.125" />
+        <AssociationConnector Association="tradeModel.FK_Certifications_Attachments" />
+        <AssociationConnector Association="tradeModel.FK_Certifications_Certifications" />
+        <AssociationConnector Association="tradeModel.FK_dbo_Certifications_dbo_Pos_Pos_ID" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

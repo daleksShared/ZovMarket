@@ -18,7 +18,6 @@ namespace DbModel
         public Pos()
         {
             this.posStatus_ID = 1;
-            this.Certifications = new HashSet<Certifications>();
             this.PosImages = new HashSet<PosImages>();
             this.Samples = new HashSet<Samples>();
             this.PosPhones = new HashSet<PosPhones>();
@@ -26,6 +25,7 @@ namespace DbModel
             this.PosRanks = new HashSet<PosRanks>();
             this.Sites = new HashSet<Sites>();
             this.Contacts = new HashSet<Contacts>();
+            this.Certifications = new HashSet<Certifications>();
         }
     
         public int ID { get; set; }
@@ -51,9 +51,8 @@ namespace DbModel
         public Nullable<bool> DeleteMark { get; set; }
         public int posStatus_ID { get; set; }
         public Nullable<System.DateTime> posStatusDate { get; set; }
+        public string comment { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Certifications> Certifications { get; set; }
         public virtual Dealers Dealers { get; set; }
         public virtual PosTypes PosTypes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -72,5 +71,7 @@ namespace DbModel
         public virtual StatusOfPos StatusOfPos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contacts> Contacts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Certifications> Certifications { get; set; }
     }
 }

@@ -20,16 +20,35 @@
           <Property Name="Reply" Type="nvarchar" MaxLength="150" />
           <Property Name="CloseAction" Type="bit" />
         </EntityType>
+        <EntityType Name="Attachments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FileExt" Type="nvarchar" MaxLength="50" />
+          <Property Name="FileData" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="Certifications">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="dateAdd" Type="datetime" StoreGeneratedPattern="Computed" />
+          <Property Name="dateAdd" Type="datetime" />
           <Property Name="datePrint" Type="datetime" />
           <Property Name="dateShip" Type="datetime" />
           <Property Name="dateGet" Type="datetime" />
-          <Property Name="Pos_ID" Type="int" />
+          <Property Name="Pos_ID" Type="int" Nullable="false" />
+          <Property Name="CertType_ID" Type="int" />
+          <Property Name="Attachment_ID" Type="int" />
+          <Property Name="DocDescription" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="CertTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DocType" Type="nvarchar" MaxLength="150" Nullable="false" />
         </EntityType>
         <EntityType Name="Contacts">
           <Key>
@@ -96,6 +115,7 @@
           <Property Name="DealerLegalNames_ID" Type="int" />
           <Property Name="DeleteMark" Type="bit" />
           <Property Name="posStatusDate" Type="datetime" StoreGeneratedPattern="Computed" />
+          <Property Name="comment" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="PosBrand">
           <Key>
@@ -240,8 +260,32 @@
           <Property Name="dealer_ID" Type="int" />
           <Property Name="userRole_ID" Type="int" />
         </EntityType>
+        <Association Name="FK_Certifications_Attachments">
+          <End Role="Attachments" Type="Self.Attachments" Multiplicity="0..1" />
+          <End Role="Certifications" Type="Self.Certifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attachments">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Certifications">
+              <PropertyRef Name="Attachment_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Certifications_Certifications">
+          <End Role="CertTypes" Type="Self.CertTypes" Multiplicity="0..1" />
+          <End Role="Certifications" Type="Self.Certifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CertTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Certifications">
+              <PropertyRef Name="CertType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_Certifications_dbo_Pos_Pos_ID">
-          <End Role="Pos" Type="Self.Pos" Multiplicity="0..1">
+          <End Role="Pos" Type="Self.Pos" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="Certifications" Type="Self.Certifications" Multiplicity="*" />
@@ -547,7 +591,9 @@
         </Function>
         <EntityContainer Name="tradeModelStoreContainer">
           <EntitySet Name="AppReports" EntityType="Self.AppReports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Attachments" EntityType="Self.Attachments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Certifications" EntityType="Self.Certifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CertTypes" EntityType="Self.CertTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DealerContacts" EntityType="Self.DealerContacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DealerLegalNames" EntityType="Self.DealerLegalNames" Schema="dbo" store:Type="Tables" />
@@ -569,6 +615,14 @@
           <EntitySet Name="StatusOfPos" EntityType="Self.StatusOfPos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Certifications_Attachments" Association="Self.FK_Certifications_Attachments">
+            <End Role="Attachments" EntitySet="Attachments" />
+            <End Role="Certifications" EntitySet="Certifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Certifications_Certifications" Association="Self.FK_Certifications_Certifications">
+            <End Role="CertTypes" EntitySet="CertTypes" />
+            <End Role="Certifications" EntitySet="Certifications" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_Certifications_dbo_Pos_Pos_ID" Association="Self.FK_dbo_Certifications_dbo_Pos_Pos_ID">
             <End Role="Pos" EntitySet="Pos" />
             <End Role="Certifications" EntitySet="Certifications" />
@@ -666,19 +720,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="tradeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        
-        <EntityType Name="Certifications">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="dateAdd" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="datePrint" Type="DateTime" Precision="3" />
-          <Property Name="dateShip" Type="DateTime" Precision="3" />
-          <Property Name="dateGet" Type="DateTime" Precision="3" />
-          <Property Name="Pos_ID" Type="Int32" />
-          <NavigationProperty Name="Pos" Relationship="Self.FK_dbo_Certifications_dbo_Pos_Pos_ID" FromRole="Certifications" ToRole="Pos" />
-        </EntityType>
         <EntityType Name="Dealers">
           <Key>
             <PropertyRef Name="ID" />
@@ -715,7 +756,6 @@
           <Property Name="posSortOrder" Type="Int32" />
           <Property Name="dealer_ID" Type="Int32" />
           <Property Name="posType_ID" Type="Int32" />
-          <NavigationProperty Name="Certifications" Relationship="Self.FK_dbo_Certifications_dbo_Pos_Pos_ID" FromRole="Pos" ToRole="Certifications" />
           <NavigationProperty Name="Dealers" Relationship="Self.FK_dbo_Pos_dbo_Dealers_dealer_ID" FromRole="Pos" ToRole="Dealers" />
           <NavigationProperty Name="PosTypes" Relationship="Self.FK_dbo_Pos_dbo_PosTypes_posType_ID" FromRole="Pos" ToRole="PosTypes" />
           <NavigationProperty Name="PosImages" Relationship="Self.FK_dbo_PosImages_dbo_Pos_Pos_ID" FromRole="Pos" ToRole="PosImages" />
@@ -736,6 +776,8 @@
           <NavigationProperty Name="StatusOfPos" Relationship="tradeModel.FK_Pos_StatusOfPos" FromRole="Pos" ToRole="StatusOfPos" />
           <Property Name="posStatusDate" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Contacts" Relationship="tradeModel.PosContacts" FromRole="Pos" ToRole="Contacts" />
+          <Property Name="comment" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Certifications" Relationship="tradeModel.FK_dbo_Certifications_dbo_Pos_Pos_ID" FromRole="Pos" ToRole="Certifications" />
         </EntityType>
         <EntityType Name="PosImages">
           <Key>
@@ -812,18 +854,6 @@
           <NavigationProperty Name="Dealers" Relationship="Self.FK_dbo_Users_dbo_Dealers_dealer_ID" FromRole="Users" ToRole="Dealers" />
           <NavigationProperty Name="UserRoles" Relationship="Self.FK_dbo_Users_dbo_UserRoles_userRole_ID" FromRole="Users" ToRole="UserRoles" />
         </EntityType>
-        <Association Name="FK_dbo_Certifications_dbo_Pos_Pos_ID">
-          <End Role="Pos" Type="Self.Pos" Multiplicity="0..1" />
-          <End Role="Certifications" Type="Self.Certifications" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pos">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Certifications">
-              <PropertyRef Name="Pos_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_dbo_Dealers_dbo_Dealers_Dealer_ID">
           <End Role="Dealers" Type="Self.Dealers" Multiplicity="0..1" />
           <End Role="Dealers1" Type="Self.Dealers" Multiplicity="*" />
@@ -922,7 +952,6 @@
         </Association>
         
         <EntityContainer Name="tradeEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Certifications" EntityType="Self.Certifications" />
           <EntitySet Name="Dealers" EntityType="Self.Dealers" />
           <EntitySet Name="Pos" EntityType="Self.Pos" />
           <EntitySet Name="PosImages" EntityType="Self.PosImages" />
@@ -932,10 +961,6 @@
           <EntitySet Name="Samples" EntityType="Self.Samples" />
           <EntitySet Name="UserRoles" EntityType="Self.UserRoles" />
           <EntitySet Name="Users" EntityType="Self.Users" />
-          <AssociationSet Name="FK_dbo_Certifications_dbo_Pos_Pos_ID" Association="Self.FK_dbo_Certifications_dbo_Pos_Pos_ID">
-            <End Role="Pos" EntitySet="Pos" />
-            <End Role="Certifications" EntitySet="Certifications" />
-          </AssociationSet>
           <AssociationSet Name="FK_dbo_Dealers_dbo_Dealers_Dealer_ID" Association="Self.FK_dbo_Dealers_dbo_Dealers_Dealer_ID">
             <End Role="Dealers" EntitySet="Dealers" />
             <End Role="Dealers1" EntitySet="Dealers" />
@@ -1029,6 +1054,21 @@
             <End Role="Pos" EntitySet="Pos" />
           </AssociationSet>
           <EntitySet Name="RankStatus" EntityType="tradeModel.RankStatus" />
+          <EntitySet Name="Attachments" EntityType="tradeModel.Attachments" />
+          <EntitySet Name="CertTypes" EntityType="tradeModel.CertTypes" />
+          <EntitySet Name="Certifications" EntityType="tradeModel.Certifications" />
+          <AssociationSet Name="FK_Certifications_Attachments" Association="tradeModel.FK_Certifications_Attachments">
+            <End Role="Attachments" EntitySet="Attachments" />
+            <End Role="Certifications" EntitySet="Certifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Certifications_Certifications" Association="tradeModel.FK_Certifications_Certifications">
+            <End Role="CertTypes" EntitySet="CertTypes" />
+            <End Role="Certifications" EntitySet="Certifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Certifications_dbo_Pos_Pos_ID" Association="tradeModel.FK_dbo_Certifications_dbo_Pos_Pos_ID">
+            <End Role="Pos" EntitySet="Pos" />
+            <End Role="Certifications" EntitySet="Certifications" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_getDealersTree_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -1270,25 +1310,85 @@
           <Property Name="RankStatus1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="StateColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Attachments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FileExt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Certifications" Relationship="tradeModel.FK_Certifications_Attachments" FromRole="Attachments" ToRole="Certifications" />
+        </EntityType>
+        <EntityType Name="CertTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocType" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Certifications" Relationship="tradeModel.FK_Certifications_Certifications" FromRole="CertTypes" ToRole="Certifications" />
+        </EntityType>
+        <EntityType Name="Certifications">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dateAdd" Type="DateTime" Precision="3" />
+          <Property Name="datePrint" Type="DateTime" Precision="3" />
+          <Property Name="dateShip" Type="DateTime" Precision="3" />
+          <Property Name="dateGet" Type="DateTime" Precision="3" />
+          <Property Name="Pos_ID" Type="Int32" Nullable="false" />
+          <Property Name="CertType_ID" Type="Int32" />
+          <Property Name="Attachment_ID" Type="Int32" />
+          <Property Name="DocDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Attachments" Relationship="tradeModel.FK_Certifications_Attachments" FromRole="Certifications" ToRole="Attachments" />
+          <NavigationProperty Name="CertTypes" Relationship="tradeModel.FK_Certifications_Certifications" FromRole="Certifications" ToRole="CertTypes" />
+          <NavigationProperty Name="Pos" Relationship="tradeModel.FK_dbo_Certifications_dbo_Pos_Pos_ID" FromRole="Certifications" ToRole="Pos" />
+        </EntityType>
+        <Association Name="FK_Certifications_Attachments">
+          <End Type="tradeModel.Attachments" Role="Attachments" Multiplicity="0..1" />
+          <End Type="tradeModel.Certifications" Role="Certifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attachments">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Certifications">
+              <PropertyRef Name="Attachment_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Certifications_Certifications">
+          <End Type="tradeModel.CertTypes" Role="CertTypes" Multiplicity="0..1" />
+          <End Type="tradeModel.Certifications" Role="Certifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CertTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Certifications">
+              <PropertyRef Name="CertType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Certifications_dbo_Pos_Pos_ID">
+          <End Type="tradeModel.Pos" Role="Pos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="tradeModel.Certifications" Role="Certifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pos">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Certifications">
+              <PropertyRef Name="Pos_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="tradeModelStoreContainer" CdmEntityContainer="tradeEntities">
-	
-          <EntitySetMapping Name="Certifications">
-            <EntityTypeMapping TypeName="tradeModel.Certifications">
-              <MappingFragment StoreEntitySet="Certifications">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="dateAdd" ColumnName="dateAdd" />
-                <ScalarProperty Name="datePrint" ColumnName="datePrint" />
-                <ScalarProperty Name="dateShip" ColumnName="dateShip" />
-                <ScalarProperty Name="dateGet" ColumnName="dateGet" />
-                <ScalarProperty Name="Pos_ID" ColumnName="Pos_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Dealers">
             <EntityTypeMapping TypeName="tradeModel.Dealers">
               <MappingFragment StoreEntitySet="Dealers">
@@ -1304,6 +1404,7 @@
           <EntitySetMapping Name="Pos">
             <EntityTypeMapping TypeName="tradeModel.Pos">
               <MappingFragment StoreEntitySet="Pos">
+                <ScalarProperty Name="comment" ColumnName="comment" />
                 <ScalarProperty Name="posStatusDate" ColumnName="posStatusDate" />
                 <ScalarProperty Name="posStatus_ID" ColumnName="posStatus_ID" />
                 <ScalarProperty Name="DeleteMark" ColumnName="DeleteMark" />
@@ -1554,6 +1655,39 @@
               <MappingFragment StoreEntitySet="RankStatus">
                 <ScalarProperty Name="StateColor" ColumnName="StateColor" />
                 <ScalarProperty Name="RankStatus1" ColumnName="RankStatus" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attachments">
+            <EntityTypeMapping TypeName="tradeModel.Attachments">
+              <MappingFragment StoreEntitySet="Attachments">
+                <ScalarProperty Name="FileData" ColumnName="FileData" />
+                <ScalarProperty Name="FileExt" ColumnName="FileExt" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CertTypes">
+            <EntityTypeMapping TypeName="tradeModel.CertTypes">
+              <MappingFragment StoreEntitySet="CertTypes">
+                <ScalarProperty Name="DocType" ColumnName="DocType" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Certifications">
+            <EntityTypeMapping TypeName="tradeModel.Certifications">
+              <MappingFragment StoreEntitySet="Certifications">
+                <ScalarProperty Name="DocDescription" ColumnName="DocDescription" />
+                <ScalarProperty Name="Attachment_ID" ColumnName="Attachment_ID" />
+                <ScalarProperty Name="CertType_ID" ColumnName="CertType_ID" />
+                <ScalarProperty Name="Pos_ID" ColumnName="Pos_ID" />
+                <ScalarProperty Name="dateGet" ColumnName="dateGet" />
+                <ScalarProperty Name="dateShip" ColumnName="dateShip" />
+                <ScalarProperty Name="datePrint" ColumnName="datePrint" />
+                <ScalarProperty Name="dateAdd" ColumnName="dateAdd" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

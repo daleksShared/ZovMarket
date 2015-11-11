@@ -255,11 +255,11 @@ namespace ZovTrade
             PosContacts=p.listContacts.Any() ? p.listContacts.Aggregate((cur, next) => cur + "\n" + next) : ""
         }        
                     );
-
+            gridControl1.DataSource = poss;
             //listBoxSubDealers.DataSource =
             //    db.Dealers.Where(x => x.Dealer_ID == dealerId).Select(d => new {d.ID, d.dealerZovName}).ToList();
             gridControl2.DataSource = db.Contacts.Where(x => x.Dealers.Where(d => d.ID == dealerId).Any()).Select(x => new { x.ContactName, x.ContactPhones, x.ContactOtherData, x.ContactDescription }).ToList();
-            gridControl1.DataSource = poss;
+
             gridViewPos.ExpandAllGroups();
             // точки продаж
             //treeListDealerPOSs.KeyFieldName = "ID";
@@ -610,8 +610,18 @@ namespace ZovTrade
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            if (!db.Pos.Where(x => x.dealer_ID == dealerId).Include(p => p.PosTypes).Any()) return;
+           // if (!db.Pos.Where(x => x.dealer_ID == dealerId).Include(p => p.PosTypes).Any()) return;
 
+            if (gridViewPos.RowCount == 0) return;
+            var posIdList = new List<int>();
+
+            for (int i = 0; i < gridViewPos.RowCount-1; i++)
+            {
+                posIdList.Add((int)(gridViewPos.GetRowCellValue(i, "ID")));
+            }
+
+
+          
 
             var dir = Path.GetDirectoryName(Application.ExecutablePath.ToString());
             using (var tradeHtml = File.Open(dir + @"\web\trade.html", FileMode.Truncate))
@@ -720,11 +730,13 @@ namespace ZovTrade
                                @"    ""<li><a>{{data.content}}</a></li>""" + Environment.NewLine +
                                @");" + Environment.NewLine +
                                @"listBoxItems = [" + Environment.NewLine;
-            var poss =
+            var poss2 =
                 db.Pos.Where(x => x.dealer_ID == dealerId ).Include(p => p.PosTypes).Select(x =>
                     new { ballonInfo = x.Ruby_Id + " " + x.legalName, ballonDescription = x.yandexAdress, x.longitude,x.attitude })
                     .ToList();
-
+            var poss=db.Pos.Where(x=>posIdList.Contains(x.ID)).Select(x =>
+                    new { ballonInfo = x.Ruby_Id + " " + x.legalName, ballonDescription = x.yandexAdress, x.longitude, x.attitude })
+                    .ToList();
             foreach (var pos in poss)
             {
                 
@@ -948,6 +960,172 @@ namespace ZovTrade
                     e.Appearance.BackColor = Color.FromArgb(colorInt);
                 }
             }
+        }
+
+        private void btnShowPos_Click(object sender, EventArgs e)
+        {
+            var dealerIdList = new List<int>();
+            dealerIdList.Add(dealerId);
+            while (true){
+                var subDealers = db.Dealers.Where(x => dealerIdList.Contains((int)x.Dealer_ID) & !dealerIdList.Contains(x.ID)).Select(x => x.ID).ToList();
+                if (!subDealers.Any()) break;
+                dealerIdList.AddRange(subDealers);
+            }
+
+            var poss =
+               db.Pos.Where(x => dealerIdList.Contains((int)x.dealer_ID)).Include(p => p.PosTypes).Select(x =>
+                   new
+                   {
+                       x.ID,
+                       x.dateadd,
+                       x.posArea,
+                       x.legalName,
+                       posRating = x.PosRanks.Any(r => r.ActiveRank == true) ? x.PosRanks.Where(y => y.ActiveRank == true).Average(y => y.Rank) : 0,
+                        //x.posRating,
+                        x.locationDescription,
+                       x.yandexAdress,
+                       x.brand,
+                       x.PosTypes.posTypeName,
+                       x.Ruby_Id,
+                       x.DealerLegalNames.LegalName,
+                       posStatus = x.StatusOfPos.StatusName,
+                       posColor = x.StatusOfPos.StatusColorInt,
+                       colorRow = x.StatusOfPos.StatusColor,
+                       posStatusDate = x.posStatusDate == null ? x.dateadd : x.posStatusDate,
+                       listPosSites = x.Sites.Select(s => s.URL).ToList(),
+                       listContacts = x.Contacts.Select(c => c.ContactName + "\n" + c.ContactPhones + "\n").ToList()
+                   }).ToList().Select(p => new
+                   {
+                       p.ID,
+                       p.dateadd,
+                       p.posStatusDate,
+                       p.posArea,
+                       p.legalName,
+                       p.posRating,
+                       p.locationDescription,
+                       p.yandexAdress,
+                       p.brand,
+                       p.posTypeName,
+                       p.Ruby_Id,
+                       p.LegalName,
+                       p.posStatus,
+                       p.posColor,
+                       p.colorRow,
+                       PosSites = p.listPosSites.Any() ? p.listPosSites.Aggregate((cur, next) => cur + "\n" + next) : "",
+                       PosContacts = p.listContacts.Any() ? p.listContacts.Aggregate((cur, next) => cur + "\n" + next) : ""
+                   }
+                   );
+            gridControl1.DataSource = poss;
+            gridViewPos.ExpandAllGroups();
+        }
+        
+        private void btnShowPosOfDealer_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var poss =
+               db.Pos.Where(x => x.dealer_ID == dealerId).Include(p => p.PosTypes).Select(x =>
+                   new
+                   {
+                       x.ID,
+                       x.dateadd,
+                       x.posArea,
+                       x.legalName,
+                       posRating = x.PosRanks.Any(r => r.ActiveRank == true) ? x.PosRanks.Where(y => y.ActiveRank == true).Average(y => y.Rank) : 0,
+                        //x.posRating,
+                        x.locationDescription,
+                       x.yandexAdress,
+                       x.brand,
+                       x.PosTypes.posTypeName,
+                       x.Ruby_Id,
+                       x.DealerLegalNames.LegalName,
+                       posStatus = x.StatusOfPos.StatusName,
+                       posColor = x.StatusOfPos.StatusColorInt,
+                       colorRow = x.StatusOfPos.StatusColor,
+                       posStatusDate = x.posStatusDate == null ? x.dateadd : x.posStatusDate,
+                       listPosSites = x.Sites.Select(s => s.URL).ToList(),
+                       listContacts = x.Contacts.Select(c => c.ContactName + "\n" + c.ContactPhones + "\n").ToList()
+                   }).ToList().Select(p => new
+                   {
+                       p.ID,
+                       p.dateadd,
+                       p.posStatusDate,
+                       p.posArea,
+                       p.legalName,
+                       p.posRating,
+                       p.locationDescription,
+                       p.yandexAdress,
+                       p.brand,
+                       p.posTypeName,
+                       p.Ruby_Id,
+                       p.LegalName,
+                       p.posStatus,
+                       p.posColor,
+                       p.colorRow,
+                       PosSites = p.listPosSites.Any() ? p.listPosSites.Aggregate((cur, next) => cur + "\n" + next) : "",
+                       PosContacts = p.listContacts.Any() ? p.listContacts.Aggregate((cur, next) => cur + "\n" + next) : ""
+                   }
+                   );
+            gridControl1.DataSource = poss;
+            gridViewPos.ExpandAllGroups();
+        }
+
+        private void btnShowPosOfSubDealers_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var dealerIdList = new List<int>();
+            dealerIdList.Add(dealerId);
+            while (true)
+            {
+                var subDealers = db.Dealers.Where(x => dealerIdList.Contains((int)x.Dealer_ID) & !dealerIdList.Contains(x.ID)).Select(x => x.ID).ToList();
+                if (!subDealers.Any()) break;
+                dealerIdList.AddRange(subDealers);
+            }
+            if (dealerIdList.Count()>=1){
+                dealerIdList.Remove(dealerId);
+            }
+            var poss =
+               db.Pos.Where(x => dealerIdList.Contains((int)x.dealer_ID)).Include(p => p.PosTypes).Select(x =>
+                   new
+                   {
+                       x.ID,
+                       x.dateadd,
+                       x.posArea,
+                       x.legalName,
+                       posRating = x.PosRanks.Any(r => r.ActiveRank == true) ? x.PosRanks.Where(y => y.ActiveRank == true).Average(y => y.Rank) : 0,
+                       //x.posRating,
+                       x.locationDescription,
+                       x.yandexAdress,
+                       x.brand,
+                       x.PosTypes.posTypeName,
+                       x.Ruby_Id,
+                       x.DealerLegalNames.LegalName,
+                       posStatus = x.StatusOfPos.StatusName,
+                       posColor = x.StatusOfPos.StatusColorInt,
+                       colorRow = x.StatusOfPos.StatusColor,
+                       posStatusDate = x.posStatusDate == null ? x.dateadd : x.posStatusDate,
+                       listPosSites = x.Sites.Select(s => s.URL).ToList(),
+                       listContacts = x.Contacts.Select(c => c.ContactName + "\n" + c.ContactPhones + "\n").ToList()
+                   }).ToList().Select(p => new
+                   {
+                       p.ID,
+                       p.dateadd,
+                       p.posStatusDate,
+                       p.posArea,
+                       p.legalName,
+                       p.posRating,
+                       p.locationDescription,
+                       p.yandexAdress,
+                       p.brand,
+                       p.posTypeName,
+                       p.Ruby_Id,
+                       p.LegalName,
+                       p.posStatus,
+                       p.posColor,
+                       p.colorRow,
+                       PosSites = p.listPosSites.Any() ? p.listPosSites.Aggregate((cur, next) => cur + "\n" + next) : "",
+                       PosContacts = p.listContacts.Any() ? p.listContacts.Aggregate((cur, next) => cur + "\n" + next) : ""
+                   }
+                   );
+            gridControl1.DataSource = poss;
+            gridViewPos.ExpandAllGroups();
         }
     }
 }

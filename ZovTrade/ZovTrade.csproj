@@ -28,7 +28,7 @@
     <PublisherName>ZOV</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>25</ApplicationRevision>
+    <ApplicationRevision>26</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -276,6 +276,7 @@
     <None Include="Properties\DataSources\DbModel.AppReports.datasource" />
     <None Include="Properties\DataSources\dbModel.Certifications.datasource" />
     <None Include="Properties\DataSources\DbModel.Certifications1.datasource" />
+    <None Include="Properties\DataSources\DbModel.CertTypes.datasource" />
     <None Include="Properties\DataSources\DbModel.Contacts.datasource" />
     <None Include="Properties\DataSources\dbModel.Coordinates.datasource" />
     <None Include="Properties\DataSources\DbModel.Coordinates1.datasource" />
@@ -349,6 +350,17 @@
     <None Include="Resources\apply_32x32.png" />
     <None Include="Resources\cancel_32x32.png" />
     <None Include="Resources\driving_32x32.png" />
+    <None Include="Resources\addfile_32x32.png" />
+    <None Include="Resources\statistical_32x32.png" />
+    <None Include="Resources\home_32x32.png" />
+    <None Include="Resources\refresh_32x32.png" />
+    <None Include="Resources\bugreport_32x32.png" />
+    <None Include="Resources\showtestreport_32x32.png" />
+    <None Include="Resources\usergroup_32x32.png" />
+    <None Include="Resources\find_32x32.png" />
+    <None Include="Resources\sutotal_32x32.png" />
+    <None Include="Resources\database_16x16.png" />
+    <None Include="Resources\database_32x32.png" />
     <Content Include="web\data.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

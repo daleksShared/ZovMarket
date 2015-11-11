@@ -94,19 +94,16 @@ namespace ZovTrade
 
                 db.Contacts.Where(x => x.Pos.Where(p => p.ID == posId).Any()).Load();
 
+                db.Attachments.Where(x => x.Certifications.Where(c => c.Pos_ID == posId).Any()).Load();
 
             }
             else
             {
-                if (dealerId > 0)
-                {
+               
                     this.Text = db.Dealers.Where(x => x.ID == dealerId).Select(x => x.dealerZovName).First() + " \\ Новый магазин";
                     db.Dealers.Where(x => x.ID == dealerId).Load();
-                }
-                else
-                {
-                    this.Text = "Новый магазин";
-                }
+              
+               
 
                 posRatingTextEdit.EditValue = 0;
                 db.PosTypes.Load();
@@ -121,6 +118,10 @@ namespace ZovTrade
 
 
             }
+
+
+            db.CertTypes.Load();
+            certTypesBindingSource.DataSource = db.CertTypes.Local.Select(x => new { x.ID, x.DocType }).ToList();
 
             int parentDealerId = 0;
 
@@ -138,7 +139,7 @@ namespace ZovTrade
 
 
             dealersBindingSource.DataSource = db.Dealers.Select(x => new { x.ID, x.dealerZovName, parentName = x.DealerParent.dealerZovName }).OrderBy(x => x.parentName).ThenBy(x => x.dealerZovName).ToList();
-
+            
             posBindingSource.DataSource = db.Pos.Local.ToBindingList();
 
             posRanksBindingSource.DataSource = db.PosRanks.Local.ToBindingList();
@@ -153,6 +154,7 @@ namespace ZovTrade
             statusOfPosBindingSource.DataSource = db.StatusOfPos.Select(x => new { x.ID, x.StatusName, x.StatusColor }).ToList();
             db.StatusOfPos.Load();
             LoadPosSites();
+
 
 
 
@@ -317,6 +319,7 @@ namespace ZovTrade
         {
             var Cert = db.Certifications.Create();
             Cert.Pos = db.Pos.Local.FirstOrDefault();
+            Cert.CertType_ID = db.CertTypes.Local.Last().ID;
             db.Certifications.Add(Cert);
         }
 
@@ -328,7 +331,6 @@ namespace ZovTrade
         private void simpleButton9_Click(object sender, EventArgs e)
         {
 
-            var newdealerId = 0;
             var frmSelectDealer = new Forms.FrmDealerChoose();
             if (frmSelectDealer.ShowDialog(this) == DialogResult.OK)
             {
