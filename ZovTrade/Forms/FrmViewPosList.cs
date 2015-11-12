@@ -37,7 +37,7 @@ namespace ZovTrade.Forms
             var data = db.Pos.Select(r => new
             {
                 DateAdd = r.dateadd,
-                DealerZovName = r.Dealers.dealerZovName,
+                DealerZovName = r.Dealers.Dealer_ID!=null ? r.Dealers.DealerParent.dealerZovName+"/"+ r.Dealers.dealerZovName :  r.Dealers.dealerZovName,
                 PosLegalName = r.legalName,
                 posRating = r.PosRanks.Any(x => x.ActiveRank == true) ? r.PosRanks.Where(y => y.ActiveRank == true).Average(y => y.Rank) : 0,
                 YandexAdress = r.yandexAdress,

@@ -136,10 +136,17 @@ namespace ZovTrade
 
             posTypesBindingSource.DataSource = db.PosTypes.Local.Select(x => new { x.ID, x.posTypeName }).ToList();
 
+            gridLookUpEdit1.Properties.DataSource= db.Dealers.Select(x => new {
+                x.ID,
+                dealerName = x.Dealer_ID != null ? x.DealerParent.dealerZovName + "/" + x.dealerZovName : x.dealerZovName
 
+            })
+            .ToList();
+            gridLookUpEdit1.Properties.ValueMember = "ID";
+            gridLookUpEdit1.Properties.DisplayMember = "dealerName";
 
-            dealersBindingSource.DataSource = db.Dealers.Select(x => new { x.ID, x.dealerZovName, parentName = x.DealerParent.dealerZovName }).OrderBy(x => x.parentName).ThenBy(x => x.dealerZovName).ToList();
-            
+            // dealersBindingSource.DataSource = 
+
             posBindingSource.DataSource = db.Pos.Local.ToBindingList();
 
             posRanksBindingSource.DataSource = db.PosRanks.Local.ToBindingList();

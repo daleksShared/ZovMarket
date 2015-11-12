@@ -51,9 +51,9 @@ public int DealerId = 0;
             gridControl1.DataSource = db.Dealers.Select(x => new
             {
                 x.ID,
-                x.dealerName,
-                x.dealerZovName
-            }).OrderBy(x => x.dealerName).ToList();
+                dealerName = x.Dealer_ID != null ? x.DealerParent.dealerZovName + "/" + x.dealerZovName : x.dealerZovName
+                
+            }).ToList();
             gridView1.BestFitColumns();
         }
     }

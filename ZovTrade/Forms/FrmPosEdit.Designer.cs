@@ -144,8 +144,6 @@
             this.dealersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colID2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.coldealerName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.coldealerName1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.dateaddDateEdit = new DevExpress.XtraEditors.DateEdit();
             this.legalNameTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.yandexAdressTextEdit = new DevExpress.XtraEditors.TextEdit();
@@ -207,6 +205,7 @@
             this.layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem24 = new DevExpress.XtraLayout.LayoutControlItem();
             this.splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::ZovTrade.FrmWait), true, true);
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
@@ -1387,9 +1386,6 @@
             this.gridLookUpEdit1.Name = "gridLookUpEdit1";
             this.gridLookUpEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.gridLookUpEdit1.Properties.DataSource = this.dealersBindingSource;
-            this.gridLookUpEdit1.Properties.DisplayMember = "dealerZovName";
-            this.gridLookUpEdit1.Properties.ValueMember = "ID";
             this.gridLookUpEdit1.Properties.View = this.gridView1;
             this.gridLookUpEdit1.Size = new System.Drawing.Size(314, 20);
             this.gridLookUpEdit1.StyleController = this.dataLayoutControl1;
@@ -1403,34 +1399,22 @@
             // 
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colID2,
-            this.coldealerName,
-            this.coldealerName1});
+            this.gridColumn3});
             this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridView1.OptionsView.ShowAutoFilterRow = true;
             this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gridView1.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridColumn3, DevExpress.Data.ColumnSortOrder.Ascending)});
             // 
             // colID2
             // 
+            this.colID2.Caption = "ID";
             this.colID2.FieldName = "ID";
             this.colID2.Name = "colID2";
-            // 
-            // coldealerName
-            // 
-            this.coldealerName.Caption = "Sub-Дилер";
-            this.coldealerName.FieldName = "dealerZovName";
-            this.coldealerName.Name = "coldealerName";
-            this.coldealerName.Visible = true;
-            this.coldealerName.VisibleIndex = 1;
-            // 
-            // coldealerName1
-            // 
-            this.coldealerName1.Caption = "Дилер";
-            this.coldealerName1.FieldName = "parentName";
-            this.coldealerName1.Name = "coldealerName1";
-            this.coldealerName1.Visible = true;
-            this.coldealerName1.VisibleIndex = 0;
+            this.colID2.Visible = true;
+            this.colID2.VisibleIndex = 0;
             // 
             // dateaddDateEdit
             // 
@@ -2103,6 +2087,14 @@
             // 
             this.splashScreenManager1.ClosingDelay = 500;
             // 
+            // gridColumn3
+            // 
+            this.gridColumn3.Caption = "Дилер";
+            this.gridColumn3.FieldName = "dealerName";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 1;
+            // 
             // FrmEditPos
             // 
             this.Appearance.Image = ((System.Drawing.Image)(resources.GetObject("FrmEditPos.Appearance.Image")));
@@ -2358,8 +2350,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn coldateShip1;
         private DevExpress.XtraGrid.Columns.GridColumn coldateInstallation;
         private DevExpress.XtraGrid.Columns.GridColumn colID2;
-        private DevExpress.XtraGrid.Columns.GridColumn coldealerName;
-        private DevExpress.XtraGrid.Columns.GridColumn coldealerName1;
         private DevExpress.XtraGrid.Columns.GridColumn colID3;
         private DevExpress.XtraGrid.Columns.GridColumn colposTypeName;
         private DevExpress.XtraSplashScreen.SplashScreenManager splashScreenManager1;
@@ -2435,5 +2425,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colAttachment_ID;
         private DevExpress.XtraEditors.SimpleButton simpleButton10;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem26;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
     }
 }

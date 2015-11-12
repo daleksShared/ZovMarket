@@ -34,7 +34,6 @@
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.coldealerName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.coldealerZovName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -81,14 +80,15 @@
             // 
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colID,
-            this.coldealerName,
-            this.coldealerZovName});
+            this.coldealerName});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.Editable = false;
             this.gridView1.OptionsFind.AlwaysVisible = true;
             this.gridView1.OptionsFind.FindNullPrompt = "Поиск...";
             this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gridView1.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.coldealerName, DevExpress.Data.ColumnSortOrder.Ascending)});
             // 
             // colID
             // 
@@ -105,14 +105,6 @@
             this.coldealerName.Name = "coldealerName";
             this.coldealerName.Visible = true;
             this.coldealerName.VisibleIndex = 1;
-            // 
-            // coldealerZovName
-            // 
-            this.coldealerZovName.Caption = "Название фабрики";
-            this.coldealerZovName.FieldName = "dealerZovName";
-            this.coldealerZovName.Name = "coldealerZovName";
-            this.coldealerZovName.Visible = true;
-            this.coldealerZovName.VisibleIndex = 2;
             // 
             // simpleButton2
             // 
@@ -225,6 +217,5 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraGrid.Columns.GridColumn colID;
         private DevExpress.XtraGrid.Columns.GridColumn coldealerName;
-        private DevExpress.XtraGrid.Columns.GridColumn coldealerZovName;
     }
 }
