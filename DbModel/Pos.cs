@@ -52,6 +52,7 @@ namespace DbModel
         public int posStatus_ID { get; set; }
         public Nullable<System.DateTime> posStatusDate { get; set; }
         public string comment { get; set; }
+        public string SiteImagePath { get; set; }
     
         public virtual Dealers Dealers { get; set; }
         public virtual PosTypes PosTypes { get; set; }

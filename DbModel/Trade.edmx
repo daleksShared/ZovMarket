@@ -116,6 +116,7 @@
           <Property Name="DeleteMark" Type="bit" />
           <Property Name="posStatusDate" Type="datetime" StoreGeneratedPattern="Computed" />
           <Property Name="comment" Type="nvarchar" MaxLength="150" />
+          <Property Name="SiteImagePath" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="PosBrand">
           <Key>
@@ -477,7 +478,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PosContacts_Pos">
-          <End Role="Pos" Type="Self.Pos" Multiplicity="1" />
+          <End Role="Pos" Type="Self.Pos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="PosContacts" Type="Self.PosContacts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Pos">
@@ -531,7 +534,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PosSites_Pos">
-          <End Role="Pos" Type="Self.Pos" Multiplicity="1" />
+          <End Role="Pos" Type="Self.Pos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="PosSites" Type="Self.PosSites" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Pos">
@@ -778,6 +783,7 @@
           <NavigationProperty Name="Contacts" Relationship="tradeModel.PosContacts" FromRole="Pos" ToRole="Contacts" />
           <Property Name="comment" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Certifications" Relationship="tradeModel.FK_dbo_Certifications_dbo_Pos_Pos_ID" FromRole="Pos" ToRole="Certifications" />
+          <Property Name="SiteImagePath" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PosImages">
           <Key>
@@ -1404,6 +1410,7 @@
           <EntitySetMapping Name="Pos">
             <EntityTypeMapping TypeName="tradeModel.Pos">
               <MappingFragment StoreEntitySet="Pos">
+                <ScalarProperty Name="SiteImagePath" ColumnName="SiteImagePath" />
                 <ScalarProperty Name="comment" ColumnName="comment" />
                 <ScalarProperty Name="posStatusDate" ColumnName="posStatusDate" />
                 <ScalarProperty Name="posStatus_ID" ColumnName="posStatus_ID" />

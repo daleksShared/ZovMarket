@@ -360,5 +360,14 @@ namespace ZovTrade
 
 
         }
+
+        private void simpleButton11_Click(object sender, EventArgs e)
+        {
+            var Contact = db.Contacts.Create();
+            Contact.ContactName = "e-mail";
+            //Contact.Dealers.Add(db.Dealers.Local.First());
+            db.Contacts.Add(Contact);
+            db.Pos.Local.FirstOrDefault().Contacts.Add(Contact);
+        }
     }
 }

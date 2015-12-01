@@ -942,7 +942,7 @@ namespace ZovTrade
                       colorRow = x.StatusOfPos.StatusColor,
                       posStatusDate = x.posStatusDate == null ? x.dateadd : x.posStatusDate,
                       listPosSites = x.Sites.Select(s => s.URL).ToList(),
-                      listContacts = x.Contacts.Select(c => c.ContactName + "\n" + c.ContactPhones + "\n").ToList()
+                      listContacts = x.Contacts.Select(c => c.ContactName + " " + c.ContactPhones+" "+c.ContactOtherData + "\n").ToList()
                   }).ToList().Select(p => new
                   {
                       p.ID,
@@ -966,6 +966,171 @@ namespace ZovTrade
                   );
             gridControl1.DataSource = poss;
             gridViewPos.ExpandAllGroups();
+        }
+
+        private void barButtonItem5_ItemClick_1(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            splashScreenManager1.ShowWaitForm();
+            var posList = db.Pos.OrderBy(x => x.Ruby_Id).Select(x => new
+            {
+                id = x.Ruby_Id,
+                legalname = x.DealerLegalNames == null ? "" : x.DealerLegalNames.LegalName,
+                dealer = x.Dealers.dealerZovName,
+                dealerFabric = x.Dealers.DealerParent == null ? x.Dealers.dealerZovName : x.Dealers.DealerParent.dealerZovName,
+                yandexaddres = x.yandexAdress,
+                city = x.city,
+                streethouse = x.locationDescription,
+                coords = x.coordstextdata,
+                addres = x.street,
+                x.legalName,
+                area = x.posArea,
+                brand = x.brand,
+                postype = x.PosTypes == null ? "" : x.PosTypes.posTypeName,
+                x.SiteImagePath,
+                listPosSites = x.Sites.Select(s => s.URL).ToList(),
+                rating = x.PosRanks.Any(r => r.ActiveRank == true) ? x.PosRanks.Where(y => y.ActiveRank == true).Average(y => y.Rank) : 0,
+                enable=x.StatusOfPos.ID==3 ? 1 : 0,
+                sortorder=x.posSortOrder==null ? 0 :x.posSortOrder
+            }).ToList().Select(p=> new {
+                p.id,
+                p.legalname ,
+                p.dealer ,
+                p.dealerFabric ,
+                p.yandexaddres ,
+                p.city ,
+                p.streethouse ,
+                p.coords ,
+                p.addres ,
+                p.legalName,
+                p.area ,
+                p.brand ,
+                p.postype ,
+                p.SiteImagePath,
+                site = p.listPosSites.Any() ? p.listPosSites.Aggregate((cur, next) => cur + ", " + next) : "",
+                p.rating ,
+                p.enable ,
+                p.sortorder
+            });
+            Debug.Write(posList.Count());
+
+            var oExcelApp =
+             (Excel.Application)System.Runtime.InteropServices.Marshal.GetActiveObject("Excel.Application");
+            if (oExcelApp == null)
+            {
+                MessageBox.Show("Откройте Ексцелль!!! Пожалуйста...");
+                return;
+            }
+            Excel.Workbook excelworkbook = oExcelApp.Workbooks.Add();
+            Excel.Worksheet excelsheet = (Excel.Worksheet)excelworkbook.Worksheets.Add();
+
+            int global_row = 1;
+            ((Excel.Range)excelsheet.Cells[global_row, 1]).Value2 = "ID";
+            ((Excel.Range)excelsheet.Cells[global_row, 2]).Value2 = "Юридическое наименование клиента";
+            ((Excel.Range)excelsheet.Cells[global_row, 3]).Value2 = "Дилер";
+            ((Excel.Range)excelsheet.Cells[global_row, 4]).Value2 = "Название на фабрике";
+            ((Excel.Range)excelsheet.Cells[global_row, 5]).Value2 = "Адрес для Яндекса";
+            ((Excel.Range)excelsheet.Cells[global_row, 6]).Value2 = "Город";
+            ((Excel.Range)excelsheet.Cells[global_row, 7]).Value2 = "Улица и номер дома";
+            ((Excel.Range)excelsheet.Cells[global_row, 8]).Value2 = "Координаты точки";
+            ((Excel.Range)excelsheet.Cells[global_row, 9]).Value2 = "Адрес";
+            ((Excel.Range)excelsheet.Cells[global_row, 10]).Value2 = "Название магазина";
+            ((Excel.Range)excelsheet.Cells[global_row, 11]).Value2 = "Телефоны";
+            ((Excel.Range)excelsheet.Cells[global_row, 12]).Value2 = "Площадь торговой точки";
+            ((Excel.Range)excelsheet.Cells[global_row, 13]).Value2 = "Бренд";
+            ((Excel.Range)excelsheet.Cells[global_row, 14]).Value2 = "Тип салона";
+            ((Excel.Range)excelsheet.Cells[global_row, 15]).Value2 = "Путь к изображениям";
+            ((Excel.Range)excelsheet.Cells[global_row, 16]).Value2 = "Сайт";
+            ((Excel.Range)excelsheet.Cells[global_row, 17]).Value2 = "Почта";
+            ((Excel.Range)excelsheet.Cells[global_row, 18]).Value2 = "Рейтинг";
+            ((Excel.Range)excelsheet.Cells[global_row, 19]).Value2 = "Вкл/Выкл";
+            ((Excel.Range)excelsheet.Cells[global_row, 20]).Value2 = "Порядок сортировки";
+            
+
+
+
+            foreach (var pos in posList)
+            {
+                global_row += 1;
+                
+                    ((Excel.Range)excelsheet.Cells[global_row, 1]).Value2 = pos.id;
+                    ((Excel.Range)excelsheet.Cells[global_row, 2]).Value2 = pos.legalname;
+                    ((Excel.Range)excelsheet.Cells[global_row, 3]).Value2 = pos.dealerFabric;
+                    ((Excel.Range)excelsheet.Cells[global_row, 4]).Value2 = pos.dealer;
+                    ((Excel.Range)excelsheet.Cells[global_row, 5]).Value2 = pos.yandexaddres;
+                    ((Excel.Range)excelsheet.Cells[global_row, 6]).Value2 = pos.city;
+                    ((Excel.Range)excelsheet.Cells[global_row, 7]).Value2 = pos.streethouse;
+                    ((Excel.Range)excelsheet.Cells[global_row, 8]).Value2 = pos.coords;
+                    ((Excel.Range)excelsheet.Cells[global_row, 9]).Value2 = pos.addres;
+                    ((Excel.Range)excelsheet.Cells[global_row, 10]).Value2 = pos.legalName;
+
+                    var posPhones = db.Pos.Where(x => x.Ruby_Id == pos.id).First().Contacts.Where(c => c.ContactPhones != null).Select(c => c.ContactPhones).ToList();
+
+                    ((Excel.Range)excelsheet.Cells[global_row, 11]).Value2 = posPhones.Count == 0 ? "" : posPhones.Aggregate((cur, next) => cur + ", " + next);
+                    ((Excel.Range)excelsheet.Cells[global_row, 12]).Value2 = pos.area;
+                    ((Excel.Range)excelsheet.Cells[global_row, 13]).Value2 = pos.brand;
+                    ((Excel.Range)excelsheet.Cells[global_row, 14]).Value2 = pos.postype;
+                    ((Excel.Range)excelsheet.Cells[global_row, 15]).Value2 = pos.SiteImagePath;
+                    ((Excel.Range)excelsheet.Cells[global_row, 16]).Value2 = pos.site;
+
+                    var posmails = db.Pos.Where(x => x.Ruby_Id == pos.id).First().Contacts.Where(c => c.ContactName == "e-mail").Select(c => c.ContactOtherData).ToList();
+                    ((Excel.Range)excelsheet.Cells[global_row, 17]).Value2 = posmails.Count == 0 ? "" : posmails.Aggregate((cur, next) => cur + ", " + next);
+                    ((Excel.Range)excelsheet.Cells[global_row, 18]).Value2 = pos.rating;
+                    ((Excel.Range)excelsheet.Cells[global_row, 19]).Value2 = pos.enable;
+                    ((Excel.Range)excelsheet.Cells[global_row, 20]).Value2 = pos.sortorder;
+                
+               
+              
+
+            }
+
+            splashScreenManager1.CloseWaitForm();
+
+
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            notifyIcon1.Visible = false;
+            Environment.Exit(0);
+        }
+
+        private void FrmDealers_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+            //this.Hide();
+            this.WindowState = FormWindowState.Normal;
+            this.ShowInTaskbar = false;
+            this.Visible = false;
+           
+            notifyIcon1.ShowBalloonTip(100);
+            e.Cancel = true;
+        }
+
+        private void notifyIcon1_Click(object sender, EventArgs e)
+        {
+            
+           
+        }
+
+        private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                if (this.Visible)
+                {
+                    this.WindowState = FormWindowState.Normal;
+                    this.ShowInTaskbar = false;
+                    this.Visible = false;
+                    notifyIcon1.ShowBalloonTip(100);
+                }
+                else
+                {
+
+                    this.Visible = true;
+                    this.ShowInTaskbar = true;
+
+                }
+            }
         }
     }
 }

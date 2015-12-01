@@ -69,14 +69,14 @@
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(684, 77, 250, 350);
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(1236, 699);
+            this.layoutControl1.Size = new System.Drawing.Size(1028, 699);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // simpleButton2
             // 
             this.simpleButton2.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton2.Image")));
-            this.simpleButton2.Location = new System.Drawing.Point(141, 5);
+            this.simpleButton2.Location = new System.Drawing.Point(139, 5);
             this.simpleButton2.Name = "simpleButton2";
             this.simpleButton2.Size = new System.Drawing.Size(94, 38);
             this.simpleButton2.StyleController = this.layoutControl1;
@@ -88,7 +88,7 @@
             this.simpleButton1.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.Image")));
             this.simpleButton1.Location = new System.Drawing.Point(5, 5);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(132, 38);
+            this.simpleButton1.Size = new System.Drawing.Size(130, 38);
             this.simpleButton1.StyleController = this.layoutControl1;
             this.simpleButton1.TabIndex = 1;
             this.simpleButton1.Text = "Добавить отзыв";
@@ -99,7 +99,7 @@
             this.gridControl1.Location = new System.Drawing.Point(5, 47);
             this.gridControl1.MainView = this.gridViewReviews;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(1226, 647);
+            this.gridControl1.Size = new System.Drawing.Size(1018, 647);
             this.gridControl1.TabIndex = 4;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewReviews});
@@ -175,7 +175,7 @@
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(3, 3, 3, 3);
-            this.layoutControlGroup1.Size = new System.Drawing.Size(1236, 699);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(1028, 699);
             this.layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlItem1
@@ -183,16 +183,16 @@
             this.layoutControlItem1.Control = this.gridControl1;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 42);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1230, 651);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1022, 651);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
             // emptySpaceItem1
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(234, 0);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(232, 0);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(996, 42);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(790, 42);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem2
@@ -200,14 +200,14 @@
             this.layoutControlItem2.Control = this.simpleButton1;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(136, 42);
+            this.layoutControlItem2.Size = new System.Drawing.Size(134, 42);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.simpleButton2;
-            this.layoutControlItem3.Location = new System.Drawing.Point(136, 0);
+            this.layoutControlItem3.Location = new System.Drawing.Point(134, 0);
             this.layoutControlItem3.Name = "layoutControlItem3";
             this.layoutControlItem3.Size = new System.Drawing.Size(98, 42);
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
@@ -217,7 +217,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1236, 699);
+            this.ClientSize = new System.Drawing.Size(1028, 699);
             this.Controls.Add(this.layoutControl1);
             this.Name = "FrmPosReview";
             this.ShowIcon = false;
